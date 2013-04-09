@@ -1,0 +1,95 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link type="text/css" href="../Public/css/search.css" rel="stylesheet">
+<link type="text/css" href="../Public/css/side-con.css" rel="stylesheet">
+<div id="wrapper">
+<div class="search-header">
+    <div class="search-header-inner">
+        <div class="search-logo"><h1>乐活搜索</h1></div>
+        <div class="search-box">
+            <form action="">
+                <input name="keyword" type="text" autocomplete="off" value="{$_REQUEST['keyword']}" ""="" data-placeholder="" class="input-box search-placeholder">
+                <input type="submit" value="搜索" class="btn-search">
+            </form>
+            <div class="search-result container-item" style="display:none;">
+
+            </div>
+        </div>
+
+        <div class="search-tips">
+            <!--<a href="/search/?keyword=创意家居" class="keyword">疯狂创意家居</a>
+            <a href="/search/?keyword=香水" class="keyword">香水迷情</a>
+            <a href="/search/?keyword=胎教" class="keyword">音乐胎教</a>
+            <a href="/search/?keyword=婚纱照" class="keyword">婚纱照</a>
+            <a href="/search/?keyword=体验团" class="keyword">体验团</a>-->
+        </div>
+
+    </div>
+</div>
+
+<div id="bd" class="bb-t3">
+<div id="main">
+<div class="inner">
+<div class="col-c">
+<div class="inner">
+<div class="search-result-nav search-bar-term">
+    <div class="sort">
+        <a href="{:U('Find/index')}?keyword={$_REQUEST['keyword']}" <eq name="_REQUEST['type']" value="">class="curr"</eq>>全部</a>
+        <a href="{:U('Find/index')}?keyword={$_REQUEST['keyword']}&type=1" <eq name="_REQUEST['type']" value="1">class="curr"</eq>>我关注的</a>
+        <a href="{:U('Find/index')}?keyword={$_REQUEST['keyword']}&type=2" <eq name="_REQUEST['type']" value="2">class="curr"</eq>>达人</a>
+        <a href="{:U('Find/index')}?keyword={$_REQUEST['keyword']}&type=3" <eq name="_REQUEST['type']" value="3">class="curr"</eq>>商家</a>
+    </div>
+</div>
+<div class="search-result-list">
+    <volist name="talk_aboutdata" id="vo">
+        <div class="search-result-block cls">
+            <div class="result-photo">
+                <a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank"><img src="{$vo.header}" alt="{$vo.name}"></a>
+            </div>			<div class="result-info">
+
+
+            <div class="result-info-user">
+                <p class="name"><strong><a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank">{$vo.name}</a>
+                </strong></p>
+                <p><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><span class="when" data-create_time="{$vo.addtime}">{$vo.addtime|dgmdate}
+			</span></a><span class="where">
+	</span></p>
+            </div>
+            <div class="result-info-cont">
+            <div class="share-cont">
+                <div class="share-txt">
+                    <p>{$vo.content}</p>
+                </div>
+                <div class="share-pic-cont">
+                <ul class="share-pic-list cls">
+                    <volist name="vo.accessory" id="v">
+                        <li><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><img src="{$v.thumbnail}" width="120" height="120" alt=""></a></li>
+                    </volist>
+                </ul>
+                </div>
+            </div>
+        </div>
+            <div class="tools cls">
+                <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="digg like-btn" data-postid="c3098eef12986ff7a77f1f41" data--ban="1000"><em>喜欢</em></a></span>
+                <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank">评论</a><b>(0)</b></span>
+                <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="trans-btn" data-postid="c3098eef12986ff7a77f1f41">转发</a><b class="num">(0)</b></span>
+            </div>			</div>
+        </div>
+    </volist>
+</div>
+<div class="pager">
+    <div class="global-page">
+        {$page}
+    </div>
+    <div id="ptest"></div>
+</div>
+</div>
+</div>
+    <include file="Find:right" />
+</div>
+</div>
+    <include file="Find:left" />
+</div>
+</div>
+
+<include file="Public:footer" />

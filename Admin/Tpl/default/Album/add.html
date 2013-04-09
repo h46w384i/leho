@@ -1,0 +1,101 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	new AjaxUpload('#upload_button', {
+	    action: APP+'/Xheditor/upLoadImg',
+	    name: 'images',
+	    onSubmit : function(file , ext){
+	        if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+	            /* Setting data */
+	            this.setData({
+	            'ext': ext
+	            });
+	            this.disable();
+	        } else {
+	            return false;
+	        }
+
+	    },
+	    onComplete : function(file,response){
+	    	var data=eval("("+response+")");
+	    	uploadOne('img','logo',data,true);
+	        this.enable();
+	    }
+	});
+	
+	new AjaxUpload('#enlarge_button', {
+	    action: APP+'/Xheditor/upLoadImg',
+	    name: 'enlarge_images',
+	    onSubmit : function(file , ext){
+	        if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+	            /* Setting data */
+	            this.setData({
+	            'ext': ext
+	            });
+	            this.disable();
+	        } else {
+	            return false;
+	        }
+
+	    },
+	    onComplete : function(file,response){
+	    	var data=eval("("+response+")");
+	    	uploadOne('enlarge_img','enlarge',data,true);
+	        this.enable();
+	    }
+	});
+});
+</script>
+<div class="pageContent">
+
+	<form method="post" action="__URL__/insert/navTabId/__MODULE__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>专题名称：</label>
+				<input type="text" class="required" name="title">
+			</div>
+			<div class="unit">
+				<label>标志logo：</label>
+				<input type="hidden" name="logo" id="logo">
+				<div style="float: left;">
+				<img id="img" width="100" height="100" style="margin-left:5px; display:none;"/>
+                <div class="button" id="upload_button"><div class="buttonContent"><button type="button">上传</button></div></div>
+                </div>
+			</div>
+			<div class="unit">
+				<label>大图：</label>
+				<input type="hidden" name="enlarge" id="enlarge">
+				<div style="float: left;">
+				<img id="enlarge_img" width="100" height="100" style="margin-left:5px; display:none;"/>
+                <div class="button" id="enlarge_button"><div class="buttonContent"><button type="button">上传</button></div></div>
+                </div>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits textInput valid" name="sort">
+			</div>
+			<div class="unit">
+				<label>内容：</label>
+				<textarea rows="5" cols="50" name="content" class="textInput"></textarea>
+			</div>
+			<div class="unit">
+				<label>标签(','分隔)：</label>
+				<textarea cols="50" rows="5" name="label" class="required"></textarea>
+			</div>
+			<div class="unit">
+				<label>发布时间：</label>
+				<input type="text" name="addtime" class="date" readonly="true" format="yyyy-MM-dd HH:mm:ss" value="{:toDate(time())}" />
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+

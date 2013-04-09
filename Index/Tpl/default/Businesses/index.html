@@ -1,0 +1,91 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/businesses.css"/>
+<div id="doc3">
+	<div id="bd">
+		<include file="Businesses:top" />
+		<div class="bd-wrap">
+			<div id="main">
+				<div class="inner">
+					<div id="slide" class="switch-fade">
+							{:showAdvPosition('businesses_top')}
+					</div>
+					<div class="section">
+						<div class="common-tt">
+							<h2 class="type-1"><span>商家分类</span></h2>
+						</div>
+						<volist name="businesses_categorydata" id="vo">
+						<div class="cate-list">
+							<h3><span class="ico"></span><a target="_blank" href="{:U('Businesses/lists/cid/'.$vo['id'])}">{$vo.name}</a></h3>
+							<ul>
+							<volist name="vo.child" id="v">
+								<li><a target="_blank" href="{:U('Businesses/lists/cid/'.$vo['id'])}?child={$v.id}">{$v.name}</a></li>
+							</volist>
+							</ul>
+						</div>
+						</volist>
+					</div>
+					<div class="section recommend">
+						<div class="common-tt">
+							<h2 class="type-1"><span>乐活推荐</span></h2>
+						</div>
+						<volist name="businessesdata" id="vo">
+						<dl>
+							<dd class="pic">
+							<a target="_blank" href="{:U('Businesses/detail/id/'.$vo['id'])}">
+								<img src="{$vo.accessory.origin}" alt="{$vo.name}" width="160" height="114">
+							</a>
+							</dd>
+							<dt><a target="_blank" href="{:U('Businesses/detail/id/'.$vo['id'])}">{$vo.name}</a></dt>
+							<dd>{$vo.signature}</dd>
+						</dl>
+						</volist>
+					</div>
+					<div class="section preferential">
+						<div class="common-tt">
+							<h2 class="type-1"><span>热门优惠</span></h2>
+							<a target="_blank" href="{:U('Businesses/preferential')}" class="more">更多»</a>
+						</div>
+						<volist name="preferentialdata" id="vo">
+						<ul>
+							<li class="pic"><a target="_blank" href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}"><img src="{$vo.logo.origin}" alt="" width="220" height="70"></a></li>
+							<li><a target="_blank" href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}">{$vo.short_title}</a></li>
+						</ul>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div id="aside">
+				<div class="inner">
+					<div class="statistic">
+						<p>在{$switch_region.crr.name}，已有</p>
+						<ul>
+							<li><span>{$businessescount|str_pad=###,6,'0',STR_PAD_LEFT}</span>商家通过<a href="{:U('Article/detail/id/58')}" target="_blank">资质认证</a></li>
+			
+							<li><span>{$qualificationscount|str_pad=###,6,'0',STR_PAD_LEFT}</span>商家入驻平台</li>
+						</ul>
+						<a id="a_zhaoshang_link" class="btn" href="{:U('Member/applyBusiness')}" target="_blank"><span>我是商家，我要入驻</span></a>
+						
+					</div>
+					<div class="famous">
+						<div class="common-tt">
+							<h2 class="type-2"><span>知名品牌</span></h2>
+						</div>
+						<volist name="isbranddata" id="vo">
+						<dl>
+						<dd class="pic"><a target="_blank" href="{:U('Businesses/detail/id/'.$vo['id'])}"><img src="{$vo.accessory.thumbnail}" alt="{$vo.name}" width="50" height="50"></a></dd>
+						<dt><a target="_blank" href="{:U('Businesses/detail/id/'.$vo['id'])}">{$vo.name}</a></dt>
+						<dd>{$vo.signature}</dd>
+						<eq name="vo.qualifications" value="1">
+						<dd><span class="ico ico-verify" title="资质认证">企业经营资质认证</span></dd>
+						</eq>
+						</dl>
+						</volist>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

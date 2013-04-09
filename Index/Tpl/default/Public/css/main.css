@@ -1,0 +1,565 @@
+body{
+	color:#434343;
+	background:url(../images/body.png) 0 0 repeat
+}
+#sec-header .sec-header-inner{
+	position:relative;
+	width:960px;
+	height:29px;
+	padding:23px 10px 17px;
+	margin:0 auto
+}
+#sec-header h2{
+	float:left
+}
+#sec-header h2 a{
+	display:block;
+	width:98px;
+	height:30px;
+	text-indent:-9999px;
+	background:url(../images/sec-app-header.png) -134px 0 no-repeat
+}
+#sec-header .cate-nav{
+	float:left;
+	height:100%;
+	margin-left:40px
+}
+#sec-header .cate-nav li{
+	float:left;
+	height:100%;
+	margin-right:10px
+}
+#sec-header .cate-nav a{
+	overflow:hidden;
+	display:block;
+	height:100%;
+	font-size:0;
+	line-height:0;
+	background-image:url(../images/sec-app-header.png);
+	background-repeat:no-repeat
+}
+#sec-header .n-home a{
+	width:56px;
+	background-position:0 -65px
+}
+#sec-header .n-home a:hover,#sec-header .n-home .curr{
+	background-position:0 -95px
+}
+#sec-header .n-show a{
+	width:74px;
+	background-position:-56px -65px
+}
+#sec-header .n-show a:hover,#sec-header .n-show .curr{
+	background-position:-56px -95px
+}
+#sec-header .n-app a{
+	width:91px;
+	background-position:-130px -65px
+}
+#sec-header .n-app a:hover,#sec-header .n-app .curr{
+	background-position:-130px -94px
+}
+#sec-header .illustration{
+	position:absolute;
+	right:0;
+	top:4px;
+	width:134px;
+	height:65px;
+	background:url(../images/sec-app-header.png) 0 0 no-repeat
+}
+#wrapper{
+	background:transparent
+}
+#bd{
+	overflow:hidden;
+	width:980px;
+	margin:0 auto;
+	border:1px solid #b8d9e6;
+	box-shadow:0 1px 2px rgba(0,0,0,0.4);
+	text-align:left;
+	background-color:#fff;
+	*zoom:1
+}
+#bd:after{
+	clear:both;
+	visibility:hidden;
+	display:block;
+	height:0;
+	content:""
+}
+#main{
+	float:left;
+	margin-right:-210px
+}
+#core{
+	padding:20px 10px 20px 20px;
+	margin-right:220px
+}
+#aside{
+	float:right;
+	width:209px;
+	padding:12px 0 9999px;
+	margin-bottom:-9979px;
+	border-left:1px solid #b8d9e6;
+	background-color:#e3f7fc
+}
+.tt-1{
+	position:relative;
+	height:30px;
+	border-bottom:2px solid #dcdcdc;
+	font-weight:bold;
+	font-family:"FAE8F6F96C59ED1","9ED1F53";
+	font-size:16px;
+	line-height:30px;
+	color:#313131;
+	letter-spacing:1px
+}
+#main .tt-1 span{
+	position:absolute;
+	left:0;
+	bottom:-2px;
+	padding:0 10px 0 2px;
+	border-bottom:2px solid #379fce
+}
+#main .tt-1 span em{
+	position:absolute;
+	_top:6px;
+	margin-left:12px;
+	white-space:nowrap;
+	font-size:12px;
+	color:#999
+}
+#aside .tt-1{
+	border-bottom:2px solid #9dd0e3;
+	font-size:14px
+}
+.ico{
+	overflow:hidden;
+	display:inline-block;
+	margin:0 5px;
+	vertical-align:middle;
+	font-size:0;
+	line-height:0;
+	background-image:url(../images/spr_ico.png);
+	background-repeat:no-repeat
+}
+.ico-need{
+	width:8px;
+	height:8px;
+	background-position:left -32px
+}
+.btn-form{
+	width:78px;
+	height:32px;
+	padding:0;
+	border:0;
+	font-weight:bold;
+	line-height:32px;
+	background-image:url(../images/btn-form.png);
+	background-repeat:no-repeat;
+	cursor:pointer
+}
+.btn-form-confirm{
+	color:#fff;
+	backgrond-position:left top
+}
+.btn-form-other{
+	color:#707070;
+	background-position:left -32px
+}
+#slide{
+	position:relative;
+	height:176px;
+	padding-bottom:11px;
+	margin-bottom:15px
+}
+#slide .pics{
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:2;
+	width:100%;
+	height:176px;
+	background-color:#fff
+}
+#slide .pics ol{
+	position:absolute;
+	right:10px;
+	bottom:6px;
+	z-index:2
+}
+#slide .pics ol li{
+	float:left;
+	display:block;
+	width:16px;
+	height:16px;
+	margin-left:5px;
+	line-height:16px;
+	color:#333;
+	text-align:center;
+	background-color:rgba(255,255,255,0.6);
+	_background-color:#fff;
+	_filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	cursor:pointer
+}
+#slide .pics ol .selected{
+	color:#fff;
+	background-color:#f70
+}
+#slide .pics ul{
+	position:relative;
+	z-index:1;
+	width:100%;
+	height:100%
+}
+#slide .pics ul li{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	opacity:0;
+	_filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50)
+}
+#slide .shadow{
+	position:absolute;
+	left:-3px;
+	bottom:0;
+	width:736px;
+	height:16px;
+	background:url(../images/slide_shadow.jpg)
+}
+#aside .applist{
+	padding:0 20px
+}
+.applist .section{
+	position:relative
+}
+#main .applist .section{
+	_width:730px
+}
+#aside .applist .section{
+	_width:169px
+}
+.applist .more{
+	position:absolute;
+	top:12px;
+	right:0
+}
+.applist .more li{
+	float:left;
+	display:block;
+	width:12px;
+	height:11px;
+	margin-left:4px;
+	text-indent:-9999px;
+	background:url(../images/more.gif) left top no-repeat;
+	cursor:pointer
+}
+.applist .more .selected{
+	background-position:-12px top;
+	cursor:default
+}
+.applist .cells{
+	overflow:hidden;
+	*zoom:1
+}
+.applist .cells:after{
+	visibility:hidden;
+	clear:both;
+	display:block;
+	height:0;
+	content:""
+}
+.applist .cells .container{
+	display:none
+}
+.applist .cells .selected{
+	display:block
+}
+.applist .cells dl{
+	position:relative
+}
+.applist .cells .pic img{
+	display:block
+}
+.applist .cells .cover{
+	position:absolute;
+	left:0;
+	top:0
+}
+.applist .cells dt{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis
+}
+.applist .cells dt a{
+	overflow:hidden;
+	display:block;
+	text-overflow:ellipsis;
+	color:#0067b6
+}
+#main .applist .cells{
+	padding-top:20px
+}
+#main .applist .cells dl{
+	float:left;
+	_display:inline;
+	width:64px;
+	padding-bottom:20px;
+	margin:0 28px;
+	text-align:center
+}
+#main .applist .cells .pic img{
+	width:64px;
+	height:64px
+}
+#main .applist .cells .cover{
+	width:64px;
+	height:64px;
+	background:url(../images/pic_cover_64_64.png);
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://127.0.0.1/2le/Index/Tpl/biscuit/Public/images/pic_cover_64_64.png")
+}
+#main .applist .cells dt{
+	position:relative;
+	left:-5px;
+	width:74px;
+	margin-top:6px;
+	_margin-right:-10px
+}
+#aside .applist .cells{
+	padding-top:10px
+}
+#aside .applist .cells dl{
+	padding-bottom:10px;
+	margin-bottom:10px;
+	border-bottom:1px dotted #9dd0e3;
+	*zoom:1
+}
+#aside .applist .cells dl:after{
+	clear:both;
+	visibility:hidden;
+	display:block;
+	height:0;
+	content:""
+}
+#aside .applist .cells .pic{
+	float:left;
+	margin-right:10px
+}
+#aside .applist .cells .pic img{
+	width:40px;
+	height:40px
+}
+#aside .applist .cells .cover{
+	width:40px;
+	height:40px;
+	background:url(../images/pic_cover_40_40.png);
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://127.0.0.1/2le/Index/Tpl/biscuit/Public/images/pic_cover_40_40.png")
+}
+#aside .applist .cells .sn{
+	position:absolute;
+	top:9px;
+	right:5px;
+	font-weight:bold;
+	font-size:16px;
+	font-style:italic;
+	color:#abd7e8
+}
+#aside .applist .cells dt{
+	width:110px;
+	margin-bottom:2px
+}
+#aside .applist .cells dd{
+	color:#707070
+}
+#aside .applist .hot .cells dt{
+	width:90px
+}
+#aside .applist .simple .cells dl{
+	margin-bottom:0;
+	border-bottom:0
+}
+#aside .applist .simple .cells .pic img{
+	width:16px;
+	height:16px
+}
+#aside .applist .simple .cells .cover{
+	width:16px;
+	height:16px;
+	background:url(../images/pic_cover_16_16.png);
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://127.0.0.1/2le/Index/Tpl/biscuit/Public/images/pic_cover_16_16.png")
+}
+#aside .applist .simple .cells dt{
+	position:relative;
+	top:-1px;
+	width:130px
+}
+#registry form{
+	padding:30px;
+	font-size:14px
+}
+#registry form .row{
+	margin-bottom:20px;
+	*zoom:1
+}
+#registry form .row:after{
+	visibility:hidden;
+	clear:both;
+	display:block;
+	height:0;
+	content:""
+}
+#registry form label,#registry form input,#registry form textarea{
+	float:left
+}
+#registry form label{
+	padding:5px 0;
+	margin:0 5px;
+	line-height:20px
+}
+#registry form label.th{
+	width:110px;
+	text-align:right
+}
+#registry form .ico{
+	position:relative;
+	top:-2px
+}
+#registry form .opt{
+	position:relative;
+	top:6px;
+	display:block;
+	width:14px;
+	height:14px
+}
+#registry form .ipt{
+	height:18px;
+	padding:5px;
+	font:14px/18px Arial;
+	border-width:1px;
+	border-style:solid;
+	border-color:#959595 #c9c9c9 #c9c9c9 #959595
+}
+#registry form textarea{
+	width:400px;
+	height:72px;
+	padding:5px;
+	font:14px/18px Arial;
+	border-width:1px;
+	border-style:solid;
+	border-color:#959595 #c9c9c9 #c9c9c9 #959595;
+	resize:none
+}
+#registry form input.error,#registry form textarea.error{
+	border-color:#dd3c10;
+	background-color:#fff6f5
+}
+#registry form .row em{
+	position:relative;
+	left:12px;
+	top:7px;
+	float:left;
+	font-size:12px;
+	line-height:16px
+}
+#registry form .row em.error{
+	padding-left:20px;
+	background:url(../images/spr_ico.png) left -16px no-repeat
+}
+#registry form p{
+	clear:both;
+	font-size:12px;
+	color:#999;
+	line-height:24px;
+	text-indent:120px
+}
+#registry form .buttons{
+	padding:10px 0 0 120px
+}
+#registry form .buttons .btn-form{
+	margin-right:10px
+}
+#registry .contact{
+	margin-left:150px;
+	line-height:20px
+}
+#registry .contact dt{
+	font-weight:bold
+}
+.btn-registry a{
+	display:block;
+	width:172px;
+	height:64px;
+	margin:20px auto 0;
+	text-indent:-9999px;
+	background:url(../images/btn-registry.png);
+	opacity:.8;
+	_filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80)
+}
+.btn-registry a:hover{
+	opacity:1;
+	_filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100)
+}
+#app-frame{
+	position:relative;
+	margin-top:20px;
+}
+.gm-master .gm-master-inner{
+	position:relative;
+	z-index:2;
+	width:975px;
+	height:74px;
+	margin:0 auto;
+	text-align:left;
+}
+.gm-master .channel{
+	float:left;
+	width:96px;
+	height:28px;
+	background:url(../images/discover-h1.jpg) no-repeat left top;
+	margin:23px 0 0 10px;
+	display:inline
+}
+.gm-master .channel a{
+	display:block;
+	width:96px;
+	height:28px;
+	text-indent:-9999px
+}
+.gm-master .gm-master-nav{
+	float:left;
+	margin:23px 0 0 36px;
+	display:inline
+}
+.gm-master .gm-master-nav li{
+	float:left;
+	margin-right:10px;
+	padding-left:10px
+}
+.gm-master .gm-master-nav li a{
+	float:left;
+	height:28px;
+	line-height:28px;
+	font-family:"Microsoft YaHei" "SimHei";
+	font-size:18px;
+	padding-right:10px;
+	color:#333;
+	text-decoration:none
+}
+.gm-master .gm-master-nav li a:hover{
+	color:#666
+}
+.gm-master .gm-master-nav .selected{
+	background:url(../images/spr-gm-master-nav.jpg) no-repeat left top
+}
+.gm-master .gm-master-nav .selected a{
+	background:url(../images/spr-gm-master-nav.jpg) no-repeat right top;
+	color:#fff
+}
+.gm-master .gm-master-nav .selected a:hover{
+	color:#fff
+}

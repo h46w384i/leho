@@ -1,0 +1,187 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/active.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/registration.css"/>
+<script type="text/javascript">
+$(function(){
+	register();
+});
+</script>
+
+<div id="wrapper">
+	<div id="bd">
+		<div id="divRegStep1" style="margin: 60px 0;">
+			<div id="reg" class="psp-wrap">
+				<div class="psp-main cls">
+					<div class="psp-container wi">
+						<form id="user_new" action="{:U('User/signup')}" method="post" class="sns-form" onsubmit="return false;">
+							<ul>
+								<li>
+									<label class="k" for="nickname"><span class="em">*</span> 昵&nbsp;&nbsp;称：</label>
+									<span class="v">
+										<input autocomplete="off" class="sns-text" type="text" id="nickname" name="name" datatype="bytetext" minlength="4" maxlength="30">
+									</span>
+								</li>
+								
+								<li>
+									<label class="k" for="uname"><span class="em">*</span> 邮&nbsp;&nbsp;箱：</label>
+									<span class="v">
+										<input autocomplete="off" class="sns-text" type="text" id="uname" name="email" >
+									</span>
+								</li>
+								
+								<li>
+									<label class="k" for="password"><span class="em">*</span> 密&nbsp;&nbsp;码：</label>
+									<span class="v">
+										<input class="sns-text" type="password" maxlength="20" id="password" name="password">
+									</span>
+								</li>
+								<li>
+									<label class="k" for="password_again"><span class="em">*</span> 确认密码：</label>
+									<span class="v">
+										<input class="sns-text" type="password" maxlength="20" id="password_again" name="password_confirmation">
+									</span>
+								</li>
+								
+								<li class="">
+									<label class="k" for="nickname">真实姓名：</label>
+									<span class="v">
+										<input autocomplete="off" class="sns-text" type="text" id="realname" name="realname">
+									</span>
+									<span class="em-block">请输入真实姓名，方便朋友找到你</span>
+								</li>
+								<li>
+									<label class="k" for=""><span class="em">*</span> 性&nbsp;&nbsp;别：</label>
+									<span class="v">
+										<label class="sns-radio"><input type="radio" emel="sexem" class="sex" value="0" name="sex" checked="checked"> 保密</label>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<label class="sns-radio"><input type="radio" emel="sexem" class="sex" value="1" name="sex"> 男</label>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<label class="sns-radio"><input type="radio" emel="sexem" class="sex" value="2" name="sex"> 女</label>
+									</span>
+									<em id="sexem"></em>
+								</li>
+
+								<li>
+									<input type="button" value="立即注册" id="submit" class="btn-reg">
+								</li>
+								<li>
+									<em class="em-block">点击立即注册表示你同意并遵守<a href="{:U('Help/index/id/52')}">{&sysconfig.site_name}协议</a>，需要帮助请联系客服：{&sysconfig.site_services_tel}</em>
+								</li>
+							</ul>
+													</form>
+					</div>
+					<div class="psp-sidebar">
+						<form action="" method="get" class="sns-form">
+							<ul>
+								<li><em class="pl c0 lh">已有帐号？请直接登录</em></li>
+								<li>
+									<a href="{:U('User/signin')}" class="btns btn-t1 signin"><span>马上登录</span></a>
+								</li>
+							</ul>
+						</form>
+						<div class="other-signin">
+							<p>使用合作网站帐号登录</p>
+							<div class="other-list">
+							<volist name='login_portdata' id='vo'>
+								<a href="{:U('Login_port/index/id/'.$vo['id'])}" class="{$vo.remark}">{$vo.name}</a>
+							</volist>
+							</div>
+						</div>
+						<div class="show-box">
+							<p>视频：时光轴，串起生活点滴</p>
+							<div class="show-main">
+								{:showAdvPosition('reg_video')}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="divRegStep2" style="display:none;">
+			<div id="reg" class="psp-wrap">
+				<div class="psp-main-active cls">
+					<div id="divEMailActivate" style="display:none;">
+						<dl class="active-main">
+							<dt>马上验证邮箱，激活你的帐号！</dt>
+							<dd>验证信息已经发送到你的邮箱 <b class="register-username">--</b></dd>
+							<dd>请在48小时内点击邮件里的确认链接，激活你的帐号。</dd>
+							<dd class="btn"><a href="javascript:;" id="btnGoMailbox" class="btns btn-t1"><span><strong>去邮箱激活</strong></span></a></dd>
+						</dl>
+						<dl class="active-other">
+							<dt>没有收到验证邮件？</dt>
+							<dd>请尝试到广告、垃圾邮件里找找看。</dd>
+							<dd>邮件地址写错了？请 <a href="javascript:;" title="更换你的注册邮箱" id="aModifyEMail">更换邮箱。</a></dd>
+							<dd>确认没有收到验证邮件，请 <a href="javascript:;" id="a_resend_mail" data-posturl="/psp/reg/_resend_mail">重新发送验证邮件</a></dd>
+							<dd>有任何问题可以联系我们的客服{&sysconfig.site_services_email}</dd>
+						</dl>
+						<div style="display:none">
+							<div id="change_mail_content">
+								<div class="panel-invite">
+									<form id="form_replace_mail" class="dialog-form form" action="/psp/reg/_replace_email" method="post" onsubmit="return false;">
+										<div class="wrap change-mail">
+											<ul class="content">
+												<li class="txt">你目前注册的电子邮箱为： <span class="register-username" id="spanUserEmail">--</span></li>
+												<li class="cls">
+													<span class="prompt">输入新的电子邮箱：</span>
+													<input type="text" maxlength="60" datatype="email" errmsg="邮箱格式不正确" reqmsg="邮箱" id="new_email" name="new_email" class="add-mail"><em></em>
+												</li>
+												<li class="cls">
+													<a class="btns btn-t2" id="submit_email" href="javascript:;"><strong><span>发送验证邮件</span></strong></a>
+												</li>
+											</ul>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="divMobileActivate" style="display:none;">
+						<dl class="active-main">
+							<dt>马上验证手机，激活你的帐号!</dt>
+							<dd>免费的校验短信已经发送到您的手机 <b class="register-username">--</b> ，<a id="a_modify_mobile" href="javascript:;">点此更换手机号码</a>。</dd>
+							<dd class="captcha-wraper">
+								<form id="activate_mobile_form" action="/psp/reg/_activate" method="post" onsubmit="return false;">
+									<label class="k" for=""> 验证码：</label>
+									<span class="v">
+										<input type="text" reqmsg="验证码" style="width:100px;" name="vcode" id="mobile_vcode" class="sns-captcha wh">
+										<input type="hidden" id="active_mobilephone" name="mobile" value="">
+									</span>
+									<a href="javascript:;" class="btns btn-t1"><span id="btn_resend_mobilevcode" data-msg="{0}秒后重新发送验证码" data-time="60" data-btn-msg="重新发送验证码" data-posturl="/psp/reg/_resend_mobilevcode">免费发送验证码</span></a>
+								</form>
+							</dd>
+							<dd class="btn"><a href="javascript:;" id="activate_mobile" class="btns btn-t1"><span><strong>提交</strong></span></a></dd>
+						</dl>
+						<dl class="active-other">
+							<dt>没有收到验证短信？</dt>
+							<dd>短信可能有延迟，请耐心等候。如长时间未收到，<a id="a_resend_mobilecode" href="javascript:;">点此重新发送。</a></dd>
+							<dd>如果再次发送确认短信还是没有收到，您可以改用 <a href="/psp/reg">邮箱注册</a>。</dd>
+							<dd>有任何问题可以联系我们的客服 {&sysconfig.site_services_tel}。</dd>
+						</dl>
+						<div style="display:none">
+							<div id="change_mobile_content">
+								<div class="panel-invite">
+									<form id="form_replace_mobile" class="dialog-form form" action="/psp/reg/_replace_mobile" method="post" onsubmit="return false;">
+										<div class="wrap change-mobile">
+											<ul class="content">
+												<li class="txt">你目前注册的手机号为： <span class="register-username" id="spanUserMobile">--</span></li>
+												<li class="cls">
+													<span class="prompt">输入新的手机号：</span>
+													<input type="text" maxlength="60" datatype="mobilecode" errmsg="手机号格式不正确" reqmsg="手机号" id="new_mobilephone" name="new_mobilephone" class="add-mobile"><em></em>
+												</li>
+												<li class="cls">
+													<a class="btns btn-t2" id="submit_mobile" href="javascript:;"><strong><span>发送验证码</span></strong></a>
+												</li>
+											</ul>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

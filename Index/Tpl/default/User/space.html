@@ -1,0 +1,133 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/profile.css"/>
+<style type="text/css">
+.fixed_elem { position: fixed; top: 40px;}
+#changeskinbtn { display: none; }
+#promptskin { display: none; }
+.comment { display: none; }
+.panel-integral { display: none; }
+</style>
+<script>
+	$(function(){
+		var section = $('.timeline-section:first');
+		layout(section);
+		
+		$('.timeline-capsule-hd-tit em').click(function(){
+			var t = $(this);
+			t.hide();
+			var section = t.parents('.timeline-section');
+			layout(section);
+		});
+		$('.timeline-scrubber .month').click(function(){
+			var t = $(this);
+			var time = t.attr('data-time');
+			var section = $('.timeline-section[data-time="'+time+'"]');
+			var top = section.offset().top;
+			$('html,body').animate({scrollTop:top});
+		});
+
+
+        $('.likeButton,.like-btn').live('click',function(){
+            var span = $(this).parent();
+            var button = $(this);
+            var url = $(this).attr('href');
+            $.getJSON(url,function(data){
+                //t.tip(data.info,2000);
+                if(data.status==1){
+                    var like = span.find('.like-btn em');
+                    if(!span.is('.current')){
+                        button.removeClass('btn-love').addClass('btn-loved');
+                        span.addClass('current');
+                        like.text(parseInt(like.html())+1);
+                    }else{
+                        button.removeClass('btn-loved').addClass('btn-love');
+                        span.removeClass('current');
+                        like.text(parseInt(like.html())-1);
+                    }
+                }
+            });
+            return false;
+        });
+		
+	});
+	function layout(section){
+		var month = section.attr('data-time');
+		$.getJSON(APP+'/User/axis_item/uid/{$userdata.id}/month/'+month,function(data){
+			if(data.status == 1){
+				var html = $(data.info);
+				html.hide();
+				section.find('.timeline-capsule').append(html);
+				html.filter('.timeline-two-col').each(function(){
+					var pre = $(this).prev();
+					var pre_top = pre.offset().top + pre.outerHeight();
+					var pre_pre = pre.prev();
+					var pre_pre_top = pre_pre.offset().top + pre_pre.outerHeight();
+					if(pre_pre_top > pre_top){
+						$(this).addClass('right-col');
+					}else{
+						$(this).addClass('left-col');
+					}
+					$(this).show();
+				});
+			}
+		});
+	}
+</script>
+<div id="wrapper">
+	<div id="bd" class="bb-t2">
+		<div id="main">
+			<div class="inner">
+				<div class="column-personal">
+					<include file="User:right" />
+					<div class="timeline-tab-content">
+						<div class="timeline-section" data-time="{$first}">
+							<div class="timeline-capsule cls" id="currentMonthContainer">
+								<div class="timeline-two-col left-col"></div>
+								<div class="timeline-two-col right-col">
+									<div class="feed">
+										<div class="feed-content">
+											<dl class="trends-list">
+												<dt>
+												<strong>{$userdata.name}</strong>的最新动态
+												</dt>
+												<volist name="member_feeddata" id="vo">
+												<dd>{$vo.content}</dd>
+												</volist>
+											</dl>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+	<volist name="axised" id="vo" offset="1">
+	<div class="timeline-section" data-time="{$key}">
+		<div class="timeline-capsule cls">
+			<div class="timeline-capsule-hd">
+				<h3 class="timeline-capsule-hd-tit" data-time="{$key}"><span>{$vo}</span><em>点击查看分享</em></h3>
+			</div>
+			<a class="timeline-spine"></a>
+		</div>
+	</div>
+	</volist>
+</div>
+				</div>
+			</div>
+		</div>
+		<div id="aside">
+			<ul class="timeline-scrubber fixed_elem">
+				<volist name="axis" id="vo">
+					<li <eq name="i" value="1">class="curr"</eq>>
+						<a class="year" href="javascript:;">{$key}年</a>
+						<ul style="">
+						<volist name="vo" id="v">
+							<li><a href="javascript:;" class="month" data-time="{$v}">{$key}月</a></li>
+						</volist>
+						</ul>
+					</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+	</div>
+<include file="Public:footer" />

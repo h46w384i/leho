@@ -1,0 +1,70 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/main.css"/>
+<script>
+$(function(){
+	circleApp();
+});
+</script>
+<div id="wrapper">		
+
+<div id="bd">
+				<div id="main">
+			<div id="core">
+				<div id="slide">
+					<div class="pics switch-fade">
+						{:showAdvPosition('app_top')}
+					</div>
+					<div class="shadow"></div>
+				</div>
+
+				<div class="applist">
+					<volist name="all" id="vo">
+					<div class="section">
+						<h2 class="tt-1"><span>{$vo.name}</span></h2>
+						<ol class="more switch-nav">
+							<volist name="vo.apps" id="v" mod="12">
+							<eq name="mod" value="1">
+							<if condition="count($vo['apps']) gt 12">
+								<eq name="i" value="1">
+								<li class="selected">{$i}</li>
+								<else />
+								<li>{$i}</li>
+								</eq>
+							</if>
+							</eq>
+							</volist>
+						</ol>
+						<div class="cells switch-content">
+						<volist name="vo.apps" id="v" mod="12">
+							<eq name="mod" value="1">
+								<eq name="i" value="1">
+								<div class="container selected">
+								<else />
+								<div class="container">
+								</eq>
+							</eq>
+							
+							<dl>
+								<dd class="pic"><a href="{:U('Circle/play/id/'.$v['id'])}"><img src="{$v.accessory.origin}" alt="{$v.name}"><span class="cover"></span></a></dd>
+								<dt><a href="{:U('Circle/play/id/'.$v['id'])}">{$v.name}</a></dt>
+							</dl>
+							<eq name="mod" value="0">
+							</div>
+							<else />
+							<if condition="count($vo['apps']) eq $i">
+							</div>
+							</if>
+							</eq>
+						</volist>
+						</div>
+					</div>
+					</volist>
+				</div>
+			</div>
+		</div>
+		<include file="Circle:app_right" />
+	</div>
+</div>
+
+<include file="Public:footer" />

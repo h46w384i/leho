@@ -1,0 +1,196 @@
+.message #aside{
+	width:232px;
+	margin-top:60px
+}
+.message #aside .col-l{
+	width:232px
+}
+.message #main{
+	margin-right:-232px
+}
+.message a{
+	color:#3d7a99
+}
+.message .title{
+	height:24px;
+	margin:17px 0 19px 9px
+}
+.mes-nav{
+	background:url(../images/bg-mes-nav-big.png) no-repeat left top;
+	padding-left:2px
+}
+.mes-nav ul{
+	width:100%;
+	height:36px;
+	background:url(../images/bg-mes-nav-big.png) no-repeat right top;
+	overflow:hidden
+}
+.mes-nav li{
+	float:left
+}
+.mes-nav li a{
+	display:block;
+	width:106px;
+	height:36px;
+	line-height:36px;
+	*line-height:39px;
+	background:url(../images/spr-mess-nav.png) no-repeat -109px 0;
+	margin-left:-2px;
+	text-align:center;
+	color:#333;
+	font-size:14px;
+	text-decoration:none;
+	overflow:hidden
+}
+.mes-nav .selected a,.mes-nav li a:hover{
+	text-decoration:none;
+	color:#333;
+	background:url(../images/spr-mess-nav.png) no-repeat -109px -43px;
+	position:relative;
+	z-index:5
+}
+.message-date{
+	height:20px;
+	padding:15px 0 0 10px
+}
+.message-date span{
+	margin-right:20px;
+	color:#999
+}
+.message-date .selected,.message-date a.selected:hover{
+	font-weight:bold;
+	color:#333
+}
+.moudle-block{
+	width:232px;
+	margin-bottom:16px
+}
+.moudle-block .hd{
+	height:6px;
+	background:url(../images/bg-module-hd.jpg) no-repeat left top;
+	overflow:hidden
+}
+.moudle-block .bd{
+	width:100%;
+	background:url(../images/bg-module-bd.jpg) repeat-y left top;
+	overflow:hidden
+}
+.moudle-block .ft{
+	height:8px;
+	background:url(../images/bg-module-ft.jpg) no-repeat left top;
+	overflow:hidden
+}
+.moudle-block .title{
+	width:190px;
+	height:24px;
+	line-height:24px;
+	background:url(../images/bg-hd-title.jpg) repeat-x left top;
+	margin:12px auto;
+	text-align:center;
+	overflow:hidden
+}
+.moudle-block .title h2{
+	display:inline;
+	background:#fff;
+	padding:0 10px;
+	color:#6d8f39;
+	font-size:14px;
+	font-weight:normal
+}
+.moudle-block .moudle-content{
+	padding:0 20px 10px;
+	line-height:22px;
+	color:#666
+}
+.global-page{
+	margin:20px auto;
+	text-align:center
+}
+.comment-lst li{
+	padding:20px 0;
+	border-bottom:1px dotted #ccc;
+	vertical-align:top
+}
+.comment-lst li .head img{
+	vertical-align:top;
+	width:50px;
+	height:50px
+}
+.comment-lst .current,.comment-lst li:hover{
+	background:#f8faf7
+}
+.cmt-lst-l,.cmt-lst-c{
+	float:left
+}
+.cmt-lst-l{
+	width:60px;
+	padding:0 0 0 10px
+}
+.cmt-lst-c{
+	width:650px;
+	margin-top:-3px
+}
+.cmt-lst-c p{
+	word-wrap:break-word
+}
+.cmt-lst-c p span{
+	color:#999
+}
+.cmt-lst-c p .cmt-ori{
+	display:inline-block
+}
+.cmt-lst-c p .cmt-target{
+	margin:0 3px
+}
+.cmt-lst-c .cmt-tools{
+	float:right;
+	margin-top:-18px
+}
+.cmt-lst-c .cmt-tools a{
+	float:left;
+	color:#3d7a99
+}
+.cmt-lst-c .split{
+	float:left;
+	*margin-top:-2px;
+	padding:0 7px;
+	color:#ccc
+}
+.cmt-lst-c .cmt-tools .role{
+	display:none;
+	float:left
+}
+.comment-lst li.current .role,.comment-lst li:hover .role{
+	display:block
+}
+.comment-lst .splitpage{
+	padding:35px 0 40px
+}
+.txt-wrap{
+	padding:17px 0 17px;
+	color:#999
+}
+.col-r .myinf{
+	margin:0 auto 6px
+}
+.col-r .myinf .title{
+	padding:0!important
+}
+.feed-con{
+	padding:0
+}
+.comment-lst .comment{
+	margin:10px 0 0
+}
+.comment-lst .comment-post{
+	padding:10px 10px 13px
+}
+.comment-lst .comment-post .txt{
+	margin:0 0 9px
+}
+.comment-lst .comment-post .submit{
+	padding:0 10px
+}
+.comment-lst .comment-post .arr-t{
+	left:571px
+}

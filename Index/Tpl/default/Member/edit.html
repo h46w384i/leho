@@ -1,0 +1,97 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script>
+$(function(){
+	memberEdit();
+});
+</script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="mylife-top">
+		<h2>帐号设置</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>基本信息</h3>
+			<p>以下信息将显示在个人资料页，方便大家了解你。</p>			
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form" action="{:U('Member/update')}" method="post" id="updateform">
+				<ul>
+					<li>
+						<label class="k" for="mail">邮箱：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="text" id="email" name="mail" maxlength="60" datatype="email" value="{$memberdata.mail}" placeholder="请输入您的邮箱" disabled="disabled">
+							<em></em>
+						</span>
+					</li>
+					<li>
+						<label class="k" for="">昵称：</label>
+						<span class="v"><input disabled="disabled" autocomplete="off" class="sns-text" type="text" id="name" name="name" minlength="4" maxlength="30" reg-pattern="/^[\u4100-\u9fa5_a-zA-Z0-9]*$/" datatype="magic-bytetext &amp;&amp; reg" errmsg="4-30个字符，支持中英文、数字、下划线" value="{$memberdata.name}" placeholder="4-30个字符，支持中英文、数字、下划线">&nbsp;&nbsp;<em></em></span>
+					</li>
+					<li>
+						<label class="k" for="">真实姓名：</label>
+						<span class="v"><strong><input type="text" id="realname" name="realname" class="sns-text" datatype="magic-bytetext &amp;&amp; reg" minlength="4" maxlength="30" reg-pattern="/^[\u4100-\u9fa5_a-zA-Z0-9]*$/" errmsg="请输入真实姓名" size="30" placeholder="请输入你的姓名" value="{$memberdata.realname}"></strong><em></em></span>
+					</li>
+					<li>
+						<label class="k" for=""><span class="em">*</span>性别：</label>
+						<span class="v">
+							<span class="sns-radio"><input type="radio" value="1" name="sex" checked="">男</span>
+							<span class="sns-radio"><input type="radio" value="2" name="sex">女</span>
+						</span>
+						<em></em>
+					</li>
+					<li>
+						<label class="k" for="">地址：</label>
+						<span class="v"><strong><input type="text" id="address" name="address" class="sns-text" minlength="4" maxlength="30" size="30" placeholder="请输入你的地址" value="{$memberdata.address}"></strong><em></em></span>
+					</li>
+					<li>
+						<label class="k" for="">生日：</label>
+						<span class="v">
+							<strong><input type="text" id="birthday" name="birthday" class="sns-text" minlength="4" maxlength="30" size="30" placeholder="请输入你的生日" value="{$memberdata.birthday|date='Y-m-d',###}"></strong><em></em>
+						</span>
+						<em></em>
+					</li>
+					<script>
+					$(function() {
+						$( "#birthday" ).datepicker({changeMonth: true,changeYear: true,shortYearCutoff: 50,yearRange: "1920:{:date('Y')}"});
+					});
+				    </script>
+					<li>
+						<label class="k" for="">手机号：</label>
+						<span class="v">
+							<empty name="memberdata.phonestatus">
+							<input type="text" id="phone" name="phone" class="sns-text" maxlength="11" errmsg="手机号码有误，请重新输入" datatype="mobilecode" size="30" placeholder="请输入你的手机号" value="{$memberdata.phone}">
+							<a id="confirmPhoneNo" href="javascript:;">验证手机号</a>
+							<else />
+							<input type="text" id="phone" name="phone" class="sns-text" disabled="disabled" value="{$memberdata.phone}">
+							</empty>
+							<em></em>
+						</span>
+					</li>
+										
+					<li>
+						<label class="k" for="">介绍自己：</label>
+						<span class="v"><textarea name="self_introduction" class="sns-textarea" datatype="bytetext" maxlength="140" placeholder="介绍下自己吧，如兴趣、特长、想说的话等">{$memberdata.self_introduction}</textarea></span>
+						<em>介绍自己，让更多人关注</em>
+					</li>
+				</ul>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</form>
+			
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:edit_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

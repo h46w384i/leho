@@ -1,0 +1,72 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/discover.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/feed.css"/>
+<script>
+$(function(){
+	circleIndex({:json_encode($_REQUEST)});
+});
+</script>
+<div id="wrapper">		
+	<div id="sec-header">
+	<div class="gm-master">
+		<div class="gm-master-inner">
+			<h1 class="channel"><a href="{:U('Circle/detection')}" title="发现生活">发现生活</a></h1>
+			<ul class="gm-master-nav">
+				<li class="selected"><a href="{:U('Circle/detection')}">首页</a></li>
+				<li><a href="{:U('Circle/philosopher')}">达人秀</a></li>
+				<li><a href="{:U('Circle/app')}">应用中心</a></li>
+			</ul>
+			<div class="bg-show-pic"></div>
+						<div class="tips-wrapper">如何投稿？</div>
+			<div class="tips" id="discover-tips" style="position: absolute; right:30px; top:48px; z-index: 99; display:none">
+				<div class="tips-t1 discover-tips">
+					<div class="tips-content">
+						<div class="bd">
+							<div class="explain">在发分享时直接<b>@发现生活</b>，或者转发他人的精彩分享时<b>@发现生活</b>，即可完成投稿</div>
+								<dl class="explain-list">
+									<dt>投稿须知：</dt>
+									<dd>1.加上#婚纱照#、#秀萌宝#等话题，投稿更容易被采用。</dd>
+									<dd>2.投稿一经采用，你的分享将展现在发现生活，使你收获更多观众。</dd>
+								</dl>
+						</div>
+					</div>
+					<span class="cue"></span> <span class="sd"></span> <a class="tips-close"></a>
+				</div>
+			</div>
+					</div>
+	</div>
+</div>
+<div id="bd"> 
+	<div id="main">
+		<div class="theme-image">
+			<img id="topic_img" src="{$val.enlarge_accessory.origin}" width="980" height="250" alt="{$val.title}">
+			<div class="other-info"></div>
+			<div class="block-tag">
+				<span>猜你喜欢：</span>
+				<volist name="albumdata" id="vo">
+				<a href="{:U('Circle/album/aid/'.$vo['id'])}" target="_blank">{$vo.title}</a>
+				</volist>
+			</div>
+			<div class="block-show-other topic-share-container share-container">
+				<span>独乐乐不如众乐乐，让我们一起分享到：</span><a href="javascript:;" onclick="return false;" class="ico-sina shareto-button-tsina"></a><a href="javascript:;" onclick="return false;" class="ico-qq shareto-button-qzone"></a><a href="javascript:;" onclick="return false;" class="ico-renren shareto-button-renren"></a><a href="javascript:;" onclick="return false;" class="ico-tqq shareto-button-tqq"></a>			</div>
+			<a href="javascript:;" onclick="upAlbum({$val['id']});" class="btn-upload"></a>
+		</div>
+		<div class="column-wraper cls">
+			<div class="talk-about jvf_pubu">
+				<h2>{$val.title}</h2>
+				<p>{$val.content|msubstr=###,0,50}
+				<if condition="strlen($val['content']) gt 50">
+				<a href="javascript:;" id="more-btn" class="more" onclick="return false;" content="{$val.content}">更多</a>
+				</if>
+				</p>
+				<a href="javascript:;" class="block-say" onclick="upAlbum({$val['id']});">{$val.title}</a>
+			</div>
+		</div>
+		<div id="split_page" class="splitpage cls" style="display:none"> 
+		</div>
+	</div> 
+</div>
+</div>
+
+<include file="Public:footer" />

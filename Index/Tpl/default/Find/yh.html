@@ -1,0 +1,78 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link type="text/css" href="../Public/css/search.css" rel="stylesheet">
+<link type="text/css" href="../Public/css/side-con.css" rel="stylesheet">
+<div id="wrapper">
+<div class="search-header">
+    <div class="search-header-inner">
+        <div class="search-logo"><h1>乐活搜索</h1></div>
+        <div class="search-box">
+            <form action="">
+                <input name="keyword" type="text" autocomplete="off" value="{$_REQUEST['keyword']}" ""="" data-placeholder="" class="input-box search-placeholder">
+                <input type="submit" value="搜索" class="btn-search">
+            </form>
+            <div class="search-result container-item" style="display:none;">
+
+            </div>
+        </div>
+
+        <div class="search-tips">
+            <!--<a href="/search/?keyword=创意家居" class="keyword">疯狂创意家居</a>
+            <a href="/search/?keyword=香水" class="keyword">香水迷情</a>
+            <a href="/search/?keyword=胎教" class="keyword">音乐胎教</a>
+            <a href="/search/?keyword=婚纱照" class="keyword">婚纱照</a>
+            <a href="/search/?keyword=体验团" class="keyword">体验团</a>-->
+        </div>
+
+    </div>
+</div>
+
+<div id="bd" class="bb-t3">
+<div id="main">
+<div class="inner">
+<div class="col-c">
+<div class="inner">
+<div class="search-result-list">
+    <volist name="preferentialdata" id="vo">
+        <div class="search-result-block cls">
+            <div class="result-photo">
+                <a href="{:U('Businesses/detail/id/'.$vo['bid'])}" target="_blank"><img src="{$vo.header}" title="{$vo.name}"></a>
+            </div>
+            <div class="result-info">
+            <div class="result-info-user">
+                <p class="name"><strong><a href="{:U('Businesses/detail/id/'.$vo['bid'])}" target="_blank">{$vo.name}</a>
+                </strong>
+                </p>
+            </div>
+            <div class="result-info-cont">
+            <div class="share-cont">
+                <div class="share-prefer">
+                    <div class="prefer-url">
+                        <a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">{$vo.title}</a>
+                    </div>
+                    <div class="prefer-desc">
+                        <p>{$vo.note}</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+			</div>
+        </div>
+    </volist>
+</div>
+<div class="pager">
+    <div class="global-page">
+        {$page}
+    </div>
+    <div id="ptest"></div>
+</div>
+</div>
+</div>
+    <include file="Find:right" />
+</div>
+</div>
+    <include file="Find:left" />
+</div>
+</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,133 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/b_global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/result_unit.css"/>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('#li_all_class').hover(function(){
+		$(this).addClass('selected');
+	},function(){
+		$(this).removeClass('selected');
+	});
+});
+//-->
+</script>
+<include file="Businesses:top" />
+<div id="wrapper" class="bb-t1">
+	<div class="top-banner"></div>
+	<div id="main">
+		<div class="inner">
+			
+			<div class="common-bar cls" id="crumb">
+				<div class="result-stat">在<strong class="nam">"所有分类"</strong> 中共找到<em class="num">{$count}</em>个商家</div>
+				<ul class="crumb-nav">
+					<li id="li_all_class" class="first">
+						<a href="{:U('Businesses/lists')}" class="local-cate">所有分类 <span class="more"></span></a>
+						<div class="cate-list">
+						<volist name="businesses_categorydata" id="vo">
+						<dl>
+							<dt><a href="{:U('Businesses/lists/cid/'.$vo['id'])}">{$vo.name}</a>({$vo.count_num})</dt>
+							<dd>
+								<volist name="vo.child" id="v">
+								<a href="{:U('Businesses/lists/cid/'.$vo['id'])}?child={$v.id}">{$v.name}</a>
+								</volist>
+							</dd>
+						</dl>
+						</volist>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+<div id="filter-tools">
+	<div class="filter-combo-t"></div>
+	<div class="filter-combo">
+				<div class="no-last">
+					<div class="block category-block">
+						<div class="k">行业类别：</div>
+						<div class="v">
+						<volist name="crr_categorydata" id="vo">
+							<eq name="vo.level" value="0">
+							<span><a href="{:U('Businesses/lists/cid/'.$vo['id'])}">{$vo.name}</a><em>({$vo.count_num})</em></span>
+							<else />
+							<span><a href="{:U('Businesses/lists/cid/'.$vo['pid'])}?child={$vo.id}">{$vo.name}</a><em>({$vo.count_num})</em></span>
+							</eq>
+						</volist>
+						</div>
+					</div>
+				</div>
+	</div>
+	<div class="filter-combo-b"></div>
+
+</div>
+<div class="search-list-hd">
+	<h2>商家列表</h2>
+	<div class="mini-global-page"></div>
+</div>
+
+<div id="filter-bar">
+	<div class="bottom-bar cls">
+		<div class="item filter-ch">
+			<label class="k">筛选商家：</label>
+			<div class="v">
+            	<a class="fake-checkbox <notempty name="_REQUEST['security']">fake-checkbox-selected</notempty>" href="{:U('Businesses/lists/cid/'.$_REQUEST['cid'])}?child={$_REQUEST['child']}&security={$_REQUEST['security']?0:1}&real_scene={$_REQUEST['real_scene']}&qualifications={$_REQUEST['qualifications']}">保证金计划</a>
+				<a class="fake-checkbox <notempty name="_REQUEST['real_scene']">fake-checkbox-selected</notempty>" href="{:U('Businesses/lists/cid/'.$_REQUEST['cid'])}?child={$_REQUEST['child']}&security={$_REQUEST['security']}&real_scene={$_REQUEST['real_scene']?0:1}&qualifications={$_REQUEST['qualifications']}">实地拍摄</a>
+				<a class="fake-checkbox <notempty name="_REQUEST['qualifications']">fake-checkbox-selected</notempty>" href="{:U('Businesses/lists/cid/'.$_REQUEST['cid'])}?child={$_REQUEST['child']}&security={$_REQUEST['security']}&real_scene={$_REQUEST['real_scene']}&qualifications={$_REQUEST['qualifications']?0:1}">资质认证</a>
+			</div>
+		</div>
+	</div>
+</div>
+			 
+			<div class="search-step"></div>
+				<div id="result-list">
+					<ol class="cls">
+<volist name="businessesdata" id="vo">
+<li class="result-unit cls">
+	<div class="photo">
+		<a href="{:U('Businesses/detail/id/'.$vo['id'])}" target="_blank" title="{$vo.name}">
+			<span class="vam"></span>
+			<img src="{$vo.accessory.path}" class="youa-se-opt-lazy-img" height="80" width="109" alt="{$vo.name}" style="visibility: visible; ">
+		</a>
+	</div>
+	<h2 class="title">
+		<a class="name" href="{:U('Businesses/detail/id/'.$vo['id'])}" target="_blank">{$vo.name}</a>
+		<eq name="vo.qualifications" value="1"><a target="_blank" href="{:U('Article/detail/id/58')}" class="ico-rz zizi" title="资质认证"></a></eq>
+		<eq name="vo.security" value="1"><a target="_blank" href="{:U('Article/detail/id/59')}" class="ico-rz baozhengjin" title="保证金计划"></a></eq>
+		<eq name="vo.real_scene" value="1"><a target="_blank" href="{:U('Businesses/poto/id/'.$vo['id'])}" class="ico-rz shijing" title="实景照片"></a></eq>
+	</h2>
+	<div class="info">
+							<p class="slogan">{$vo.signature}</p>
+		
+		<ul class="base cls">
+                                                            <li class="ext">商家特色：{$vo.characteristic}</li>
+                                                                        						
+							<li class="phone">电话：{$vo.tel}</li>
+					</ul>
+			</div>
+</li>
+</volist>
+</ol>
+</div>
+<div class="global-page">{$page}</div>	
+		</div>
+	</div>
+	
+	<div id="aside">
+		
+                                                
+        <div class="mod-se hot-activity"><div class="hd"><h3>热门活动</h3></div>
+        <div class="bd">
+        <volist name="preferentialdata" id="vo">                  
+        <div class="cls">
+        	<a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank" title="{$vo.short_title}">
+        		<img src="{$vo.logo.origin}" alt="{$vo.short_title}" width="160" height="200">
+        	</a>
+            <p><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}">{$vo.short_title}</a></p>
+        </div>
+		</volist>
+</div></div>
+	</div>
+
+        </div>
+<include file="Public:footer" />

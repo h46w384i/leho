@@ -1,0 +1,86 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('#add_domain').submit(function(){
+		var form = $(this);
+		var para = form.serialize();
+		var url = form.attr('action');
+		var re = new RegExp("^[A-Za-z][A-Za-z0-9]{3,20}$","i");
+		var domain = form.find('#domain').val();
+		if(!re.test(domain)){
+			form.find('#domain').tip('英文字母开头,4-20个字母和数字',2000);
+			return false;
+		}
+		$.post(url,para,function(data){
+			if(data.status == 1){
+				goUrl(APP+'/Member/domain');
+			}else{
+				form.find('input[type="submit"]').tip(data.info,2000);
+			}
+		},'json');
+	});
+});
+//-->
+</script>
+<div id="wrapper">
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+				
+	<div class="mylife-top">
+		<h2>帐号设置</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>个性域名</h3>
+			<p>个性域名是你的时光轴地址。通过个性域名可直接访问时光轴，帮助朋友快速浏览你的精华分享.</p>
+		</div>
+		<empty name="domaindata">
+		<div class="mylife-bd">
+						<form class="sns-form" action="{:U('Member/doDomain')}" method="post" id="add_domain" onsubmit="return false;">
+			<div class="mylife-domain">
+				<ul class="cls">
+					<li>
+						<label for="">{:HOST.__APP__.'/'}</label>
+						<span class="v">
+							<input type="text" size="20" name="domain" id="domain" class="sns-text" placeholder="英文字母开头,4-20个字母和数字" reqmsg="个性域名" datatype="reg" maxlength="20" reg-pattern="/^[A-Za-z][A-Za-z0-9]{3,20}$/" errmsg="英文字母开头,4-20个字母和数字">
+						</span>
+						<em class="warning">请仔细填写，保存后不可更改。</em><span class="tip" id="tip"></span>
+					</li>
+				</ul>
+				<p class="tl-url">您当前的时间轴为{:HOST.U('User/space/id/'.$memberdata['id'])}</p>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</div>
+			</form>
+		</div>
+		<else />
+		<div class="mylife-bd">
+						<div class="domain">
+				<div class="domain-in">
+					<div class="notice-wrap">
+						<div class="pic succeed"></div>
+						<div class="notice-txt cls">
+							<p>已设定个性域名</p>
+							<p>当前时光轴地址为：{:HOST.__APP__.'/'.$domaindata['domain']}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+				</div>
+		</empty>
+	</div>
+	
+	
+	
+
+			</div>
+		</div>
+		<include file="Member:edit_nav" />
+	</div>
+	</div>
+<include file="Public:footer" />

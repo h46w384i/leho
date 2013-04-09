@@ -1,0 +1,17 @@
+<li>
+	<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" class="head">
+	<img alt="{$vo.name}" title="{$vo.name}" src="{$vo.header}" width="30">
+	</a>
+	<p>
+		<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" class="name" title="{$vo.name}">{$vo.name}</a>：
+		<span>{$vo.content|contentFilter}</span>
+	</p>
+	<div class="cls">
+		<span class="date">{$vo.addtime|dgmdate}</span>
+		<p class="comment-tools">
+		<eq name="memberdata.id" value="$vo['uid']">
+			<a href="javascript:;" class="del" cid="{$vo['id']}">删除</a>
+		</eq>
+		</p>
+	</div>
+</li>

@@ -1,0 +1,62 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/login.css"/>
+<script type="text/javascript">
+$(function(){
+	signin();
+});
+</script>
+
+<div id="wrapper" class="login-wrap" >
+	<div id="bd">
+		<div class="psp-wrap" style="margin: 60px 0;">
+			<div class="psp-main cls">
+				<div class="psp-container">
+					<div class="login-icon">
+						<p class="t">还没有帐号？</p>
+						<p class="reg"><a href="{:U('User/register')}" class="btn-reg">立即注册</a></p>
+						<p class="t">使用合作网站帐号登录</p>
+						<p class="icon-list">
+						<volist name='login_portdata' id='vo'>
+						<a href="{:U('Login_port/index/id/'.$vo['id'])}" class="icons icon-{$vo.remark}"></a>
+						</volist>
+						</p>
+					</div>
+				</div>
+				<div class="psp-sidebar">
+					<div class="login-con">
+						<form id="signinform" class="sns-form" action="{:U('User/login')}" method="post" onsubmit="return false">
+							<ul>
+								<li><em class="c0">使用{&sysconfig.site_name}帐号登录</em></li>
+								<li>
+									<label class="k" for="uname"><span class="em">*</span> 帐&nbsp;&nbsp;号：</label>
+									<span class="v">
+									 <input type="text" name="email" id="uname" class="sns-text login-width" placeholder="请输入邮箱">
+									</span>
+								</li>
+								<li>
+									<label class="k" for="password"><span class="em">*</span> 密&nbsp;&nbsp;码：</label>
+									<span class="v">
+										<input type="password" id="password" name="password" value="" placeholder="请输入密码" class="sns-text login-width">
+									</span><em style="display:none;"></em>								
+								</li>
+							</ul>
+							<div class="login-remember cls">
+								<div class="remember-checkbox">
+									<input type="checkbox" name="remember_me" id="auto_flag" checked="true">
+									<label for="auto_flag" title="建议在网吧或公共电脑上取消该选项">下次自动登录</label>
+								</div>
+								<a class="fogot-num" href="{:U('User/ajaxforgot_password')}" tabindex="-1" id="forgotPassword">忘记密码?</a>
+							</div>
+							<div class="btn">
+								<input type="button" class="btn-login" value="登录" id="submit" >
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />

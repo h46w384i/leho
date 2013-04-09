@@ -1,0 +1,159 @@
+<script>
+	$(function(){
+		$('#change-cover-btn').click(function(){
+			var box = $('#change-cover-layer');
+			if(box.is(':hidden')){
+				box.show();
+			}else{
+				box.hide();
+			}
+		});
+		
+		$('#change-cover-layer .tips-close').click(function(){
+			$('#change-cover-layer').hide();
+		});
+		
+		$('.pic-wrap .re_img').click(function(){
+			var t = $(this);
+			var src = t.attr('rel');
+			$('.pic-wrap .re_img').removeClass('selected');
+			t.addClass('selected');
+			$('#cover_wrap_img img').attr('src',src);
+		});
+		
+		$('#cover_save').click(function(){
+			var t = $(this);
+			var id = $('.pic-wrap .re_img.selected').attr('fid');
+			$.getJSON(APP+'/Member/setFront_cover/id/'+id,function(data){
+				if(data.status == 1){
+					$('#change-cover-layer .tips-close').trigger('click');
+				}else{
+					t.tip(data.info,2000);
+				}
+			});
+		});
+		
+		$('.photo').hover(function(){
+			$(this).find('.photo-upload').show();
+		},function(){
+			$(this).find('.photo-upload').hide();
+		});
+		
+		$('#nav li').click(function(){
+			var href = $(this).attr('data-href');
+			goUrl(href);
+		});
+
+        $('.btn-invite').click(function(){
+            $('#invitebox').dialog({
+                modal: true,
+                resizable:false,
+                width:700
+            });
+        });
+	});
+</script>
+<div class="personal-profile-section">
+	<div class="cover-img">
+		<div id="cover_wrap_img" class="cover-wrap-img">
+			<img src="{$front_coverdata.logo.origin}">
+		</div>
+		<eq name="userdata.id" value="$memberdata['id']">
+		<a href="javascript:;" id="change-cover-btn" class="btn-change"><span><i></i>更改封面</span></a>
+		<a href="javascript:;" class="btn-invite"><span>邀请好友</span></a>
+		<div class="prompt">为你的个人主页挑选一张独特的封面吧！</div>
+		</eq>
+			</div>
+    <div class="panel-invite" id="invitebox" style="display: none;">
+    <div class="wrap">
+        <ul class="content">
+            <li class="txt">邀请他人加入{&sysconfig.site_name}</li>
+            <li>
+                <span id="emptyhint-10005" class="emptyhint">邀请链接</span><input type="text" class="add-mail" value="<php>echo HOST.U('Index/invite')</php>">
+            </li>
+            <em style=""></em>
+        </ul>
+    </div>
+    </div>
+	<div class="profile-personal cls">
+		<div class="profile-pic cls">
+			<div class="photo">
+				<a href="{:U('User/space/id/'.$userdata['id'])}">
+					<img src="{$userdata.header.path}" alt="{$userdata.name}" title="{$userdata.name}" width="120" height="120">
+				</a>
+				<eq name="userdata.id" value="$memberdata['id']">
+				<div class="photo-upload" style="display:none"><em class="ico-photo"></em>
+					<a title="修改头像" alt="修改头像" href="{:U('Member/avatar')}">修改头像</a>
+				</div>
+				</eq>
+			</div>
+			
+						<div class="actions">
+									<neq name="userdata.id" value="$memberdata['id']">
+									<a href="{:U('Member/attention/id/'.$userdata['id'])}" class="btn-follow-26-add add-follow guanzhu"><span>加关注</span></a>
+									</neq>
+			</div>
+			            			<h2><a href="{:U('User/space/id/'.$userdata['id'])}" class="name">{$userdata.name}</a>
+            						<eq name="userdata.daren" value="1">
+									<a class="ico-approve approve-person-b" href="{:U('Index/daren')}" target="_blank" title="达人认证"></a>
+									<notempty name="userdata.daren_explain">
+									<span class="auth">({$userdata.daren_explain})</span>
+									</notempty>
+									</eq>
+                        			</h2>
+		</div>
+		<ul class="profile-info">
+			<li>
+			<eq name="userdata.sex" value="1">
+            <em class="ico-sex-b"></em>
+            </eq>
+            <eq name="userdata.sex" value="2">
+            <em class="ico-sex-g"></em>
+            </eq>
+                {$userdata.address}&nbsp;&nbsp;&nbsp;&nbsp;
+									{$userdata.birthday|date='Y年m月d日',###}
+				            </li>
+			<li class="profile-info-total"> 积分<em>{$userdata.value}</em></li>
+			<li title="">
+			<eq name="userdata.id" value="$memberdata['id']">
+				<a href="{:U('Member/edit')}" title="修改" class="modify-data"><span>修改</span></a>
+			</eq>
+			</li>
+		</ul>
+	<ul id="nav" class="profile-nav-list cls">
+		<li data-href="{:U('User/space/id/'.$userdata['id'])}" class="share <eq name="ACTION_NAME" value="space">curr</eq>">分享<em class="count">{$userdata.talk_about}</em></li>
+		<li data-href="{:U('User/like/id/'.$userdata['id'])}" class="like <eq name="ACTION_NAME" value="like">curr</eq>">喜欢<em class="count">{$userdata.like}</em></li>
+		<li data-href="{:U('User/attention/id/'.$userdata['id'])}" class="follow <eq name="ACTION_NAME" value="attention">curr</eq>">关注<em class="count">{$userdata.attention}</em></li>
+		<li data-href="{:U('User/wasAttention/id/'.$userdata['id'])}" class="fans <eq name="ACTION_NAME" value="wasAttention">curr</eq>">观众<em class="count">{$userdata.was_attention}</em></li>
+	</ul>
+	</div>
+	<div class="cover-img-set cover-img-change tips" id="change-cover-layer" style="z-index: 1000; display: none; ">
+				<div class="tips-t1">
+					<div class="tips-content">
+						<div class="hd">
+							<ul class="upload-tab cls">
+								<li class="curr"><a href="javascript:;">推荐配图</a></li>
+							</ul>
+						</div>
+						<div class="temp-panel">
+							<div class="bd" id="pic-con">
+								<div class="temp-list cls">
+									<div class="pic-wrap">
+									<volist name="coverdata" id="vo">
+									<a class="re_img <eq name="front_coverdata.id" value="$vo['id']">selected</eq>" fid="{$vo.id}" rel="{$vo.logo.origin}" href="javascript:;"><img width="100" height="62" src="{$vo.logo.thumbnail}" alt=""><p>{$vo.name}</p></a>
+									</volist>
+									</div>
+								</div>
+							</div>
+							<div class="ft">
+								<a href="javascript:;" data-imid="49a9bf4eddb1340e96c5c8ba" id="cover_save" class="btns btn-t2"><span>保存</span></a>
+								<a href="javascript:;" id="cover_cancel" class="btn-cancel btns btn-t4"><span>取消</span></a>
+							</div>
+						</div>
+					</div>
+					<span class="cue"></span>
+					<span class="sd"></span>
+					<span class="tips-close"></span>
+				</div>
+			</div>
+	</div>

@@ -1,0 +1,58 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">
+    <div id="bd" class="bb-t6">
+        <div id="main">
+            <div class="inner">
+                <div class="shxinxi-top">
+                    <h2>视频管理</h2>
+                </div>
+                <div class="mylife-cont">
+                    <div class="mylife-hd">
+                        <h3>视频信息</h3>
+                        <p>以下信息将显示您的商户视频。</p>
+                    </div>
+                    <div class="mylife-bd">
+                        <div>{$businesses.video}</div>
+                        <form class="sns-form" action="{:U('Company/updateVideo')}" method="post" id="updateform" style="margin-top: 40px;">
+                            <ul>
+                                <li>
+                                    <label class="k" for="video">视频代码：</label>
+                                    <span class="v">
+                                        <textarea class="sns-text" style="width: 350px;height: 100px;" type="text" name="video" id="code" placeholder="输入视频代码">{$businesses.video}</textarea>
+                                        <em></em>
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="btn">
+                                <input type="submit" value="保存" class="btn-reg">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <include file="Company:left" />
+    </div>
+
+</div>
+<script type="text/javascript">
+    <!--
+    $(function(){
+        $('#updateform').submit(function(){
+            var form = $(this);
+            $.post(form.attr('action'),form.serialize(),function(data){
+                if(data.status == 1){
+                    jalert(data.info,{callback:function(){
+                        goUrl(APP+'/Company/video');
+                    }});
+                }else{
+                    form.find('input["type=submit"]').tip(data.info);
+                }
+            },'json');
+            return false;
+        });
+    });
+</script>
+<include file="Public:footer" />

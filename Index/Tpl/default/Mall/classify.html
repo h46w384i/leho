@@ -1,0 +1,94 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/list.css"/>
+<script>
+$(function(){
+	mallIndex();
+});
+</script>
+<div id="bd" >
+            
+	<div id="sec-header">
+		
+<div class="sec-header-inner">
+	<h4><a class="logo" href="{:U('Mall/index')}" title="乐活商城">乐活商城</a><div class="city"><a href="{:U('Index/city')}">{$switch_region.crr.name}</a></div></h4>
+	<ul id="sec-nav" class="cate-nav">
+        <li><a href="{:U('Mall/index')}">首页</a></li>
+        <volist name="categorydata" id="vo">
+            <li <eq name="vo.id" value="$_REQUEST['cid']">class="navactiv"</eq>>
+               <a href="{:U('Mall/classify/cid/'.$vo['id'])}">{$vo.name}</a>
+            </li>
+        </volist>
+	</ul>
+</div>
+
+</div>
+    <div class="bd-wrap">
+    	<div id="main">
+            <div class="inner">
+				<div class="filter">
+					<div class="result">
+						<div class="selector">
+							<p>全部分类</p>
+							<i></i>
+							<div class="sort">
+                            <volist name="goods_categorydata" id="vo">
+                                    <dl>
+								        <dt><a href="{:U('Mall/classify/cid/'.$vo['id'])}">{$vo.name}</a></dt>
+								        <volist name="vo.child" id="v">
+								        <dd><a href="{:U('Mall/classify/cid/'.$vo['id'])}?child={$v['id']}">{$v.name}</a></dd>
+								        </volist>
+								    </dl>
+							</volist>
+							</div>
+						</div>
+						<ul class="path">
+                        								<li><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}">{$crr_category['name']}</a></li>
+                        								<notempty name="child">
+                        								<li><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}">{$child['name']}</a></li>
+                        								</notempty>
+													</ul>
+						<div class="statistic">找到<span>{$count}</span>条与<em>{$switch_region.crr.name}{$crr_category.name}</em>相关的信息</div>
+					</div>
+					<div class="options">
+                    		<dl class="cls">
+							<dt>行业类别：</dt>
+                            <dd <empty name="_REQUEST['child']">class="selected"</empty>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?rid={$_REQUEST['rid']}&sort={$_REQUEST['sort']}">不限</a></dd>
+                            <volist name="crr_category.child" id="vo">
+                            <dd <eq name="vo.id" value="$_REQUEST['child']">class="selected"</eq>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$vo['id']}&rid={$_REQUEST['rid']}&sort={$_REQUEST['sort']}">{$vo.name}</a></dd>
+                            </volist>
+                            </dl>
+                            <dl class="cls">
+							<dt>区域：</dt>
+							<dd <empty name="_REQUEST['rid']">class="selected"</empty>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}&sort={$_REQUEST['sort']}">不限</a></dd>
+							<volist name="regiondata" id="vo">
+                            <dd <eq name="vo.id" value="$_REQUEST['rid']">class="selected"</eq>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}&rid={$vo['id']}&sort={$_REQUEST['sort']}">{$vo.name}</a></dd>
+                            </volist>
+							</dl>
+                        					</div>
+				</div>
+				<div class="section">
+					<div class="op-order">
+						<h4>排序：</h4>
+						<ul>
+							<li <empty name="sortarr.0">class="active"</empty>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}&rid={$_REQUEST['rid']}">默认</a></li>
+							<li <eq name="sortarr.0" value="crrnum">class="active"</eq>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}&rid={$_REQUEST['rid']}&sort=crrnum_{$sortarr[1]=='asc'?'desc':'asc'}">按销量</a></li>
+							<li <eq name="sortarr.0" value="price">class="active"</eq>><a href="{:U('Mall/classify/cid/'.$crr_category['id'])}?child={$_REQUEST['child']}&rid={$_REQUEST['rid']}&sort=price_{$sortarr[1]=='asc'?'desc':'asc'}">按价格</a></li>
+						</ul>
+					</div>
+					<div class="showindow showindow-type2">
+                    <volist name="goodsdata" id="v">
+							<include file="Mall:item" />
+					</volist>
+					</div>
+                    <div class="global-page">
+                    {$page}
+                    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+        </div>
+
+<include file="Public:footer" />

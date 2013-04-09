@@ -1,0 +1,78 @@
+<form id="pagerForm" action="__URL__/lookUp">
+	<input type="hidden" name="pageNum" value="1" />
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="__URL__/lookUp" onsubmit="return dwzSearch(this, 'dialog');">
+	<input type="hidden" name="dialogId" value="{$_REQUEST.dialogId}">
+	<input type="hidden" name="group" value="{$_REQUEST.group}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>商号：</label>
+				<input type="text" name="name" class="medium" >
+			</li>
+			<li style="width: 600px;">
+				<label>入驻时间：</label>
+				<input type="text" name="mintime" class="date" readonly="true" format="yyyy-MM-dd HH:mm:ss"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+				<span style="float: left;" >&nbsp;～&nbsp;</span>
+				<input type="text" name="maxtime" class="date" readonly="true" format="yyyy-MM-dd HH:mm:ss"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</li>
+			<li>
+				<label>状态：</label>
+				<SELECT name="status" class="combox">
+					<option value="">所有</option>
+					<option value="1">启用</option>
+					<option value="0">禁用</option>
+				</SELECT>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+
+	<table class="table" layoutH="118" targetType="dialog" width="100%">
+		<thead>
+		<tr>
+			<th width="60">编号</th>
+			<th width="100" orderField="name" <if condition="$_REQUEST._order eq 'name'">class="{$_REQUEST._sort}"</if>>商号</th>
+            <th width="100" orderField="tel" <if condition="$_REQUEST._order eq 'tel'">class="{$_REQUEST._sort}"</if>>预约电话</th>
+            <th width="80" orderField="addtime" <if condition="$_REQUEST._order eq 'addtime'">class="{$_REQUEST._sort}"</if>>入驻时间</th>
+            <th width="40" orderField="qualifications" <if condition="$_REQUEST._order eq 'qualifications'">class="{$_REQUEST._sort}"</if>>资质认证</th>
+            <th width="40" orderField="security" <if condition="$_REQUEST._order eq 'security'">class="{$_REQUEST._sort}"</if>>保证金</th>
+			<th width="40" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="60">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_node" rel="{$vo['id']}">
+				<td>{$vo['id']}</td>
+				<td>{$vo['name']}</td>
+				<td>{$vo['tel']}</td>
+                <td>{$vo['addtime']}</td>
+                <td>{$vo['qualifications']|getCheckStatus}</td>
+                <td>{$vo['security']|getCheckStatus}</td>
+                <td>{$vo['status']|getStatus}</td>
+				<td>
+				<a class="btnSelect" href="javascript:lookUpBack({:getJsStr($vo,array('id','name'))},'{$_REQUEST.dialogId}','{$_REQUEST.group}')" title="查找带回">选择</a>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="dialog" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+	</div>
+</div>

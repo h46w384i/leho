@@ -1,0 +1,39 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<script type="text/javascript">
+	$(function(){
+		userSetpwd();
+	});
+</script>
+<div class="mainbody body_bot body_con clearfix">
+	<div class="jvf_body"  style=" padding-bottom: 50px;">
+        <div class="jvf_new_modal jvf_frame " id="forgot_password_container">
+            <form class="cmxform" id="setpassword" action="{:U('User/setpassword')}" method="post">
+            <input type="hidden" name="email" value="{$verificationdata.mail}"/>
+            <input type="hidden" name="code" value="{$verificationdata.code}"/>
+                <h2 class="setptit">{%reset_password}</h2>
+                <div class="segment" style="margin: 0px auto; text-align:center;">
+                     <div style="color: #999999; font-size: 14px;" class="textinput pas_pos elinp" id="inputPassword">
+                            <label style="display: inline-block;
+    text-align: right;
+    width: 110px;">输入新密码：</label><input class="2linp" type="password" name="password" id="user_password" size="30" placeholder="{%password_text}" />
+                    </div>
+                    <div style="color: #999999; font-size: 14px;" id="inputConfirmPassword" class="textinput inp_pas elinp">
+                            <label style="display: inline-block;
+    text-align: right;
+    width: 110px;">再次输入密码：</label><input type="password" size="30" placeholder="{%confirm_password_text}" name="password_confirmation" id="user_password_confirmation">   
+     				</div>
+                </div>
+                <div style="text-align: center; margin: 10px;">
+                    <input type="button" value="{%reset_password}" name="commit" class="btn p2153 f20 jvf_bold linebl  setpw-login">
+                </div>
+            </form>
+        </div>
+        <div class="jvf_520_bot jvf_allimg mg0a"></div>
+	</div>
+</div>
+
+<include file="Public:footer" />
+
+
+		

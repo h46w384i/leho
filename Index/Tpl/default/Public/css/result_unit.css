@@ -1,0 +1,218 @@
+.search-step{
+	overflow:hidden;
+	height:10px
+}
+.ico-rz{
+	background:url("../images/spr_icons.png") 0 -18px no-repeat;
+	float:left;
+	display:inline-block;
+	vertical-align:top;
+	width:16px;
+	height:16px;
+	margin-top:3px;
+	*margin-top:2px;
+	margin-left:6px
+}
+.result-unit .title .ico-certification-m{
+	background:url("../images/spr_icons.png") no-repeat;
+	float:left
+}
+.result-unit .title .ico-certification-m{
+	display:inline-block;
+	vertical-align:top;
+	margin:0 10px 0 2px;
+	background-position:0 -149px;
+	*margin-top:-1px
+}
+.result-unit .info .advance .tuan,.result-unit .info .advance .youhui{
+	background:url("../images/spr_icons.png") no-repeat
+}
+.result-unit{
+	width:740px;
+	padding-top:12px;
+	padding-bottom:15px;
+	border-top:1px solid #fff;
+	border-bottom:1px solid #f0f0f0;
+	position:relative;
+	vertical-align:bottom
+}
+.result-unit .photo{
+	width:120px;
+	height:90px;
+	margin:0 16px 14px 16px;
+	float:left;
+	display:inline;
+	background-position:4px 111px
+}
+.result-unit .photo a{
+	border:1px solid #e0e0e0;
+	background:#fff;
+	width:118px;
+	height:88px;
+	display:table-cell;
+	*display:block;
+	vertical-align:middle;
+	overflow:hidden;
+	text-align:center
+}
+.result-unit .photo a .vam{
+	display:none;
+	*display:inline;
+	*zoom:1;
+	background:#fff;
+	height:100%;
+	vertical-align:middle;
+	font:0/0 Arial
+}
+.result-unit .photo a img{
+	vertical-align:middle
+}
+.result-unit a{
+	color:#06C
+}
+.result-unit .title{
+	float:left;
+	display:inline;
+	width:420px;
+	margin-bottom:0;
+	line-height:24px;
+	height:24px;
+	overflow:hidden
+}
+.result-unit .title .name{
+	font-size:14px;
+	vertical-align:top;
+	display:inline;
+	float:left
+}
+.result-unit .title .subbranch{
+	display:inline-block;
+	height:24px;
+	margin-left:6px;
+	float:left;
+	font-weight:normal;
+	color:#999
+}
+.result-unit .title .subbranch a{
+	color:#999
+}
+.result-unit .info{
+	vertical-align:baseline;
+	width:420px;
+	float:left;
+	display:inline;
+	line-height:22px
+}
+.result-unit .slogan{
+	width:100%;
+	overflow:hidden;
+	white-space:nowrap;
+	word-break:keep-all;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis
+}
+.result-unit .info .base li{
+	color:#666;
+	width:418px;
+	overflow:hidden;
+	white-space:nowrap;
+	word-break:keep-all;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis
+}
+.result-unit .info .base .phone{
+	color:#333
+}
+.result-unit .info .btn-map{
+	vertical-align:base;
+	display:inline-block;
+	text-align:center;
+	width:40px;
+	height:22px
+}
+.result-unit .info .advance li{
+	float:left;
+	width:145px;
+	line-height:20px;
+	padding-left:29px;
+	margin-right:10px;
+	overflow:hidden;
+	white-space:nowrap;
+	word-break:keep-all;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis
+}
+.result-unit .info .advance .tuan{
+	background-position:0 -538px
+}
+.result-unit .info .advance .youhui{
+	background-position:0 -560px
+}
+.result-unit .info .advance .youhui-1{
+	width:300px
+}
+#result-list .result-unit .popularity{
+	width:112px;
+	float:left;
+	color:#999;
+	margin-top:-24px
+}
+#result-list .result-unit .popularity .n-pl,#result-list .result-unit .popularity .n-gz,#result-list .result-unit .popularity .n-yy{
+	background:url(../images/spr_icons.png) no-repeat;
+	padding-left:20px;
+	line-height:22px
+}
+#result-list .result-unit .popularity .n-pl{
+	background-position:0 -283px
+}
+#result-list .result-unit .popularity .n-gz{
+	background-position:0 -393px
+}
+#result-list .result-unit .popularity .n-yy{
+	background-position:0 -429px
+}
+#result-list .result-unit .sh-popularity{
+	float:right;
+	margin-top:auto
+}
+#vip-showcase{
+	width:736px;
+	border:2px solid #cfe4f9
+}
+#vip-showcase .photo{
+	margin-left:14px
+}
+#vip-showcase .info .phone strong{
+	color:#ff1a1a
+}
+#vip-showcase .ico-vip{
+	background:url(../images/spr_bg_icons.png) 0 0 no-repeat;
+	position:absolute;
+	display:block;
+	width:83px;
+	height:80px;
+	top:-3px;
+	right:-3px
+}
+#vip-showcase .base{
+	margin-bottom:8px
+}
+#vip-showcase .advance{
+	margin-bottom:7px
+}
+.result-unit-hover{
+	background:#fafafa
+}
+.result-unit .hilight{
+	color:#e2320c
+}
+
+.zizi{
+	background:url('../images/zizi_renzheng.jpg') no-repeat 0 0
+}
+.baozhengjin{
+	background:url('../images/baozhengjin.jpg') no-repeat 0 0
+}
+.shijing{
+	background:url('../images/shijing.jpg') no-repeat 0 0
+}

@@ -1,0 +1,75 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">
+    <div id="bd" class="bb-t6">
+        <div id="main">
+            <div class="inner">
+                <div class="myxinxi-top">
+                    <h2>优惠管理</h2>
+                </div>
+                <div class="mylife-cont">
+                    <div class="mylife-hd">
+                        <h3>优惠管理</h3>
+                        <p>以下信息将显示您所有的优惠信息。</p>
+                    </div>
+                    <div class="mylife-bd">
+                        <div class="jvf_btn" style="margin-bottom: 10px;"><a class="btn-reg btn_a" id="add" href="{:U('Company/addPreferential')}">添加</a></div>
+                        <table cellspacing="0" width="100%" cellpadding="0" border="0" class="jvf_table">
+                            <thead>
+                            <tr>
+                                <th width="400px">优惠名称</th>
+                                <th width="150px">状态</th>
+                                <th width="150px">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="preferentialdata" id="vo">
+                                <tr>
+                                    <td>
+                                        <dir>
+                                            {$vo.title}
+                                        </dir>
+                                    </td>
+                                    <td align="txc">
+                                        <div class="mylistings-price">
+                                            <eq name="vo.status" value="1">正常</eq>
+                                            <eq name="vo.status" value="0">禁用</eq>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <a href="{:U('Company/editPreferential/id/'.$vo['id'])}">编辑</a>
+                                            <a href="{:U('Company/delPreferential/id/'.$vo['id'])}" class="del">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="global-page">{$page}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <include file="Company:left" />
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.del').click(function(){
+            var t = $(this);
+            $.getJSON(t.attr('href'),function(data){
+                if(data.status == 1){
+                    jalert(data.info);
+                    t.parents('tr').remove();
+                }else{
+                    t.tip(data.info);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<include file="Public:footer" />

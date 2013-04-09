@@ -1,0 +1,91 @@
+<div id="header">
+	<noscript> 
+		<div class="nojs">
+			<p>您的浏览器已经禁用了脚本，这会影响您正常使用本站的功能。</p> 
+		</div>
+	</noscript> 
+		<div class="global-header ">
+		<div class="global-header-inner">
+			<div class="left">
+				<div class="logo">
+					<a href="http://sns.ipiao.com/" target="_blank"><img src="http://sns.ipiao.com/public/images/five/guest_detail_sprite.png" alt="{&sysconfig.site_name}" /></a>
+				</div>
+				<ul class="cate-nav">
+					<li>
+						<a href="{:U('Businesses/index')}">逛商店</a>
+					</li>
+					
+					<li><a href="{:U('Businesses/lists')}">找商家</a></li>
+					<li><a href="{:U('Businesses/preferential')}">淘优惠</a></li>
+					<li><a href="{:U('Mall/index')}">乐活商城</a></li>
+				</ul>
+			</div>
+
+			<div class="right">
+				<div class="search hover" id="search">
+					<form action="{:U('Find/index')}" method="get">
+						<input type="text" autocomplete="off" placeholder="搜分享、人、商家..." name="keyword"/>
+						<button type="submit">搜索</button>
+					</form>
+				</div>
+				<empty name="memberdata">
+				<ul class="login-nav">
+					<li>
+						<a href="{:U('User/register')}" target="_blank">注册</a><span class="gap">|</span>
+						<a href="javascript:jvfDialog('signinDialog',APP+'/User/signin');">登录</a>
+					</li>
+					<li class="hover-shim">
+						<a href="javascript:;" class="">第三方帐号登录<i class="ico-arrow"></i></a>
+						<div class="dropmenu">
+							<div class="dropdown">
+								<ul class="cls">
+								<volist name='login_portdata' id='vo'>
+					                 <li><a href="{:U('Login_port/index/id/'.$vo['id'])}" target="_blank"><i class="ico-sort ico-{$vo.remark}"></i>{$vo.name}</a></li>
+					            </volist>
+								</ul>
+							</div>
+							<div class="dropdown-ft"></div>
+						</div>
+					</li>
+				</ul>
+				<else />
+				<ul class="person">
+					<li class="top-user">
+						<a href="{:U('User/space/id/'.$memberdata['id'])}" class="user">
+							<img src="{$memberdata.header.thumbnail}" width="20" height="20">
+							{$memberdata.name}<i class="ico-arrow"></i>
+						</a>
+						<div class="down-user">
+							<div class="dropdown">
+								<ul class="cls">
+									<li>
+										<a href="{:U('User/space/id/'.$memberdata['id'])}">我的时光轴</a>
+									</li>
+									<li><a href="{:U('Member/myshare')}">我的分享</a></li>
+									<li><a href="{:U('Member/buyOrderList')}">我的订单</a></li>
+									<li><a href="{:U('Member/edit')}">帐号设置</a></li>
+									<li><a href="{:U('User/logout')}">退出</a></li>
+								</ul>
+							</div>
+							<div class="dropdown-ft"></div>
+						</div>
+					</li>
+					<li class="top-mess">
+						<a href="javascript:;" class="mess">消息<i class="ico-arrow"></i></a>
+						<div class="gl-top-tips" id="notify_layer">
+							<div class="dropdown" id="top-mess-layer"><ul class="tips-nav cls">
+		<li><a href="{:U('Member/comment')}">查看评论</a></li>
+			<li><a href="{:U('Member/at')}">查看@我</a></li>
+			<li><a href="{:U('Member/liked')}">查看喜欢</a></li>
+	</ul></div>
+							<div class="dropdown-ft"></div>
+						</div>
+					</li>
+					<li class="top-share" id="top-share"><a href="javascript:;" class="share" onclick="jvfDialog('sharebox', APP+'/Member/sharebox');"><i class="ico-share"></i>发布</a></li>
+				</ul>
+				</empty>
+							</div>
+			
+					</div>
+	</div>
+	</div>

@@ -1,0 +1,55 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>消费登记</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>消费登记</h3>
+			<p>以下信息将可以消费登记你的消费券。</p>			
+		</div>
+		<div class="mylife-bd">
+			<form method="post" id="couponform" action="{:U('Company/consumecoupon')}" class="sns-form" style="text-align: center;">
+		 	<div class="goods_registration_top" style="margin-bottom: 25px;">
+		 		<img src="../Public/images/jvf_yellow.png" />
+		 		<span style="position: relative;top: -10px;">{%member_verifycoupon_info}</span>
+		 	</div>
+		 	<ul>
+		 	<li>
+		 	<span class="textinput jvf_allimg inp_id v">
+		 		<input id="coupon-input-sn" class="sns-text" type="text" name="sn"  placeholder="{&sysconfig.site_couponname}{%voucher_sn}">
+		 	</span>
+		 	</li>
+		 	<li>
+		    <span class="textinput jvf_allimg inp_pas v">
+		    	<input id="coupon-input-pass" class="sns-text" type="pass" name="pass" placeholder="{&sysconfig.site_couponname}{%voucher_pass}">
+		    </span>
+		    </li>
+		    </ul>
+		    <div class="btn" style="padding-left: 0px;margin-top: 30px;">
+			<input type="button" name="query" value="{%member_verifycoupon_query}" class="btn-reg" id="coupon-query" style="width: 140px">&nbsp;&nbsp;&nbsp;
+			<input type="button" value="{%member_verifycoupon_consume}" name="consume" class="btn-reg" id="coupon-consume" style="width: 140px">
+		   	</div>
+		   	</form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	memberVerifycoupon();
+});
+//-->
+</script>
+<include file="Public:footer" />

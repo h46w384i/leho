@@ -1,0 +1,59 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>我的信息</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>我的账户</h3>
+			<p>以下信息将显示您的账户信息。</p>			
+		</div>
+		<div class="mylife-bd">
+			<table class="myzhanghu">
+				<tr>
+                	<td class="jvf_tr" width="40%">商家：</td>
+                	<td>
+	                	<empty name="businessesdata">
+	                    <a href="{:U('Member/applyBusiness')}">申请入住</a>
+	                    <else />
+	                    <eq name="businessesdata.status" value="1"><a href="{:U('Company/index')}">{$businessesdata.name}</a>审核通过    <a href="{:U('Company/index')}">管理</a><else />正在审核</eq>
+	                    </empty>
+                    </td>
+                </tr>
+                <tr>
+                	<td class="jvf_tr">现金：</td>
+                    <td>{$memberdata.cash} <a href="{:U('Member/recharge')}">充值</a></td>
+                </tr>
+                <tr>
+                	<td class="jvf_tr">积分：</td>
+                    <td>{$memberdata.value}</td>
+                </tr>
+                <tr>
+                	<td class="jvf_tr">等级：</td>
+                	<td>{$memberdata.level.name}</td>
+                </tr>
+                <tr>
+                	<td class="jvf_tr">勋章：</td>
+                     <td>
+                     <volist name="medaldata" id="vo">
+                     	<img src="{$vo.logopath}" alt="{$vo.name}--{$vo.mark}" />
+                     </volist>
+                     </td>
+                </tr>
+            </table>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:my_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

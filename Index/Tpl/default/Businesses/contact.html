@@ -1,0 +1,120 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/contact_b.css"/>
+<div id="wrapper">
+<include file="Businesses:pub" />
+<div id="bd" class="gl-w">
+    <div id="wrap" class="cls switch-tabs doc-ex-1">
+        <div id="main">
+            <div class="inner">
+                <div class="sh-mod all-txt">
+                    <div class="hd"><span class="n"><h2>联系商家</h2></span></div>
+                    <div class="bd">
+                        <div class="format">
+                            <div class="section">
+                                <p class="fn"><strong>{$businessesdata.companyname}</strong></p>
+                            </div>
+                            <div class="section">
+                                <div class="list-dot">
+                                    {$businessesdata.signature}
+                                </div>
+                            </div>
+                            <div class="section">
+                                <ul class="list-label">
+                                    <li><label>联系地址：</label><span>{$businessesdata.address}</span></li>
+                                    <li><label>联系电话：</label><span>{$businessesdata.tel}</span></li>
+                                    <li><label>营业时间：</label><span>{$businessesdata.opening}</span></li>
+
+
+
+                                    <li>
+                                        <label>
+
+                                            商家特色：
+                                        </label>
+										<span>{$businessesdata.characteristic}</span>
+                                    </li>
+
+
+
+                                    <li>
+                                        <label>
+
+                                            服务范围：
+                                        </label>
+										<span>{$businessesdata.services}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sh-map">
+                                <div class="map-t">
+                                    <span class="n">商家地图</span>
+                                </div>
+                                <div class="map-c" id="hugeMapViewContainer">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 其它用户还浏览了 } -->
+                <div class="sh-mod">
+                    <div class="hd"><span class="n">其它用户还浏览了</span></div>
+                    <div class="bd">
+                        <div class="sub-hd"><span class="n"><h3>精品服务</h3></span></div>
+                        <div class="sub-bd">
+                            <ul class="mod-it-1 cls">
+                             <volist name="goodsdata" id="vo">
+                                <li>
+                                    <div class="img"><a href="{:U('Goods/index/id/'.$vo['id'])}" alt="{$vo.title}" width="220">
+                                        <img height="160" src="{$vo.accessory.thumbnail}" width="219" alt="{$vo.title}">
+                                    </a></div>
+                                    <div class="txt">
+                                        <p class="attr"><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p>
+                                        <p class="price"><span class="discount">&yen;<i>{$vo.price}</i></span><span class="original">&yen;<i>{$vo.original}</i></span></p>
+                                    </div>
+                                </li>
+                             </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="{:U('Businesses/detail/id/'.$_REQUEST['id'])}" class="back2index" title="返回商家首页"></a>
+                </div>
+            </div>
+        </div>
+          <div id="aside" class="no-bdr">
+            <div class="switch-box">
+                <ul class="switch-nav">
+                        <li><a class="selected" href="{:U('Businesses/contact/id/'.$_REQUEST['id'])}">联系商家</a></li>
+                </ul>
+            </div>
+        </div>
+            </div>
+    </div>
+</div>
+	
+        </div>
+<script type="text/javascript">
+    $(function(){
+        $(window).scroll(function(){
+            if($(document).scrollTop() > 100){
+                $('.switch-box').addClass('aside_fixed');
+            }else{
+                $('.switch-box').removeClass('aside_fixed');
+            }
+        });
+        load_map_wrapper();
+    });
+    function load_map_wrapper(){
+    <if condition="($businessesdata.latitude neq '') AND ($businessesdata.longitude neq '')">
+            var map = new jvfMap("hugeMapViewContainer","{$businessesdata.latitude}","{$businessesdata.longitude}",{$businessesdata.zoom},true);
+    map.addTags("{$businessesdata.latitude}","{$businessesdata.longitude}","{$businessesdata.address}",{$businessesdata.zoom},"");
+    <else />
+    initialize();
+    </if>
+    }
+</script>
+<include file="Public:footer" />

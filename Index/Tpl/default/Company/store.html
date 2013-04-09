@@ -1,0 +1,155 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>店面管理</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>我的店面</h3>
+			<p>以下信息将显示您的店面信息。</p>			
+		</div>
+		<div class="mylife-bd">
+			<div>
+				<table class="jvf_table" style="margin-top:10px;">
+                	<tr>
+                    	<td id="tbtit" colspan="4">店面幻灯片广告：</td>
+                    </tr>
+                	<tr>
+                    	<th class="jvf_tc" width="10%">序号</th>
+                    	<th class="jvf_tc" width="40%">图片</th>
+                        <th class="jvf_tc" width="30%">链接</th>
+                        <th class="jvf_tc" width="20%">操作</th>
+                    </tr>
+                    <volist name="businesses_slidedata" id="vo">
+					<tr>
+                    	<td class="jvf_tc">{$vo.sort}</td>
+						<td><img width="296" height="75" src="__ROOT__{$vo.img}" /></td>
+						<td><a href="{$vo.link}">{$vo.link}</a></td>
+						<td class="jvf_tc"><a href="{:U('Company/delSlide/id/'.$vo['id'])}" class="delSlide">删除</a></td>
+					</tr>
+					</volist>
+                    <tr>
+                    	<td class="jvf_tc jvf_btn" colspan="4"><button class="btn-reg" id="addSlide">添加</button></td>
+                    </tr>
+				</table>
+			</div>
+		</div>
+        
+        
+        <div class="mylife-bd">
+			<div>
+				<table class="jvf_table" style="margin-top:10px;">
+                	<tr>
+                    	<td id="tbtit" colspan="3">店面文章列表：</td>
+                    </tr>
+                	<tr>
+                    	<th class="jvf_tc" width="10%">序号</th>
+                    	<th class="jvf_tc" width="70%">标题</th>
+                        <th class="jvf_tc" width="20%">操作</th>
+                    </tr>
+                    <volist name="businessesArticledata" id="vo">
+					<tr>
+                    	<td class="jvf_tc">{$vo.sort}</td>
+						<td>{$vo.title}</td>
+						<td class="jvf_tc caoz"><a href="{:U('Company/editArticle/id/'.$vo['id'])}" class="editArticle">编辑</a><a href="{:U('Company/delArticle/id/'.$vo['id'])}" class="delArticle">删除</a></td>
+					</tr>
+                    </volist>
+                    <tr>
+                    	<td class="jvf_tc jvf_btn" colspan="4"> <button class="btn-reg" id="addArticle">添加</button></td>
+                    </tr>
+				</table>
+			</div>
+		</div>
+        
+        
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('#updateform').submit(function(){
+		var form = $(this);
+		$.post(form.attr('action'),form.serialize(),function(data){
+			if(data.status == 1){
+				jalert(data.info);
+			}else{
+				form.find('input["type=submit"]').tip(data.info);
+			}
+		},'json');
+		return false;
+	});
+	
+
+	$('#addSlide').click(function(){
+		var uuid = $(this).attr('guid');
+		if(!uuid){
+			uuid = guid();
+			$(this).attr('guid',uuid);
+		}
+		jvfDialog(uuid,"{:U('Company/addSlide')}");
+	});
+	
+	$('#addArticle').click(function(){
+		var uuid = $(this).attr('guid');
+		if(!uuid){
+			uuid = guid();
+			$(this).attr('guid',uuid);
+		}
+		jvfDialog(uuid,"{:U('Company/addArticle')}");
+	});
+	
+	
+	$('.delSlide').click(function(){
+		var t = $(this);
+		var href = t.attr('href');
+		$.getJSON(href,function(data){
+			if(data.status == 1){
+				t.parents('tr').remove();
+				jalert(data.info);
+			}else{
+				t.tip(data.info,3000);
+			}
+		});
+		return false;
+	});
+
+    $('.delArticle').click(function(){
+        var t = $(this);
+        var href = t.attr('href');
+        $.getJSON(href,function(data){
+            if(data.status == 1){
+                t.parents('tr').remove();
+                jalert(data.info);
+            }else{
+                t.tip(data.info,3000);
+            }
+        });
+        return false;
+    });
+
+    $('.editArticle').click(function(){
+        var uuid = $(this).attr('guid');
+        var url = $(this).attr('href');
+        if(!uuid){
+            uuid = guid();
+            $(this).attr('guid',uuid);
+        }
+        jvfDialog(uuid,url);
+        return false;
+    });
+});
+
+//-->
+</script>
+<include file="Public:footer" />

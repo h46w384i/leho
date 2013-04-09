@@ -1,0 +1,78 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>标题：</label>
+				<input type="text" class="required" name="title" style="width: 385px;" value="{$vo.title}">
+			</div>
+            
+			<div class="unit">
+				<label>简略标题：</label>
+				<input type="text" class="required" name="short_title" maxlength="20" style="width: 385px;" value="{$vo.short_title}">
+			</div>
+			
+			<div class="unit">
+				<label>发布商家：</label>
+				<input type="hidden" name="bid" group="businesses" field="id" value="{$vo.bid}">
+				<input name="businesses_name" type="text" readonly="readonly" group="businesses" field="name" value="{$vo.bid|getParent='Businesses',###}" />
+				<a class="btnLook" href="{:U('Businesses/lookUp/group/businesses/dialogId/'.MODULE_NAME.'_'.ACTION_NAME)}" target="dialog" rel="businesses_lookup">查找带回</a>
+			</div>
+			
+			<div class="unit">
+				<label>标志logo：</label>
+				<input type="hidden" name="logo" id="logo" value="{$vo.logo}">
+				<div style="float: left;">
+                <notempty name="vo.logo">
+                <img id="img" width="100" height="100" src="__ROOT__{$vo.logopath}" style="margin-left:5px;"/>
+                <else />
+				<img id="img" width="100" height="100" style="margin-left:5px; display:none;"/>
+                </notempty>
+                <div class="button" id="upload_button"><div class="buttonContent"><button type="button">上传</button></div></div>
+                </div>
+			</div>
+
+			<div class="unit">
+				<label>序号：</label>
+				<input type="text" class="digits textInput valid" name="sort" value="{$vo.sort}">
+			</div>
+
+            <div class="unit">
+				<label>有效期：</label>
+				<input type="text" name="starttime" class="date" readonly="true" value="{$vo.starttime}" />
+				<a class="inputDateButton" href="javascript:;">选择</a>
+				<span style="float: left;" >&nbsp;～&nbsp;</span>
+				<input type="text" name="endtime" class="date" readonly="true" value="{$vo.endtime}"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+			
+			<div class="unit">
+				<label>注意事项：</label>
+				<textarea rows="2" cols="60" name="note" class="textInput">{$vo.note}</textarea>
+			</div>
+
+            <div class="unit">
+                <label>短信内容：</label>
+                <textarea rows="2" cols="60" name="sms" class="textInput">{$vo.sms}</textarea>
+            </div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<SELECT name="status" class="combox">
+					<option value="1" <eq name="vo.state" value="1">selected="selected"</eq>>启用</option>
+					<option value="0" <eq name="vo.state" value="0">selected="selected"</eq>>禁用</option>
+				</SELECT>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+

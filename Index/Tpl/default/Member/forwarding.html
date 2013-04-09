@@ -1,0 +1,50 @@
+<script>
+$(document).ready(function(){
+	forwarding();
+});
+</script>
+<div class="panel panel-t1 panel-transmit" title="转发">
+<form id="jvf_forwarding">
+	<div class="panel-content">
+		<div class="bd cls">
+			<div class="con-pos" style="">
+				<div class="before-con">
+				<notempty name="vo.source">
+					<a href="{:U('User/space/id/'.$vo['source']['uid'])}" id="orign_user">@{$vo.source.name}</a>:
+					{$vo.source.content}
+				<else />
+					<a href="{:U('User/space/id/'.$vo['uid'])}" id="orign_user">@{$vo.name}</a>:
+					{$vo.content}
+				</notempty>
+				</div>
+				<div class="now-con">
+					<textarea name="content" style="font-family: Tahoma, 宋体; word-wrap: break-word; line-height: 18px; overflow-y: auto; overflow-x: hidden; outline: none; "></textarea>
+				</div>
+				<div class="other-con cls">
+					<div id="textNum"><div class="count-txt">还可以输入<span>140</span>字</div></div>
+				</div>
+			</div>
+			<div class="panel-transmit-ft publish" style="width:auto;">
+				<ul class="panel-comment" id="comment-set">
+					<li>
+					<notempty name="vo.source">
+						<label style=""><i class="checkbox" id="comment_check" style="display:inline-block;"></i>同时评论给 <span id="org_cmt_user">{$vo.name}</span><input type="hidden" name="comment_check" value="0" /></label>
+						<label><i class="checkbox" id="orign_check" style="display:inline-block;"></i>同时评论给原文作者 <span id="org_post_user">{$vo.source.name}</span><input type="hidden" name="orign_check" value="0" /></label>
+					<else />
+						<label style=""><i class="checkbox" id="comment_check" style="display:inline-block;"></i>同时评论给原文作者 <span id="org_cmt_user" style="display:inline-block;">{$vo.name}</span><input type="hidden" name="comment_check" value="0" /></label>
+					</notempty>
+					</li>
+					<li>
+						<label><i class="checked" id="profile_check" style="display:inline-block;"></i><span>同时展现在时光轴</span><input type="hidden" name="profile_check" value="1" /></label>
+					</li>
+				</ul>
+				<div class="panel-btn">
+					<input type="hidden" name="tid" value="{$vo['tid']?$vo['tid']:$vo['id']}">
+					<a id="trans_confirm" href="#" onclick="return false;" class="btns btn-t2"><span>转发</span></a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</form>
+</div>

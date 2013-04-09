@@ -1,0 +1,42 @@
+#header{height:auto;}/* by limeng */
+#index #header{height:40px;}/* by limeng */
+#topbar_status strong{margin-right:8px;}/* by limeng */
+
+#wrapper{min-width:960px;}/* by limeng */
+
+/* hack pagination copy from base/shop/css/common.css */
+.global-page {text-align:center;line-height:2!important;}
+.global-page a,
+.global-page span {
+	display: inline-block;*display: inline;*zoom:1;color:#3d7a99 !important;background-color:#f0f0f0;padding:0 9px;margin-top:20px;margin-bottom:20px;margin-right:6px;text-decoration:none;vertical-align: middle;font-weight:normal;border-radius:0;_margin-bottom:1px;
+	border:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	background-image:none;
+	filter:none;
+}
+.global-page a:hover	{background:#666;color:#fff !important;text-decoration:none!important;
+	border:0 none;
+	filter:none;
+}
+.global-page span {color:#999!important;background:#f0f0f0;}
+.global-page span.global-page-break {background:none;border:none;color:#717171;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	filter:none;
+}
+.global-page span.select {font-weight:bold;color:#fff !important;background:#666;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	border:none;
+	filter:none;
+}
+.global-page .global-page-next,
+.global-page .global-page-previous{font-family:tahoma;}
+.global-page .global-page-next {*height:24px;_height:auto;*padding-top:2px;_padding-top:0;overflow:hidden;}
+.global-page span.global-page-next {background:#f0f0f0;color:#bfbfbf;}
+.global-page input {width:24px;text-align:center;vertical-align: middle;}
+.global-page button {font-size:12px;vertical-align: middle;}

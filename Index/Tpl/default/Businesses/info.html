@@ -1,0 +1,93 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/contact.css"/>
+<div id="wrapper">
+<include file="Businesses:pub" />
+<div id="bd" class="gl-w">
+    <div id="wrap" class="cls switch-tabs doc-ex-1">
+        <div id="main">
+            <div class="inner">
+                <a name="title"></a>
+                <ul class="switch-content" style="display: block; ">
+                    <volist name="businesses_articledata" id="vo">
+                    <eq name="i" value="1">
+                    <li class="selected">
+                    <else />
+                    <li class="unselected">
+                    </eq>
+                        <div class="sh-mod all-txt">
+                            <div class="hd"><span class="n"><h2>{$vo.title}</h2></span></div>
+
+                            <div class="bd">
+                                <div class="pre">
+                                {$vo.content}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+                <!-- 其它用户还浏览了 } -->
+                <div class="sh-mod">
+                    <div class="hd"><span class="n">其它用户还浏览了</span></div>
+                    <div class="bd">
+                        <div class="sub-hd"><span class="n"><h3>精品服务</h3></span></div>
+                        <div class="sub-bd">
+                            <ul class="mod-it-1 cls">
+                             <volist name="goodsdata" id="vo">
+                                <li>
+                                    <div class="img"><a href="{:U('Goods/index/id/'.$vo['id'])}" alt="{$vo.title}" width="220">
+                                        <img height="160" src="{$vo.accessory.thumbnail}" width="219" alt="{$vo.title}">
+                                    </a></div>
+                                    <div class="txt">
+                                        <p class="attr"><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p>
+                                        <p class="price"><span class="discount">&yen;<i>{$vo.price}</i></span><span class="original">&yen;<i>{$vo.original}</i></span></p>
+                                    </div>
+                                </li>
+                             </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="{:U('Businesses/detail/id/'.$_REQUEST['id'])}" class="back2index" title="返回商家首页"></a>
+                </div>
+            </div>
+        </div>
+        <div id="aside" class="no-bdr">
+            <div class="switch-box">
+                <ul class="switch-nav">
+                    <volist name="businesses_articledata" id="vo">
+                    <li><a href="javascript:;" class="nav-tab <eq name="i" value="1">selected<else />unselected</a></eq>">{$vo.title}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+	
+        </div>
+<script type="text/javascript">
+    $(function(){
+       $(window).scroll(function(){
+           if($(document).scrollTop() > 100){
+               $('.switch-box').addClass('aside_fixed');
+           }else{
+               $('.switch-box').removeClass('aside_fixed');
+           }
+       });
+
+       $('.nav-tab').click(function(){
+           var t = $(this);
+           var nav = $('.nav-tab');
+           var index = nav.index(t);
+           nav.removeClass('selected').addClass('unselected');
+           t.removeClass('unselected').addClass('selected');
+           var crr = $('.switch-content li').removeClass('selected').addClass('unselected').eq(index);
+           crr.removeClass('unselected').addClass('selected');
+           var top = crr.offset().top - 90;
+           $('html,body').animate({scrollTop:top});
+       });
+    });
+</script>
+<include file="Public:footer" />

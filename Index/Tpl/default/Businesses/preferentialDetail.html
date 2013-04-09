@@ -1,0 +1,240 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/coupon.css"/>
+<div id="wrapper">
+<include file="Businesses:pub" />
+<div id="bd" class="gl-w">
+    <div id="wrap" class="cls switch-tabs doc-ex-1">
+        <div id="main">
+            <div class="inner">
+                <div class="sh-mod coupon-detail">
+                    <div class="bd">
+                        <div class="coupon-topic">
+                            <div class="col"><h3>{$preferentialdata.title}</h3></div>
+                            <div class="col">
+                                <if condition="($preferentialdata.endtime gt time())">
+                                有效期：<i><strong>{$preferentialdata.addtime|toDateYmd}</strong></i> 至 <i><strong>{$preferentialdata.endtime|toDateYmd}</strong></i>
+                                <else />
+                                已结束
+                                </if>
+                            <span class="coupon-taken">{$preferentialdata.crr} 人已领取</span></div>
+                            <div class="col cls">
+                                <div class="share-container cls">
+                                    <span style="float:left;padding-top: 3px;"><em>分享到：</em></span>
+                                    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+                                        <a class="bds_qzone" title="分享到QQ空间" href="#"></a><a class="bds_renren" title="分享到人人网" href="#"></a>
+                                        <a class="bds_tsina" title="分享到新浪微博" href="#"></a>
+                                        <a class="bds_tqq" title="分享到腾讯微博" href="#"></a>
+                                        <a class="bds_kaixin001" title="分享到开心网" href="#"></a> <a class="bds_douban" title="分享到豆瓣网" href="#"></a>
+                                        <a class="bds_copy" title="分享到复制网址" href="#"></a>
+                                    </div>
+                                    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=668549" ></script>
+                                    <script type="text/javascript" id="bdshell_js"></script>
+                                </div>
+                                <if condition="($preferentialdata.endtime gt time())">
+                                <div class="coupon-btn cls">
+                                    <a class="btn-ex-typewriter-2 print_coupon" href="{:U('Businesses/preferentialPrint/id/'.$preferentialdata['id'])}" title="打印优惠券"><span>打印优惠券</span></a>									<a class="btn-ex-mobile-2 send_by_sms" href="#" title="发送到手机"><span>发送到手机</span></a>
+                                </div>
+                                </if>
+                            </div>
+                        </div>
+                        <div class="section coupon-list">
+                            <a href="javascript:;" target="_blank"><img src="{$preferentialdata.logo.path}" alt="{$preferentialdata.title}" style="max-width: 705px;"></a>
+                        </div>
+                        <div class="section">
+                            <div class="coupon-tips">
+                                <p><strong>优惠内容及注意事项：</strong></p>
+                                <p>{$preferentialdata.note}</p>
+                            </div>
+                            <div class="coupon-msg">
+                                <dl>
+                                    <dt><i><strong>短信优惠券：</strong>下载短信使用同样有效</i><em>（短信下载完全免费，我们会严格保密您的手机号码）</em></dt>
+                                    <dd>
+                                        <p>{$preferentialdata.sms}</p>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <if condition="($preferentialdata.endtime gt time())">
+                            <div class="coupon-btn">
+                                <a class="btn-ex-typewriter-2 print_coupon" href="{:U('Businesses/preferentialPrint/id/'.$preferentialdata['id'])}" title="打印优惠券"><span>打印优惠券</span></a><a class="btn-ex-mobile-2 send_by_sms" href="#" title="发送到手机"><span>发送到手机</span></a>
+                            </div>
+                            </if>
+                        </div>
+                        <div class="section">
+                            <div class="cls">
+                                <span style="float:left;padding-top: 3px;"><em>分享到：</em></span>
+                                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+                                    <a class="bds_qzone" title="分享到QQ空间" href="#"></a><a class="bds_renren" title="分享到人人网" href="#"></a>
+                                    <a class="bds_tsina" title="分享到新浪微博" href="#"></a>
+                                    <a class="bds_tqq" title="分享到腾讯微博" href="#"></a>
+                                    <a class="bds_kaixin001" title="分享到开心网" href="#"></a> <a class="bds_douban" title="分享到豆瓣网" href="#"></a>
+                                    <a class="bds_copy" title="分享到复制网址" href="#"></a>
+                                </div>
+                            </div>
+                            <p><em>以上信息的最终解释权归商家所有，如有疑问请联系商家咨询。</em></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 其它用户还浏览了 } -->
+                <div class="sh-mod">
+                    <div class="hd"><span class="n">其它用户还浏览了</span></div>
+                    <div class="bd">
+                        <div class="sub-hd"><span class="n"><h3>精品服务</h3></span></div>
+                        <div class="sub-bd">
+                            <ul class="mod-it-1 cls">
+                             <volist name="goodsdata" id="vo">
+                                <li>
+                                    <div class="img"><a href="{:U('Goods/index/id/'.$vo['id'])}" alt="{$vo.title}" width="220">
+                                        <img height="160" src="{$vo.accessory.thumbnail}" width="219" alt="{$vo.title}">
+                                    </a></div>
+                                    <div class="txt">
+                                        <p class="attr"><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p>
+                                        <p class="price"><span class="discount">&yen;<i>{$vo.price}</i></span><span class="original">&yen;<i>{$vo.original}</i></span></p>
+                                    </div>
+                                </li>
+                             </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="{:U('Businesses/detail/id/'.$_REQUEST['id'])}" class="back2index" title="返回商家首页"></a>
+                </div>
+            </div>
+        </div>
+            <div id="aside">
+                <div id="map_module">
+                    <!-- 地图 -->
+                    <div class="sh-mod shop-map">
+                        <div class="bd">
+                            <div class="img">
+                                <div id="map" style="height: 177px; width: 210px;">
+
+                                </div>
+                                <div>
+                                    <a class="businessesMap" href="javascript:;">查看大图</a>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        load_map_wrapper();
+                                    });
+                                    function load_map_wrapper(){
+                                        <if condition="($businessesdata.latitude neq '') AND ($businessesdata.longitude neq '')">
+                                            var map = new jvfMap("map","{$businessesdata.latitude}","{$businessesdata.longitude}",{$businessesdata.zoom},false);
+                                            map.addTags("{$businessesdata.latitude}","{$businessesdata.longitude}","{$businessesdata.address}",{$businessesdata.zoom},"");
+                                        <else />
+                                        initialize();
+                                        </if>
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社区feeds -->
+                <div class="sh-mod shop-feeds" id="sns_mini_module">
+                    <div class="bd">
+                        <div class="info cls">
+                            <div class="avatar">
+                                <a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank"><img width="50" height="50" src="{$mdata.header.thumbnail}" width="50" height="50" alt="{$mdata.name}"></a>
+                            </div>
+                            <div class="fn">
+                                <p><a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">{$mdata.name}</a><a href="javascript:;" class="i-v" title="商家认证"></a></p>
+                                <p><a href="#" class="btn-ex-follow"><span>加关注</span></a><em>{$mdata['wasAttentionNum']}观众</em></p>
+                            </div>
+                        </div>
+                        <div class="feeds">
+                            <ul>
+                                <volist name="talk_aboutdata" id="vo">
+                                    <li class="feeds-li _cmtTarget">
+                                        <p class="p">
+                                            {$vo.content}
+                                        </p>
+                                        <notempty name="vo.accessory">
+                                            <p class="p">
+                                                <a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><img src="{$vo.accessory.0.thumbnail}" alt="" width="58"></a>
+                                            </p>
+                                        </notempty>
+                                        <div class="tools cls">
+                                            <p class="f-l"><em>{$vo.addtime|date='m-d H:i',###}</em></p>
+                                            <p class="f-r">
+                                                <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="digg like-btn" data--ban="0" style="outline:none"><em>{$vo.likes}</em></a></span>
+                                                <span class="comment-number"><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="comment-view-btn _cmtBtn">评论</a><b class="c-count">({$vo.comment})</b></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="sh-more">
+                                <a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">更多精彩»</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+        </div>
+        <div id="smscontent" style="display: none;" >
+            <div class="panel-mobile-sand" title="发送到手机" style="width: 450px;height: 300px;">
+            <form class="bb-form" action="{:U('Businesses/preferentialSms')}" method="post" name="send_form">
+
+                <input type="hidden" name="id" value="{$preferentialdata.id}">
+                <h4>以下内容将被发送至您的手机</h4>
+                <div class="sms-content">
+                    {$preferentialdata.sms}
+                </div>
+                <ul>
+                    <li><label class="k" for="id">手机号：</label>
+                        <input class="v" id="send_phone" style="font-weight:bold;" datatype="mobilecode" name="phone" reqmsg="手机号码" errmsg="手机号码"><em style=""></em></li>
+                    <li class="coupon-vcode">
+                        <label class="k" for="safecode">验证码：</label>
+									<span class="v">
+										<input style="float: left;" class="safecode" name="_vcode" type="text" value="" datatype="vcode" maxlength="4" reqmsg="为防止短信骚扰，请输入正确的验证码">
+                        <div class="safecode-img" style="margin: 0;">
+                            <img id="_vcode_img" src="{:U('Index/verify')}">
+                            <a href="javascript:;" id="_vcode_txt" onclick="$(this).prev().attr('src',APP+'/Index/verify')">看不清？</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="btn">
+                    <button id="s_submit" type="button" onclick="sendS(this);">发送</button>
+                </div>
+            </form>
+        </div>
+        </div>
+<script type="text/javascript">
+    $(function(){
+        $.onload(function(){
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+        });
+        $('.send_by_sms').click(function(){
+            jvfDialogHtml('smssend',$('#smscontent').html());
+        });
+    });
+    function sendS(t){
+        var form = $(t).parents('form');
+        var phone = form.find('input[name="phone"]');
+        if(!phone.val()){
+            phone.tip('请输入手机号码',3000);
+            return false;
+        }
+        var _vcode = form.find('input[name="_vcode"]');
+        if(!_vcode.val()){
+            _vcode.tip('请输入验证码',3000);
+            return false;
+        }
+        $.post(form.attr('action'),form.serialize(),function(data){
+            if(data.status == 1){
+                $(t).parents('.ui-dialog').find('.ui-dialog-titlebar-close').trigger('click');
+                jalert(data.info,{callback:function(){
+                    window.location.reload();
+                }});
+            }else{
+                $(t).tip(data.info,3000);
+            }
+        },'json');
+        return false;
+    }
+</script>
+<include file="Public:footer" />

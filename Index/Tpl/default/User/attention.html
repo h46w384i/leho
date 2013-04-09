@@ -1,0 +1,193 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/profile.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/interact.css"/>
+<style type="text/css">
+.fixed_elem { position: fixed; top: 40px;}
+#changeskinbtn { display: none; }
+#promptskin { display: none; }
+.comment { display: none; }
+.panel-integral { display: none; }
+</style>
+<script>
+$.getScript(PUBLIC+'/dwz/js/jquery.masonry.min.js',function(){
+	var href = APP+'/Circle/ajaxCircle/likeuid/'+{$userdata['id']};
+	reset(href);
+});
+
+var scrollboot = true;
+
+$(window).scroll(function(){
+		var $container = $('#main .column-wraper');
+		var $page = $('#split_page');
+		var bottom = $container.offset().top + $container.outerHeight() - $(this).height();
+		var scrollTop=$(document).scrollTop();//滚动条距离
+		if(scrollTop>=bottom && scrollboot){
+			scrollboot = false;
+			var href = $page.find('.current').next('a').attr('href');
+			if(href){
+				loading.loadingStart('.jvf_member_box');
+				$.getJSON(href,function(data){
+					loading.loadingEnd();
+					$page.html(data.info.page);
+					$newElems = $(data.info.html);
+					$newElems.hide();
+					$newElems.imagesLoaded(function(){
+						$container.append($newElems).masonry( 'appended', $newElems, false );
+						scrollboot = true;
+						$newElems.show();
+					});
+				});
+			}else{
+				loading.loadingNot('.jvf_member_box');
+			}	
+		}
+});
+
+function reset(href){
+	var $container = $('#main .column-wraper');
+	var $page = $('#split_page');
+	loading.loadingStart('#main');
+	$.post(href,function(data){
+		loading.loadingEnd();
+		$page.html(data.info.page);
+		var html = $(data.info.html);
+		html.hide();
+		$container.append(html);
+		if($container.is('.masonry')){
+			$container.imagesLoaded( function(){
+				$container.masonry('reload');
+				html.show();
+			});
+		}else{
+			//$container.imagesLoaded( function(){
+		      $container.masonry({
+		        itemSelector : '.jvf_pubu'
+		      });
+		      html.show();
+		    //});
+		}
+		scrollboot = true;
+	},'json');
+}
+ajaxCircle();
+</script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t2">
+		<div id="main">
+			<div class="inner">
+				<div class="column-personal">
+					<include file="User:right" />
+					<div class="timeline-tab-content">
+						<div class="interact-section">
+						<div class="myfollow-hd">
+							<ul class="cls">
+								<li class="curr"><a href="javascript:;">我的关注</a></li>
+							</ul>
+						</div>
+						<div class="myfollow-bd">
+															<div class="myfollow-bd">
+	<div class="list">
+		<ul>
+		<notempty name="mdata">
+		<volist name="mdata" id="vo">
+						<li class="cls">
+				<div class="myfollow-lst-l">
+					<a href="{:U('User/space/id/'.$vo['id'])}" target="_blank" class="head">
+						<img src="{$vo.thumbnail}" alt="{$vo.name}" title="{$vo.name}">
+					</a>
+				</div>
+				<div class="myfollow-lst-c">
+					<p>
+						<a href="{:U('User/space/id/'.$vo['id'])}" target="_blank">{$vo.name}</a>
+						<eq name="vo.daren" value="1">
+<a class="ico-approve approve-person-s" href="{:U('Index/daren')}" target="_blank" title="达人认证"></a>
+						</eq>	
+					</p>
+					<p>
+						<span>
+							<eq name="vo.sex" value="1">男</eq>
+							<eq name="vo.sex" value="2">女</eq>
+							 {$vo.address}</span><span>观众：<strong>{$vo.wasAttentionNum}</strong><em class="split">|</em>被喜欢：<strong>{$vo.wasLikeNum}</strong>
+						</span>
+					</p>
+					<notempty name="vo.last">
+										<p>
+						<a href="{:U('Talk_about/detail/id/'.$vo['last']['id'])}" target="_blank">
+															{$vo.last.content|msubstr=###,0,500}
+													</a>
+						<span>({$vo.last.addtime|dgmdate})</span>
+					</p>
+					</notempty>
+									</div>
+				
+								<div class="myfollow-lst-r">
+								<in name="vo.id" value="$memberdata['attention_ids']">
+									<div class="btn-follow-22-end"><span class="ico-end">已关注</span></div>
+									<div class="btn-follow-22-end-cancel handler-follow" style="display: none; ">
+										<p><a href="javascript:;" uid="{$vo.id}" class="cancel-attention" data--ban="1000">取消关注</a></p>
+									</div>
+								<else />
+									<a class="btn-follow-22-add add-attention" uid="{$vo.id}" href="javascript:;"><span>加关注</span></a>
+								</in>
+								</div>
+							</li>
+							</volist>
+							<else />
+							<div class="block-space">
+																<div class="index-space">
+								<i></i>没有关注，关注使生活更精彩
+							</div>
+															</div>
+							</notempty>
+					</ul>
+	</div>
+	<div class="global-page">{$page}</div></div>													</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+<!--
+$(function(){
+	$('.myfollow-bd .list li').hover(function(){
+		$(this).find('.handler-follow').show();
+	},function(){
+		$(this).find('.handler-follow').hide();
+	});
+	
+	$('.cancel-attention').live('click',function(){
+		var t = $(this);
+		var uid = t.attr('uid');
+		$.getJSON(APP+'/Member/removeattention/id/'+uid,function(data){
+			if(data.status == 1){
+				var html='<a class="btn-follow-22-add add-attention" uid="'+uid+'" href="javascript:;"><span>加关注</span></a>';
+				t.parents('.myfollow-lst-r').html(html);
+			}else{
+				t.tip(data.info,2000);
+			}
+		});
+	});
+	
+	$('.add-attention').live('click',function(){
+		var t = $(this);
+		var uid = t.attr('uid');
+		$.getJSON(APP+'/Member/attention/id/'+uid,function(data){
+			if(data.status == 1){
+				var html='<div class="btn-follow-22-end"><span class="ico-end">已关注</span></div>'
+						+'<div class="btn-follow-22-end-cancel handler-follow" style="display: none; ">'
+						+'<p><a href="javascript:;" uid="'+uid+'" class="cancel-attention" data--ban="1000">取消关注</a></p>'
+						+'</div>';
+				t.parents('.myfollow-lst-r').html(html);
+			}else{
+				t.tip(data.info,2000);
+			}
+		});
+	});
+});
+//-->
+</script>
+<include file="Public:footer" />

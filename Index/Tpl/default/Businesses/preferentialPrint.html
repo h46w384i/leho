@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>{$preferentialdata.title}</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../Public/css/bc.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../Public/css/discount.css">
+</head>
+<body onload="window.print();">
+
+<div class="coupon-con">
+    <div class="print2">
+        <h1 class="title">{$preferentialdata.title}</h1>
+        <img class="img" src="{$preferentialdata.logo.path}" alt="{$preferentialdata.title}">
+        <div class="info">
+            <p class="time"><strong>有效期：{$preferentialdata.addtime|toDateYmd}至{$preferentialdata.endtime|toDateYmd}</strong></p>
+            <p>{$preferentialdata.note}</p>
+            <table class="contact">
+                <tbody><tr>
+                    <td>{$businessesdata.companyname}</td>
+                    <td>
+                        地址：{$businessesdata.address}<br>
+                        电话：{$businessesdata.tel}
+                    </td>
+                </tr>
+                </tbody></table>
+            <p class="tips">以上信息的最终解释权归商家所有，如有疑问，请联系商家咨询。</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

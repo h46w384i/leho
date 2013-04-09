@@ -1,0 +1,136 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/show.css"/>
+<script>
+$(function(){
+	circlePhilosopher();
+});
+</script>
+<div id="wrapper">		
+
+<div class="show-hd">
+		<div class="show-hd-wrapper">
+			<div class="show-hd-pic">
+				<a href="{:U('Index/daren')}" target="_blank" class="btns btn-t1"><span><strong>立即申请</strong></span></a>
+			</div>
+		</div>
+	</div>
+
+
+<div id="bd" class="bb-t5">
+	<!--{start: 搜索首页布局 -->
+		<div id="main">
+			<div class="inner">
+				<div class="show-bd">
+					<div class="show-nav">
+						<ul>
+						<volist name="daren_showdata" id="v">
+							<li data-category="hot{$v.id}"><a href="javascript:;">{$v.name}</a></li>
+						</volist>
+						</ul>
+					</div>
+					<volist name="daren_showdata" id="v">
+					<div class="show-block hot{$v.id}">
+						<div class="show-title t2 title-share-cate" data-category="share-cate">
+							<h3>{$v.name}</h3>
+						</div>
+						<div class="show-cont-pic cls">
+	<volist name="v.darens" id="vo" mod="2" offset="0" length="2">
+							<div class="show-pic-item <eq name="mod" value="1">mr37</eq>">
+		<div class="show-pic-hd">
+			<dl class="cls">
+				<dt>
+					<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" class="user-headimage">
+						<img src="{$vo.header.thumbnail}" title="{$vo.reason}" alt="{$vo.name}" width="50">
+					</a>
+					<in name="vo.uid" value="$memberdata['attention_ids']">
+					<a class="btn-follow-20-end" href="javascript:;"><span>已关注</span></a>
+					<else />
+					<a class="btn-follow-20-add" href="javascript:;" uid="{$vo.uid}"><span>加关注</span></a>
+					<a href="javascript:;" class="checked follow-checkbox" uid="{$vo.uid}" uid="{$vo.uid}"></a>
+					</in>
+				</dt>
+				<dd>
+					<p class="name">
+						<strong>
+						<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" title="{$vo.reason}">{$vo.name}</a>
+						</strong>
+					</p>
+					<p class="auth" title="{$vo.daren_explain}">{$vo.daren_explain}</p>
+					<p class="desc" title="{$vo.reason}">推荐理由：{$vo.reason}</p>
+					<p class="love"><em class="num">{$vo.was_likes}</em>人喜欢</p>
+				</dd>
+			</dl>
+		</div>
+		<div class="show-pic-bd">
+		<notempty name="vo.accessory">
+			<a href="{:U('Member/talk_aboutLike/tid/'.$vo['last']['id'])}" target="_blank">
+				<img src="{$vo.accessory.0.thumbnail}">
+			</a>
+		</notempty>
+		</div>
+	</div>
+	</volist>
+						</div> 
+						<div class="show-cont-nopic">
+							<ul class="recomment-list cls">
+							<volist name="dr_lxms" id="vo" mod="2" offset="2">
+							<li>
+								<dl>
+									<dt>
+										<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" class="user-headimage">
+											<img src="{$vo.header.thumbnail}" title="{$vo.reason}" alt="{$vo.name}">
+										</a>
+										<in name="vo.uid" value="$memberdata['attention_ids']">
+										<else />
+										<a href="javascript:;" class="checked follow-checkbox" uid="{$vo.uid}" uid="{$vo.uid}"></a>
+										</in>
+												</dt>
+									<dd>
+										<p class="name">
+											<strong>
+												<a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank" title="{$vo.reason}">{$vo.name}</a>
+											</strong>
+										</p>
+										<p class="auth" title="{$vo.daren_explain}">{$vo.daren_explain}</p>
+										<in name="vo.uid" value="$memberdata['attention_ids']">
+											<a class="btn-follow-20-end" href="javascript:;"><span>已关注</span></a>
+											<else />
+											<a class="btn-follow-20-add" href="javascript:;" uid="{$vo.uid}"><span>加关注</span></a>
+											</in>
+										</dd>
+								</dl>
+								<a href="#" class="recomment-close">删除</a>
+							</li>
+							</volist>
+							</ul>
+						</div>
+						<php>
+						$bool = false;
+						foreach($dr_lxms as $value){
+							if(!in_array($value['uid'], $memberdata['attention_ids'])){
+								$bool = true;
+							}
+						}
+						</php>
+						<notempty name="bool">
+						<div class="show-ft">
+							<span class="checkbox-cont">
+								<a href="javascript:;" class="checked check-all" id="hot-recommend-checkbox" data-category="hot-recommend" data-state="checked"></a>全选
+							</span>
+							<a href="javascript:;" class="btns btn-t1 follow-btn" data-category="hot-recommend"><span><strong>关注所选</strong></span></a>
+						</div>
+						</notempty>
+					</div>
+					</volist>
+				</div>
+			</div>
+		</div>
+		<div id="aside">
+			<div class="col-l">
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />

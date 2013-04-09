@@ -1,0 +1,292 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/post.css"/>
+<script>
+$(document).ready(function(){
+	$('.likeButton,.like-btn').click(function(){
+		var span = $('.like-btn').parent();
+		var button = $('.likeButton');
+		var url = $(this).attr('href');
+		$.getJSON(url,function(data){
+			//t.tip(data.info,2000);
+			if(data.status==1){
+				var like = $('.like-btn em');
+				if(!span.is('.current')){
+					button.removeClass('btn-love').addClass('btn-loved');
+					span.addClass('current');
+					like.text(parseInt(like.html())+1);
+				}else{
+					button.removeClass('btn-loved').addClass('btn-love');
+					span.removeClass('current');
+					like.text(parseInt(like.html())-1);
+				}
+			}
+		});
+		return false;
+	});
+	
+	$('.operate-menu-share').hover(function(){
+		$(this).find('.operate-menu-list').show();
+	},function(){
+		$(this).find('.operate-menu-list').hide();
+	});
+	
+	$('.share-operate .jvf_shareto').live('click',function(){
+		var href = $(this).attr('href');
+		window.open(href,'','height=400,width=650,top=300,left=500,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+	});
+	
+	$('.trans-btn').live('click',function(){
+		var tid = $(this).attr('tid');
+		jvfDialog(guid(), APP+'/Member/forwarding/tid/'+tid);
+	});
+	
+	$('.cmt-reply').live('click',function(){
+		var t = $(this);
+		var div = t.parents('li.cls').find('.comment-post');
+		if(div.is(':hidden')){
+			var content = div.find('textarea[name="content"]');
+			if(!content.val()){
+				content.val('回复@'+t.attr('data-info')+':');
+				commentNum(content);
+			}
+			div.show();
+		}else{
+			div.hide();
+		}
+	});
+	
+	$('.comment-tools .del').live('click',function(){
+		var t = $(this);
+		var li = t.parents('li');
+		var cid = t.attr('cid');
+		$.getJSON(APP+'/Member/comment_del/id/'+cid,function(data){
+			if(data.status == 1){
+				li.fadeOut(function(){
+					li.remove();
+				});
+			}else{
+				t.tip(data.info);
+			}
+		});
+	});
+	
+	$('.comment_form .comment-btn').live('click',function(){
+		var t = $(this);
+		var form = t.parents('.comment_form');
+		var para = form.serialize();
+		if(t.is('.btn-t6')){
+			$.post(APP+'/Member/doTalk_about_comment',para,function(data){
+				if(data.status == 1){
+					$.get(APP+'/Talk_about/getCommentOne/id/'+data.info,function(data){
+						$('.comment-list ul').prepend(data);
+					});
+					var content = form.find('textarea[name="content"]');
+					content.val('');
+					commentNum(content);
+				}else{
+					t.tip(data.info,2000);
+				}
+			},'json');
+		}
+	});
+	
+	$('.comment_form .btn-faces').qqFace('.comment_form',function(t){
+		commentNum(t);
+	},'textarea[name="content"]');
+	
+	$('.comment_form textarea[name="content"]').live('keyup',function(e){
+		var t = $(this);
+		commentNum(t);
+	});
+	
+	$('.comment_form .panel-checkbox').live('click',function(){
+		var t = $(this);
+		var input = t.siblings('input[name="panel-checkbox"]');
+		if(t.is('.checkbox')){
+			t.removeClass('checkbox').addClass('checked');
+			input.val(1);
+		}else{
+			t.removeClass('checked').addClass('checkbox');
+			input.val(0);
+		}
+	});
+	
+	function commentNum(t){
+		var form = t.parents('.comment_form');
+		var submitbtn = form.find('.comment-btn');
+		var num = getLength(t.val());
+		var textNum = 140 - num;
+		if(textNum < 0){
+			submitbtn.removeClass('btn-t6').addClass('btn-default-20');
+		}else{
+			submitbtn.removeClass('btn-default-20').addClass('btn-t6');
+		}
+		if(num <=0){
+			submitbtn.removeClass('btn-t6').addClass('btn-default-20');
+		}
+	}
+});
+</script>
+
+<div id="wrapper">
+
+<div id="bd" class="bb-t4">
+	<div id="main">
+		<div class="inner">
+			<div class="post-detail">
+				<div class="feed">
+					<div class="feed-content">
+						<div class="share-detail">
+							<div class="share-user">
+								<p class="share-avatar">
+									<a href="{:U('User/space/id/'.$talk_aboutdata['uid'])}"><img src="{$talk_aboutdata.header}" alt="{$talk_aboutdata.name}"></a>
+								</p>
+								<p>
+									<strong><a target="_blank" href="{:U('User/space/id/'.$talk_aboutdata['uid'])}">{$talk_aboutdata.name}</a></strong>
+									<eq name="talk_aboutdata.daren" value="1">
+									<a class="ico-approve approve-person-s" href="{:U('Index/daren')}" target="_blank" title="达人认证"></a>
+									</eq>
+								</p>
+								<p>
+									<span class="when">
+										{$talk_aboutdata.addtime|dgmdate}
+									</span>
+								</p>
+							</div>
+							<div class="share-cont">
+																														<div class="share-pic-cont">
+							<volist name="talk_aboutdata.accessory" id="vo">
+							<div class="share-pic">
+								<a href="{$vo.origin}" target="_blank"><img class="share-img" src="{$vo.origin}"></a>
+							</div>
+							</volist>
+							<volist name="talk_aboutdata.source.accessory" id="vo">
+							<div class="share-pic">
+								<a href="{$vo.origin}" target="_blank"><img class="share-img" src="{$vo.origin}"></a>
+							</div>
+							</volist>
+					</div>
+				<notempty name="talk_aboutdata.source.content">
+				<div class="share-txt">
+					<a href="{:U('/User/space/id/'.$talk_aboutdata['source']['uid'])}">{$talk_aboutdata['source']['name']}</a>:{$talk_aboutdata.source.content}
+				</div>
+				</notempty>
+				<div class="share-txt">
+					{$talk_aboutdata.content}
+				</div>
+				<notempty name="talk_aboutdata.place">
+				<div style="line-height:28px;">
+					<i class="jvf_place fl"></i>&nbsp;&nbsp;{$talk_aboutdata.place}
+				</div>
+				</notempty>
+				<notempty name="talk_aboutdata.price">
+				<div style="line-height:28px;">
+					<i class="jvf_yen fl"></i>&nbsp;&nbsp;{$talk_aboutdata.price}元
+				</div>
+				</notempty>
+		<ul class="share-info">
+					</ul>
+																								</div>
+							<div class="tools cls">
+								<span <in name="talk_aboutdata.id" value="$memberdata['like_ids']">class="current"</in>><a href="{:U('Member/talk_aboutLike/tid/'.$talk_aboutdata['id'])}" class="digg like-btn"><em>{$talk_aboutdata.likes}</em></a></span>
+								<span><a href="javascript:void(0);" class="comment-view-btn">评论</a><b class="c-count">({$talk_aboutdata.comment})</b></span>
+								<span><a href="javascript:void(0);" class="trans-btn" tid="{$talk_aboutdata['tid']?$talk_aboutdata['tid']:$talk_aboutdata['id']}">转发</a><b>({$talk_aboutdata.forwarding})</b></span>
+							</div>
+							<div class="comment" id="comment_container" style="display: block; ">
+								<div class="comment-post">
+								<form class="comment_form">
+									<input type="hidden" name="tid" value="{$talk_aboutdata.id}" />
+									<div class="txt">
+										<textarea placeholder="我觉得…" class="into comment-txt" name="content"></textarea>
+									</div>
+									<div class="submit cls">
+										<a href="javascript:;" class="comment-btn btns btn-default-20">
+											<span>评论</span>
+										</a>
+										<a href="javascript:;" class="btn-faces">表情</a>
+										<span class="penel-check-wrap publish"><i class="checkbox panel-checkbox" style="display:inline-block;"></i><span class="font">同时转发</span></span>
+									</div>
+									<i class="arr-t"></i>
+								</form>
+								</div>
+								<div class="comment-list">
+									<ul>
+									<volist name="commentdata" id="vo">
+									<include file="Talk_about:getCommentOne" />
+									</volist>
+									</ul>
+								</div>
+								<div class="global-page">{$page}</div>							</div>
+						</div>
+						<div class="fix-operate-btns" style="top: 60px;">
+							<div class="operate-btns">
+																		<a href="{:U('Member/talk_aboutLike/tid/'.$talk_aboutdata['id'])}" class="likeButton btn-operate <in name="talk_aboutdata.id" value="$memberdata['like_ids']">btn-loved<else />btn-love</in>">喜欢</a>
+																		<div class="operate-menu operate-menu-share">
+										<a href="javascript:;" class="btn-operate btn-share">分享</a>
+										<div class="operate-menu-list share-operate" style="display: none; ">
+											<div class="tips">
+												<div class="tips-t1">
+													<div class="tips-content share-container">
+														<div class="bd">
+															<php>
+														$ref_urllink = HOST.U('Member/talk_aboutLike/tid/'.$talk_aboutdata['id']);
+														$ref_name = C('sysconfig.site_title');
+														$ref_pic = HOST.$talk_aboutdata['accessory'][0]['thumbnail'];
+														</php>
+														<a href="javascript:;" class="op-transmit trans-btn" tid="{$talk_aboutdata['tid']?$talk_aboutdata['tid']:$talk_aboutdata['id']}">转发到站内</a>
+														<a href="http://v.t.sina.com.cn/share/share.php?url={$ref_urllink}&title={$ref_name}&pic={$ref_pic}" onclick="return false;" class="op-sina shareto-button-tsina jvf_shareto"	title="新浪微博">新浪微博</a>
+														<a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={$ref_urllink}&amp;title={$ref_name}&amp;pics={$ref_pic}" onclick="return false;" class="op-qqkj shareto-button-qzone jvf_shareto" title="QQ空间">QQ空间</a>
+														<a href="http://share.renren.com/share/buttonshare.do?link={$ref_urllink}&title={$ref_name}" onclick="return false;" class="op-renren shareto-button-renren jvf_shareto" title="人人网">人人网</a>
+														<a href="http://v.t.qq.com/share/share.php?title={$ref_name}&url={$ref_urllink}&pic={$ref_pic}" onclick="return false;" class="op-qq shareto-button-tqq jvf_shareto" title="腾讯微博">腾讯微博</a>
+														</div>
+													</div>
+													<span class="sd"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="aside">
+					<div class="side-con cls">
+			<div class="post-wrap">
+				<div class="title cls">
+					<h3><a href="{:U('User/space/id/'.$talk_aboutdata['uid'])}">{$talk_aboutdata.name}</a>
+					<eq name="talk_aboutdata.daren" value="1">
+					<a class="ico-approve approve-person-s" href="{:U('Index/daren')}" target="_blank" title="达人认证"></a>
+					</eq>
+					的分享
+                    </h3>
+					<a target="_blank" href="{:U('User/space/id/'.$talk_aboutdata['uid'])}" class="right-a">更多</a>
+				</div>
+				<div class="cls">
+					<ul class="pic-list post-pic cls" id="more_post">
+					<volist name="tadata" id="vo">
+							<li>
+								<div class="pic-wrap">
+								<notempty name="vo.accessory">
+									<a target="_blank" href="{:U('Talk_about/detail/id/'.$vo['id'])}"><img src="{$vo.accessory.0.thumbnail}" width="85" height="85"></a>
+								</notempty>
+								<notempty name="vo.source.accessory">
+									<a target="_blank" href="{:U('Talk_about/detail/id/'.$vo['source']['id'])}"><img src="{$vo.source.accessory.0.thumbnail}" width="85" height="85"></a>
+								</notempty>
+								</div>
+								<div class="con-wrap cls">
+									<p>{$vo.content|msubstr=###,0,20}<a target="_blank" href="{:U('Talk_about/detail/id/'.$vo['id'])}">查看全部</a></p>
+								</div>
+							</li>
+					</volist>
+					</ul>
+				</div>
+							</div>
+		</div>
+</div>
+</div>
+	</div>
+<include file="Public:footer" />

@@ -1,0 +1,81 @@
+<div class="myhone-bg">
+	<div class="myhome-hd">
+		<div class="myhome-user">
+			<div class="user-photo">
+				<a href="{:U('User/space/id/'.$memberdata['id'])}"><img src="{$memberdata.header.path}" alt="{$memberdata.name}" width="120"></a>
+				<div class="amend" id="modify_headimg" style="height:0px;"><i></i><span><a title="修改头像" alt="修改头像" href="{:U('Member/avatar')}">修改头像</a></span></div>
+			</div>
+			<dl class="user-info">
+				<dt><a href="{:U('User/space/id/'.$memberdata['id'])}" title="test003">{$memberdata.name}</a>
+</dt>
+				<dd><a href="{:U('User/space/id/'.$memberdata['id'])}"><i class="ico-timeline"></i><span>我的时光轴</span></a></dd>
+				<dd>
+					<a href="javascript:;" onclick="return false" class="exp_credit"><i class="ico-medal"></i><span>积分：{$memberdata.value}</span></a>
+					<div id="medal">
+						<a href="javascript:;" onclick="return false" class="me-style"><i class="ico-mark"></i><span>勋章</span></a>
+						
+						<div class="panel panel-t3 medal-panel" style="display:none;">
+							<div class="panel-content">
+								<div class="bd">
+								<empty name="medaldata">
+									<span class="empty-medal">你尚未获得任何勋章</span>
+								<else />
+									<ul class="medal-list cls">
+									<volist name="medaldata" id="vo">
+										<li data-name="{$vo.name}" data-mark="{$vo.mark}"><a href="#" onclick="return false" ><img class="medal" src="{$vo.logopath}" alt="{$vo.name}" is-new="0" title="" style="width: 34px; height: 34px;"></a></li>
+									</volist>
+									</ul>
+								</empty>
+								</div>
+							</div>
+							<span class="sd"></span>
+						</div>
+											</div>
+				</dd>
+				<dd class="user-attention">
+					<ul class="cls">
+						<li><a href="{:U('Member/liked')}"><strong>{$allNum.was_like}</strong><span>被喜欢</span></a></li>
+						<li><a href="{:U('User/wasAttention/id/'.$memberdata['id'])}"><strong>{$allNum.was_attention}</strong><span>观众</span> </a></li>
+						<li><a href="{:U('User/attention/id/'.$memberdata['id'])}"><strong>{$allNum.attention}</strong><span>关注</span> </a></li>
+					</ul>
+				</dd>
+			</dl>
+		<div id="yindao-add-headimg" class="panel panel-t4 panel-t4-lt panel-photo-tips" style="position: absolute; top: 30px; left: 130px; display: none; ">
+	<div class="panel-content">
+		<div class="hd">
+			<h3>上传头像</h3>
+		</div>
+		<div class="bd">
+			<div class="photo-tips-cont">
+				<p>还没有上传头像？有头像更容易得到关注！</p>
+				<p><a href="{:U('Member/avatar')}">立即上传</a></p>
+			</div>
+		</div>
+	</div>
+	<span class="sd"></span>
+	<span class="cue"></span>
+	<span class="close">X</span>
+</div></div>
+	
+		<div class="block-show">
+			<a href="#" onclick="return false" class="share-btn"></a>
+			<div class="go-discover go-2">
+				<a href="{:U('Circle/detection')}">去发现生活</a>
+			</div>
+		<div id="yindao-add-post" class="panel panel-t4 panel-t4-tl panel-guide-end" style="position:absolute;top:92px;left:20px; display:none; z-index:99;">
+	<div class="panel-content">
+		<div class="hd">
+			<h3>引导页</h3>
+		</div>
+		<div class="bd">
+			<div class="guide-end-cont">
+				<p>在这里轻松发布</p>
+			</div>
+		</div>
+	</div>
+	<span class="sd"></span>
+	<span class="cue"></span>
+	<a href="javascript:;" class="close">X</a>
+</div></div>
+	</div>
+</div>

@@ -1,0 +1,146 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/coupon.css"/>
+<div id="wrapper">
+<include file="Businesses:pub" />
+<div id="bd" class="gl-w">
+    <div id="wrap" class="cls switch-tabs doc-ex-1">
+        <div id="main">
+            <div class="inner">
+                <div class="sh-mod">
+                    <div class="hd"><span class="n"><h2>优惠活动</h2></span></div>
+                    <div class="bd">
+                        <ul class="mod-it-3 cls">
+                            <volist name="preferentialdata" id="vo">
+                            <li class="first">
+                                <div class="img">
+                                    <a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" class="pc-inner"><img height="150" width="150" src="{$vo.logo.thumbnail}" alt="{$vo.title}"></a>
+                                </div>
+                                <div class="txt">
+                                    <p><strong><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}">{$vo.title}</a></strong></p>
+                                    <if condition="($vo.endtime gt time())">
+                                    <p><em>有效期：{$vo.starttime|toDateYmd} 至 {$vo.endtime|toDateYmd}</em></p>
+                                    <else />
+                                    <p>已结束</p>
+                                    </if>
+                                    <p class="inline">{$vo.note}</p>
+                                    <p class="status"><span class="gets">
+										<i>{$vo.crr}</i><em> 人已领取</em></span>
+                                        <if condition="($vo.endtime gt time())">
+                                            <a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" class="btns-ex btn-ex-t2"><span>去领取</span></a>
+                                        <else />
+                                            <a href="javascript:;" class="btns-ex btn-ex-t3"><span>已结束</span></a>
+                                        </if>
+                                    </p>
+                                </div>
+                                <span class="modify"></span>
+                            </li>
+                            </volist>
+                        </ul>
+                        <div class="global-page">
+                            {$page}
+                        </div>
+                    </div>
+                </div>
+                <!-- 其它用户还浏览了 } -->
+                <div class="sh-mod">
+                    <div class="hd"><span class="n">其它用户还浏览了</span></div>
+                    <div class="bd">
+                        <div class="sub-hd"><span class="n"><h3>精品服务</h3></span></div>
+                        <div class="sub-bd">
+                            <ul class="mod-it-1 cls">
+                             <volist name="goodsdata" id="vo">
+                                <li>
+                                    <div class="img"><a href="{:U('Goods/index/id/'.$vo['id'])}" alt="{$vo.title}" width="220">
+                                        <img height="160" src="{$vo.accessory.thumbnail}" width="219" alt="{$vo.title}">
+                                    </a></div>
+                                    <div class="txt">
+                                        <p class="attr"><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p>
+                                        <p class="price"><span class="discount">&yen;<i>{$vo.price}</i></span><span class="original">&yen;<i>{$vo.original}</i></span></p>
+                                    </div>
+                                </li>
+                             </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="{:U('Businesses/detail/id/'.$_REQUEST['id'])}" class="back2index" title="返回商家首页"></a>
+                </div>
+            </div>
+        </div>
+            <div id="aside">
+                <div id="map_module">
+                    <!-- 地图 -->
+                    <div class="sh-mod shop-map">
+                        <div class="bd">
+                            <div class="img">
+                                <div id="map" style="height: 177px; width: 210px;">
+
+                                </div>
+                                <div>
+                                    <a class="businessesMap" href="javascript:;">查看大图</a>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        load_map_wrapper();
+                                    });
+                                    function load_map_wrapper(){
+                                        <if condition="($businessesdata.latitude neq '') AND ($businessesdata.longitude neq '')">
+                                            var map = new jvfMap("map","{$businessesdata.latitude}","{$businessesdata.longitude}",{$businessesdata.zoom},false);
+                                            map.addTags("{$businessesdata.latitude}","{$businessesdata.longitude}","{$businessesdata.address}",{$businessesdata.zoom},"");
+                                        <else />
+                                        initialize();
+                                        </if>
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社区feeds -->
+                <div class="sh-mod shop-feeds" id="sns_mini_module">
+                    <div class="bd">
+                        <div class="info cls">
+                            <div class="avatar">
+                                <a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank"><img width="50" height="50" src="{$mdata.header.thumbnail}" width="50" height="50" alt="{$mdata.name}"></a>
+                            </div>
+                            <div class="fn">
+                                <p><a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">{$mdata.name}</a><a href="javascript:;" class="i-v" title="商家认证"></a></p>
+                                <p><a href="#" class="btn-ex-follow"><span>加关注</span></a><em>{$mdata['wasAttentionNum']}观众</em></p>
+                            </div>
+                        </div>
+                        <div class="feeds">
+                            <ul>
+                                <volist name="talk_aboutdata" id="vo">
+                                    <li class="feeds-li _cmtTarget">
+                                        <p class="p">
+                                            {$vo.content}
+                                        </p>
+                                        <notempty name="vo.accessory">
+                                            <p class="p">
+                                                <a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><img src="{$vo.accessory.0.thumbnail}" alt="" width="58"></a>
+                                            </p>
+                                        </notempty>
+                                        <div class="tools cls">
+                                            <p class="f-l"><em>{$vo.addtime|date='m-d H:i',###}</em></p>
+                                            <p class="f-r">
+                                                <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="digg like-btn" data--ban="0" style="outline:none"><em>{$vo.likes}</em></a></span>
+                                                <span class="comment-number"><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="comment-view-btn _cmtBtn">评论</a><b class="c-count">({$vo.comment})</b></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="sh-more">
+                                <a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">更多精彩»</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+	
+        </div>
+<include file="Public:footer" />

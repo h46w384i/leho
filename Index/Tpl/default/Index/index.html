@@ -1,0 +1,139 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/index.css"/>
+<script>
+$(function(){
+	index();
+});
+</script>
+	<div id="wrapper" >
+<div class="bd-main theme-1">
+	<include file="Public:ad_top" />
+<div id="bd">
+	<div class="share-item">
+		<div class="item-bd cls">
+			<div class="item-bd-top"></div>
+			<div class="item-bd-btm"></div>
+			<div class="share-items-hd cls">
+				<h4 title="热门专辑"><a href="{:U('Album/index')}" target="_blank">热门专辑</a></h4>
+			<ul>
+			<volist name="albumdata" id="vo" offset="8">
+				<li><a target="_blank" href="{:U('Circle/album/aid/'.$vo['id'])}">{$vo.title}</a></li>
+			</volist>
+			</ul>
+			</div>
+			<div id="switch-tabs-rmzj" class="share-items-bd switch-tabs">
+				<a class="switch-scroll-prev switch-scrolled" href="javascript:;"><span class="prev"></span></a>
+				<a class="switch-scroll-next" href="javascript:;"><span class="next"></span></a>
+				<div class="share-items-list switch-scroll-panel">
+					<ul class="switch-nav cls">
+					<volist name="albumdata" id="vo" offset="0" length="8" mod="4">
+					<eq name="mod" value="1">
+						<eq name="i" value="1">
+						<li class="selected">
+						<else />
+						<li class="unselected">
+						</eq>
+					</eq>
+						<a href="{:U('Circle/album/aid/'.$vo['id'])}" class="pic" target="_blank">
+						<img src="{$vo.accessory.origin}" alt="{$vo.title}" width="218" height="298">
+							{$vo.title}
+						</a>
+				
+					<eq name="mod" value="0"></li></eq>
+					</volist>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="item-bt"></div>
+	</div>
+		<div class="ad-item" id="ad-top">
+		{:showAdvPosition('index_middle')}
+		</div>
+    <volist name="share" id="val">
+		<div class="block-item" style="position:relative;">
+			<a name="lxms" class="anchor-name">&nbsp;</a>
+			<div class="item-hd cls">
+				<h4 title="{$val.name}" class="item-tit1"><a href="{:U('Circle/index/cid/'.$val['id'])}" target="_blank">{$val.name}</a></h4>
+			</div>
+			<div class="item-bd cls">
+				<div class="item-bd-top"></div>
+				<div class="item-bd-btm"></div>
+				<div class="block-item-bd cls">
+					<div class="share-hot">
+                        <ul class="cls">
+                        <volist name="val.share" id="vo" offset="0" length='8'>
+                            <li>
+                                <h5 class="share-hot-hd"><a href="{:U('Circle/index/lid/'.$vo['id'])}" target="_blank">{$vo.name}</a><span>({$vo.count})</span></h5>
+                                <div class="share-hot-bd cls">
+                                    <a href="{:U('Circle/index/lid/'.$vo['id'])}" target="_blank">
+                                        <img src="{$vo.origin}" width="196" height="196">
+                                    </a>
+                                </div>
+                                <div class="share-hot-bt">
+                                    <em class="num-pl">{$vo.likes}</em>
+                                    <a href="{:U('Circle/index/lid/'.$vo['id'])}" target="_blank">去看看</a>
+                                </div>
+                            </li>
+                        </volist>
+                        </ul>
+                    </div>
+                    <div class="share-hot-tags">
+                        更多分享：
+                        <volist name="val.share" id="vo" offset="8">
+                        <a href="{:U('Circle/index/lid/'.$vo['id'])}" target="_blank" class="hot-tag">{$vo.name}</a>
+                        </volist>
+                        <a class="hot-more" target="_blank" href="{:U('Circle/index/cid/'.$val['id'])}">全部<span>&gt;&gt;</span></a>
+                    </div>
+				</div>
+			</div>
+	</div>
+    </volist>
+	<div class="ad-item" id="ad-bottom" style="opacity: 1; ">
+		{:showAdvPosition('index_footer')}
+	</div>
+	<include file="Public:link" />
+</div>
+
+	</div>
+</div>
+</div>
+</div>
+
+<div class="panel panel-t1 feedback-box" id="feed_panel" style="display:none">
+	<div class="panel-content" style="width:480px; overflow:hidden;">
+		<div class="hd">
+			<h3>你提我改</h3>
+		</div>
+		<div class="bd cls">
+			<div class="con-pos" style="padding:0">
+				<form action="/talkleho/_add" method="post" id="feed_back_form">
+					<div class="feedback-type">
+						<span>反馈类型</span>
+						<label><input class="feed-type-radio" type="radio" name="feedback_type" value="11" checked="checked" />建议</label>
+						<label><input class="feed-type-radio" type="radio" name="feedback_type" value="12" />问题</label>
+						<label><input class="feed-type-radio" type="radio" name="feedback_type" value="13" />其他</label>
+					</div>
+					<div class="feedback-content">
+						<textarea id="feedback_content" name="feedback_content"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="ft">
+				<div id="feedback_error" class="feedback-error" style="display:none">请输入10~2000个字符的内容</div>
+				<div class="panel-btn"><a href="javascript:;" id="feedback_confirm" class="btns btn-t2"><span>提交</span></a></div>
+			</div>
+		</div>
+	</div>
+	<span class="sd"></span>
+	<span class="close">X</span>
+</div>
+<div class="fix-block-r">
+		<a class="back-top" href="javascript:;">返回顶部</a>
+</div>
+
+	</div>
+
+<include file="Public:footer" />

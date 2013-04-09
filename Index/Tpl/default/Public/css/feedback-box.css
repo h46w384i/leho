@@ -1,0 +1,48 @@
+.feedback-box{
+	width:480px
+}
+.feedback-box .feedback-type{
+	width:400px;
+	height:20px;
+	line-height:20px;
+	padding:20px 0;
+	margin:0 auto
+}
+.feedback-box .feedback-type input{
+	vertical-align:middle;
+	margin:0 6px 0 18px
+}
+.feedback-box .feedback-type label{
+	vertical-align:middle;
+	font-family:Tahoma;
+	font-size:12px
+}
+.feedback-box .feedback-content{
+	width:400px;
+	margin:0 auto
+}
+.feedback-box textarea{
+	width:394px;
+	height:100px;
+	border:1px solid #bfbfbf;
+	resize:none;
+	line-height:22px;
+	padding:2px;
+	overflow-y:auto
+}
+.feedback-box .ft{
+	width:400px;
+	height:68px;
+	margin:0 auto
+}
+.feedback-box .btn-t2{
+	float:right;
+	margin:10px 0 0
+}
+.feedback-box .feedback-error{
+	float:left;
+	margin:17px 0 0;
+	background:url(../images/error-bj.png) no-repeat 0 0;
+	padding-left:21px;
+	color:#e63917
+}

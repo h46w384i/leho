@@ -1,0 +1,79 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>我的信息</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>我的优惠券</h3>
+			<p>以下信息将显示您优惠券。</p>			
+		</div>
+		<div class="mylife-bd">
+     <div id="inbox_filters" class="clearfix shaix">
+         <form action="{:U('Member/mycoupons')}" id="inbox_filter_form" method="get">        
+             <label for="filter">{%member_show}：</label>
+             <select id="filter" name="filter" onchange="$('#inbox_filter_form').submit();">
+                 <option <if condition='($filter eq "") OR ($filter eq "all")'>selected="selected"</if> value="all">{%all_text}</option>
+                    <option <if condition='($filter eq "unused")'>selected="selected"</if> value="unused">{%coupon_unused}</option>
+                    <option <if condition='($filter eq "used")'>selected="selected"</if> value="used">{%coupon_used}</option>
+                    <option <if condition='($filter eq "freeze")'>selected="selected"</if> value="freeze">{%coupon_freeze}</option>
+                    <option <if condition='($filter eq "expired")'>selected="selected"</if> value="expired">{%coupon_expired}</option>
+             </select>
+         </form>
+         <div class="jvf_a_but jvf_fr" id="inbox_top_pagination"></div>
+     </div>
+         <table cellspacing="0" cellpadding="0" border="0" class="jvf_table">
+       <thead>
+         <tr>
+           <th width="200px">{%goods_title}</th>
+           <th width="80px">{&sysconfig.site_couponname}{%voucher_sn}</th>
+           <th width="80px">{%voucher_pass}</th>
+           <th width="180px">{%voucher_date}</th>
+           <th width="80px">{%operational_text}</th>
+         </tr>
+       </thead>
+       <tbody>
+       <volist name="couponsdata" id="vo">
+         <tr>
+           <td class="txc"><span><a class="shpc" href="{:U('Goods/index/id/'.$vo['good']['id'])}" target="_blank">{$vo.good.title}</a></span></td>
+           <td class="txc"><span>{$vo.sn}</span></td>
+           <td class="txc"><span>{$vo.pass}</span></td>
+           <td class="txc"><span>{$vo.starttime|toDate=###,'Y-m-d'}～{$vo.endtime|toDate=###,'Y-m-d'}</span></td>
+           <td class="txc">
+             <if condition="($vo.status eq 0) AND ($vo.endtime gt $now)">
+             <eq name="allow_sms" value="1">
+             <a class="reject fl ma0 smscoupon" href="{:U('Member/smscoupon/id/'.$vo['id'])}">{%member_mycoupons_sms}</a>
+             </eq>
+             <a class="reject fr ma0" href="{:U('Member/printcoupon/id/'.$vo['id'])}">{%member_mycoupons_print}</a>
+             </if>
+             <if condition="$vo.status eq 1">
+             <span>{%coupon_used}</span>
+             </if>
+             <if condition="$vo.status eq 2">
+             <span>{%coupon_freeze}</span>
+             </if>
+             <if condition="($vo.status eq 0) AND ($vo.endtime lt $now)">
+             <span>{%coupon_expired}</span>
+             </if>
+           </td>
+         </tr>
+       </volist>
+       </tbody>
+     </table>    
+<div class="global-page">{$page}</div>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:my_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

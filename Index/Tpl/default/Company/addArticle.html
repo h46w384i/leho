@@ -1,0 +1,49 @@
+<div style="width:600px;height: 600px;margin-bottom: 20px;" title="添加文章信息">
+	<form class="sns-form" action="{:U('Company/insertArticle')}" method="post">
+		<ul style="margin: 30px 0px 30px 70px;">
+			<li>
+				<label class="k fl" for="link">标题：</label>
+				<span class="v fl">
+					<input autocomplete="off" class="sns-text" type="text" id="title" name="title" placeholder="请输入标题">
+				</span>
+			</li>
+            <li>
+                <label class="k fl" for="link">排序：</label>
+				<span class="v fl">
+					<input autocomplete="off" class="sns-text" type="text" id="sort" name="sort" placeholder="显示顺序从大到小">
+				</span>
+            </li>
+			<li>
+				<label class="k fl" for="link">内容：</label>
+				<span class="v fl">
+					<textarea style="height: 200px;width: 450px;" class="sns-text editor" type="text" name="content" placeholder="显示顺序从大到小" upImgUrl="{:U('Xheditor/upLoadImg')}" upImgExt="jpg,jpeg,gif,png"></textarea>
+				</span>
+			</li>
+		</ul>
+		<div class="jvf_btn"><button class="btn-reg insertArticle" type="button">提交</button></div>
+	</form>
+</div>
+
+<script type="text/javascript">
+<!--
+$(function(){
+	$('.insertArticle').click(function(){
+		var t = $(this);
+		var form = t.parents('form');
+		var para = form.serialize();
+		$.post(form.attr('action'),para,function(data){
+			if(data.status == 1){
+				t.parents('.ui-dialog').find('.ui-dialog-titlebar-close').trigger('click');
+				jalert(data.info,{callback:function(){
+                    goUrl(APP+'/Company/store');
+                }});
+			}else{
+				t.tip(data.info,3000);
+			}
+		},'json');
+		return false;
+	});
+    xheditorBox();
+});
+//-->
+</script>

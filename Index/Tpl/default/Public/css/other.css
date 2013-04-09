@@ -1,0 +1,301 @@
+#wrapper{
+	padding-top:20px
+}
+#bd{
+	background:url(../images/bg_mylife.png) 0 0 repeat-y
+}
+.help-top h2{
+	background:url(../images/help-logo.png) 0 0 no-repeat;
+	width:123px;
+	height:34px;
+	overflow:hidden;
+	text-indent:-999px;
+	margin-top:-46px;
+	margin-left:-160px;
+	_position:relative;
+	_z-index:99
+}
+.help-cont{
+	padding:46px 50px 60px;
+	min-height:700px;
+	_height:700px
+}
+.help-hd h3{
+	font-size:14px;
+	line-height:28px;
+	margin-bottom:17px;
+	border-bottom:1px solid #ededed
+}
+.help-hd p{
+	color:#999
+}
+.help-hd .base-info{
+	background-position:56px 28px
+}
+.help-hd .base-photo{
+	background-position:56px -62px
+}
+.help-hd .base-pw{
+	background-position:56px -159px
+}
+.help-hd .base-addr{
+	background-position:56px -256px
+}
+.help-bd{
+	line-height:22px
+}
+.help-bd .k{
+	width:110px
+}
+.help-bd .v strong{
+	display:inline-block;
+	line-height:30px;
+	zoom:1;
+	font-weight:normal
+}
+.help-bd .v .sns-radio,.help-bd .v .sns-select{
+	display:inline-block;
+	line-height:30px;
+	zoom:1;
+	margin-right:6px
+}
+.help-bd .v .sns-text{
+	width:266px
+}
+.help-bd .v .sns-textarea{
+	width:386px;
+	height:72px
+}
+.help-bd .sns-form .btn .btn-default{
+	width:86px;
+	height:30px;
+	*line-height:28px
+}
+.help-bd .sns-form .btn .btn-reg{
+	width:86px;
+	height:30px;
+	*line-height:28px
+}
+.help-bd .sns-form .btn{
+	padding-left:115px
+}
+.help-bd dt{
+	height:26px;
+	line-height:26px
+}
+.help-bd dd{
+	margin-bottom:25px;
+	display:none
+}
+.help-bd dd h4{
+	font-weight:normal;
+	margin:15px 0;
+	background:url(../images/ico_tit.png) 0 center no-repeat;
+	padding-left:15px
+}
+.help-bd ol h5{
+	margin:6px auto
+}
+.help-bd ol ol{
+	margin-left:2em;
+	color:#666
+}
+.help-bd ol li{
+	margin:10px 0
+}
+.help-bd .help-pic{
+	text-align:center;
+	text-align:center;
+	margin:30px 0
+}
+.help-bd .help-pic img{
+	margin:0 auto
+}
+.help-bd .help-pic span{
+	display:block
+}
+.help-bd p a,.help-bd p a:hover,.help-bd p a:active{
+	text-decoration:underline
+}
+.help-bd .letter{
+	width:685px;
+	height:946px;
+	overflow:hidden;
+	text-indent:-9999em;
+	background:url(../images/letter.png) 0 0 no-repeat
+}
+.help-bd .passwd-level{
+	color:#999;
+	font-size:12px;
+	padding-left:112px;
+	height:20px;
+	line-height:18px
+}
+.help-bd .passwd-level dt,.help-bd .passwd-level dd{
+	float:left
+}
+.help-bd .passwd-level dt{
+	margin-right:4px
+}
+.help-bd .passwd-level .level{
+	background:url(../images/ico_mylife.png) 0 -80px no-repeat;
+	width:180px;
+	height:20px;
+	color:#999;
+	position:relative
+}
+.help-bd .passwd-level .level span{
+	position:absolute;
+	top:10px;
+	*top:12px;
+	left:26px
+}
+.help-bd .passwd-level .level-1{
+	background-position:0 -126px
+}
+.help-bd .passwd-level .level-1 span{
+	left:26px
+}
+.help-bd .passwd-level .level-2{
+	background-position:0 -172px
+}
+.help-bd .passwd-level .level-2 span{
+	left:85px
+}
+.help-bd .passwd-level .level-3{
+	background-position:0 -218px
+}
+.help-bd .passwd-level .level-3 span{
+	left:146px
+}
+.help-bd .help-tips{
+	color:#999;
+	font-size:12px;
+	padding-left:112px;
+	height:20px;
+	line-height:18px
+}
+.help-bd .btns-wrap{
+	padding:20px 0 0 0;
+	text-align:center
+}
+.help-bd .btns-wrap .btns{
+	margin-right:10px
+}
+.help-bd .sitemap-link dl{
+	width:160px;
+	float:left;
+	display:inline;
+	margin-right:1px;
+	margin-bottom:10px
+}
+.help-bd .sitemap-link dt{
+	font-weight:bold;
+	font-family:Microsoft Yahei;
+	background:#f2f2f2;
+	height:28px;
+	line-height:28px;
+	text-align:center
+}
+.help-bd .sitemap-link dd{
+	display:block;
+	text-align:center;
+	margin-bottom:0;
+	height:24px;
+	line-height:24px
+}
+.help-bd .sitemap-link dd a{
+	margin:0 3px
+}
+.help-bd .current{
+	background-color:#f4f4f4
+}
+.help-addr-item{
+	margin-bottom:15px;
+	padding:5px 0
+}
+.help-add-cont{
+	padding:0
+}
+.help-bd .selected{
+	background-color:#f5f5f5;
+	padding:10px 0 35px
+}
+.help-bd .selected .help-addr-tit .tit-op{
+	display:block
+}
+.help-bd .selected .help-addr-form{
+	display:block
+}
+.help-addr-tit{
+	padding:0 10px
+}
+.help-addr-tit .tit-addr{
+	float:left;
+	font-size:14px
+}
+.help-addr-tit .tit-op{
+	float:right;
+	color:#cdcdcd;
+	display:none
+}
+.help-addr-tit .tit-op a{
+	margin:0 5px;
+	color:#999
+}
+.help-addr-tit .tit-op a:hover,.help-addr-tit .tit-op a:active{
+	color:#333
+}
+.help-addr-tit .curr{
+	display:block
+}
+.help-addr-tit .curr a,.help-addr-tit .curr a:hover,.help-addr-tit .curr a:active{
+	color:#588c0d
+}
+.help-addr-form{
+	margin-top:35px;
+	display:none
+}
+.help-addr-add{
+	background:url(../images/ico_mylife.png) 0 -37px no-repeat;
+	padding-left:15px;
+	margin-left:10px;
+	height:20px;
+	line-height:20px
+}
+.help-nav{
+	padding-top:50px
+}
+.help-nav dt a,.help-nav dt a:hover,.help-nav dt a:active{
+	display:block;
+	height:28px;
+	line-height:28px;
+	font-size:14px;
+	padding-left:40px;
+	color:#588c0d;
+	text-decoration:none
+}
+.help-nav dt a:hover{
+	background-color:#ebebeb
+}
+.help-nav dt.current{
+	background:#67a727
+}
+.help-nav dt.current a,.help-nav dt.current a:hover,.help-nav dt.current a:active{
+	color:#fff;
+	font-weight:bold;
+	background-color:#67a727;
+	text-decoration:none
+}
+.help-nav dl{
+	margin-bottom:5px
+}
+#ft{
+	padding:20px 0 90px;
+	color:#ccc;
+	line-height:25px
+}
+#ft a,#ft a:hover,#ft a:active{
+	color:#999;
+	margin:0 5px
+}

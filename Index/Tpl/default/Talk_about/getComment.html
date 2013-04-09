@@ -1,0 +1,10 @@
+<ul>
+<volist name="data" id="vo">
+<include file="Talk_about:getCommentOne" />
+</volist>
+</ul>
+<gt name="count" value="2">
+<p class="more">
+	<a href="{:U('Member/talk_aboutLike/tid/'.$tid)}" target="_blank">查看全部{$count}条评论</a>
+</p>
+</gt>

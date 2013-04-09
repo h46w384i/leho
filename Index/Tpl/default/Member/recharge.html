@@ -1,0 +1,44 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>我的信息</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>账户充值</h3>
+			<p>为您的账户充值。</p>			
+		</div>
+		<div class="mylife-bd">
+    <form id="payForm"  method="post" target="_blank" action="{:U('Member/toRecharge')}">
+      <div class="jvf_box_con" >
+        <div class="cart_borbox" style="padding:5px;">
+          <ul class="account_info" style="margin-bottom:15px;">
+            <li class="mobile bold"><label for="cash">{%recharge_cash}：</label><input id="cash" class="jvf_inputt" name="cash" placeholder="{%recharge_cash}" type="text"></li>
+          </ul>
+          <include file="Member:paylist" />
+        </div>
+      </div>
+      <div class="jvf_btn jvf_tc">
+        <input type="button" value="{%member_recharge_submit}" class="btn-reg"  id="goodsBuyBtn" />
+      </div>
+    </form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:my_nav" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+$(function(){
+	memberRecharge();
+})
+</script>
+<include file="Public:footer" />

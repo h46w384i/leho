@@ -1,0 +1,91 @@
+<link rel="stylesheet" type="text/css" href="../Public/css/result_unit.css"/>
+
+<script type="text/javascript">
+<!--
+$(function(){
+	$('.businessesMap').click(function(){
+		jvfDialog('bmaps', APP+'/Index/maps/bid/'+{$businessesdata.id});
+	});
+	
+	$('.toggle').toggle(function(){
+		$(this).parent().removeClass('unfold').addClass('fold');
+		$(this).text('收起');
+		$('#shmsg_ext').show();
+	},function(){
+		$(this).parent().removeClass('fold').addClass('unfold');
+		$(this).text('更多');
+		$('#shmsg_ext').hide();
+	});
+	
+	$('#nav a').hover(function(){
+		$(this).parent().addClass('curr');
+	},function(){
+		$(this).parent().removeClass('curr');
+	});
+});
+//-->
+</script>
+<div id="hd">
+<div id="banner_module">
+	<div class="crumb-bg">
+		<div class="gl-w crumb">
+			<a href="{:U('Businesses/index')}">逛商街</a><em>&gt;</em>
+							<a href="{:U('Businesses/list/cid/'.$arr_data[1])}">{$arr_data.1|getParent='Businesses_category',###}</a><em>&gt;</em>
+							<a href="{:U('Businesses/list/cid/'.$arr_data[1])}?child={$arr_data[2]}">{$arr_data.2|getParent='Businesses_category',###}</a><em>&gt;</em>
+			<span>{$businessesdata.name}</span></div>
+		<div class="gl-w vcard">
+			<div class="general cls">
+				<span class="name"><h2 style="font-size: 23px;"><a href="{:U('Businesses/detail/id/'.$businessesdata['id'])}">{$businessesdata.name}</a></h2></span>
+								<eq name="businessesdata.qualifications" value="1"><a target="_blank" href="{:U('Article/detail/id/58')}" class="ico-rz zizi" title="资质认证"></a></eq>
+								<eq name="businessesdata.security" value="1"><a target="_blank" href="{:U('Article/detail/id/59')}" class="ico-rz baozhengjin" title="保证金计划"></a></eq>
+								<eq name="businessesdata.real_scene" value="1"><a target="_blank" href="{:U('Businesses/poto/id/'.$businessesdata['id'])}" class="ico-rz shijing" title="实景照片"></a></eq>
+								<a href="{:U('User/space/id/'.$businessesdata['uid'])}" target="_blank" class="node">社区主页»</a>
+			</div>
+			<div class="info">
+				<ul class="">
+						<li>
+							<label>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</label><span class="addr">{$businessesdata.address}&nbsp;&nbsp;[<a class="addr_map_button map-locate businessesMap" href="javascript:;" rel="{$businessesdata.id}">地图</a>]</span>
+						</li>
+						<li>
+						<label>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</label><span>{$businessesdata.tel}</span>
+													<label>营业时间：</label><span class="open">{$businessesdata.opening}</span>
+																			<span class="unfold" style=""><a href="javascript:;" class="toggle">更多</a></span>
+						</li>
+				</ul>
+				<ul id="shmsg_ext" style="display: none; ">
+					<li>
+						<label>商家特色：</label><span>{$businessesdata.characteristic}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+	</div>
+	<div id="nav" class="gl-w">
+		<dl class="first">
+			<dt <eq name="ACTION_NAME" value="detail">class="curr"</eq>><a href="{:U('Businesses/detail/id/'.$businessesdata['id'])}"><strong>商家首页</strong></a></dt>
+		</dl>
+		<span class="bdr"></span>
+		<dl>
+			<dt <eq name="ACTION_NAME" value="info">class="curr"</eq>><a href="{:U('Businesses/info/id/'.$businessesdata['id'])}"><strong>商家信息</strong></a></dt>
+			<dd <eq name="ACTION_NAME" value="poto">class="curr"</eq>><a href="{:U('Businesses/poto/id/'.$businessesdata['id'])}">相册</a></dd>
+			<dd <eq name="ACTION_NAME" value="video">class="curr"</eq>><a href="{:U('Businesses/video/id/'.$businessesdata['id'])}">视频</a></dd>
+		</dl>
+		<span class="bdr"></span>
+		<dl>
+			<dt <eq name="ACTION_NAME" value="service">class="curr"</eq>><a href="{:U('Businesses/service/id/'.$businessesdata['id'])}"><strong>精品服务</strong></a></dt>
+			<dd <eq name="ACTION_NAME" value="doing">class="curr"</eq>><a href="{:U('Businesses/doing/id/'.$businessesdata['id'])}">优惠活动</a></dd>
+		</dl>
+		<span class="bdr"></span>
+		<dl>
+			<dt <eq name="ACTION_NAME" value="mouth">class="curr"</eq>><a href="{:U('Businesses/mouth/id/'.$businessesdata['id'])}"><strong>商家口碑</strong></a></dt>
+		</dl>
+		<div class="contact">
+			<span class="bdr"></span>
+			<dl>
+				<dt <eq name="ACTION_NAME" value="contact">class="curr"</eq>><a href="{:U('Businesses/contact/id/'.$businessesdata['id'])}"><strong>联系商家</strong></a></dt>
+			</dl>
+			<span class="bdr"></span>
+		</div>
+</div>

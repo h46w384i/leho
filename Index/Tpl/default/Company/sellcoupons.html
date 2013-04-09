@@ -1,0 +1,62 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>出售优惠券</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>出售的优惠券</h3>
+			<p>以下信息将显示您出售的消费券信息。</p>			
+		</div>
+		<div class="mylife-bd">
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" class="jvf_table">
+   <thead>
+     <tr>
+       <th width="300px">{%goods_title}</th>
+       <th width="100px">{&sysconfig.site_couponname}{%voucher_sn}</th>
+       <th width="100px">{%voucher_pass}</th>
+       <th width="100px">{%voucher_date}</th>
+       <th width="100px">{%status_text}</th>
+     </tr>
+   </thead>
+   <tbody>
+    <volist name="couponsdata" id="vo">
+		<tr>
+		  <td class="txc"><span><a class="shpc" href="{:U('Goods/index/id/'.$vo['good']['id'])}" target="_blank">{$vo.good.title}</a></span></td>
+		  <td class="txc"><span>{$vo.sn}</span></td>
+		  <td class="txc"><span>******</span></td>
+		  <td class="txc"><span>{$vo.starttime|toDate=###,'Y-m-d'}<br />～<br />{$vo.endtime|toDate=###,'Y-m-d'}</span></td>
+		  <td class="txc">
+		    <if condition="($vo.status eq 0) AND ($vo.endtime gt $now)">
+		    <span>{%coupon_unused}</span>
+		    </if>
+		    <if condition="$vo.status eq 1">
+		    <span>{%coupon_used}</span>
+		    </if>
+		    <if condition="$vo.status eq 2">
+		    <span>{%coupon_freeze}</span>
+		    </if>
+		    <if condition="($vo.status eq 0) AND ($vo.endtime lt $now)">
+		    <span>{%coupon_expired}</span>
+		    </if>
+		  </td>
+		</tr>
+	</volist>
+   </tbody>
+ </table>
+		</div>
+		 <div class="global-page">{$page}</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<include file="Public:footer" />

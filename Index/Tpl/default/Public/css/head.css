@@ -1,0 +1,175 @@
+a:hover{
+	text-decoration: none;
+}
+/* 头 */
+#header {
+    height: 40px;
+    margin-bottom: 10px;
+}
+#header .global-header {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    height: 30px;
+    left: 0;
+    padding: 5px 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+#header .global-header-inner {
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    width: 980px;
+}
+#header .global-header-inner .left {
+    float: left;
+}
+#header .global-header-inner .logo {
+    float: left;
+    margin-right: 12px;
+}
+#header .global-header-inner .logo a {
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    width: 79px;
+}
+#header .global-header-inner a {
+    color: #666666;
+    font-family: 微软雅黑;
+}
+
+#header .global-header-inner a:hover{
+	color:#3da2fe;
+	
+}
+
+#header .global-header-inner .cate-nav {
+    float: left;
+    font-size: 14px;
+    margin: 1px 0;
+}
+#header .global-header-inner .cate-nav li {
+    display: inline;
+    float: left;
+	padding: 0 15px;
+	line-height: 30px;
+    margin-right: 6px;
+    position: relative;
+}
+
+#header .global-header-inner .right {
+    float: right;
+}
+
+#header .global-header-inner .search {
+    background: url("../images/bg_header.png") no-repeat scroll 0 -81px transparent;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin: 2px 20px 2px 0;
+    padding: 0 0 0 10px;
+    position: relative;
+    width: 180px;
+}
+#header .global-header-inner .search input {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    height: 26px;
+    line-height: 26px;
+    outline: medium none;
+    width: 154px;
+}
+
+#header .global-header-inner .search button {
+    background: url("../images/bg_header.png") no-repeat scroll -166px -81px transparent;
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    height: 26px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    text-indent: -99px;
+    top: 0;
+    width: 24px;
+}
+
+#header .global-header-inner .login-nav {
+    color: #808080;
+    float: left;
+    margin: 1px 0;
+}
+
+#header .global-header-inner li{
+    line-height: 28px;
+    margin-right: 30px;
+}
+#header .global-header-inner .login-nav li {
+    display: inline;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+#header .global-header-inner .login-nav li .gap {
+    margin: 0 6px;
+}
+
+/*
+#header .login-third-login {
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 116px;
+}
+#header .global-header-inner .ico-arrow {
+    background: url("../images/bg_header.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    font-size: 0;
+    height: 6px;
+    margin-left: 5px;
+    vertical-align: middle;
+    width: 10px;
+}
+*/
+#header .global-header-inner .dropdown{
+	background:#fff;
+}
+#header .global-header-inner .dropdown a:hover{
+	background:#fff;
+}
+.dropmenu {
+    background-color: #FFFFFF;
+    border: 1px solid #F1F1F1;
+    display: none;
+    left: 0;
+    min-width: 78px;
+    padding: 10px 14px;
+    position: absolute;
+    top: 28px;
+    z-index: 3;
+}
+.dropmenu a {
+    color: #BCBCBC;
+    display: block;
+    line-height: 20px;
+}
+.hover-shim:hover .dropmenu{
+    display: block;
+}
+
+
+
+
+/*foot*/
+.tel-400 {
+    background: url("http://sns.ipiao.com/public/images/index_v_single_20121123.png") no-repeat scroll 0 -330px transparent;
+    display: inline-block;
+    font-size: 20px;
+    padding-left: 16px;
+}
+

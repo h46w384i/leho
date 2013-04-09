@@ -1,0 +1,60 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>充值信息</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>充值日志</h3>
+			<p>以下信息将显示您充值详情。</p>			
+		</div>
+		<div class="mylife-bd">
+<table cellspacing="0" width="100%" cellpadding="0" border="0" class="jvf_table">
+	<thead>
+		<tr>
+		  <th width="100px">{%recharge_sn}</th>
+		  <th width="300px">{%recharge_time}</th>
+		  <th width="100px">{%recharge_cash}</th>
+		  <th width="100px">{%recharge_paid_up}</th>
+		  <th width="100px">{%recharge_type}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="rechargedata" id="vo">
+        <tr>
+          <td class="txc">
+            <span>{$vo.sn}</span>
+          </td>
+          <td class="txc">
+              <span>{$vo.addtime}</span>
+          </td>
+          <td class="txc">
+              <span>&yen;{$vo.cash}</span>
+          </td>
+          <td class="txc">
+            <span>&yen;{$vo.cope}</span>
+          </td>
+          <td class="txc">
+            <span>{$vo.bank_id}</span>
+          </td>
+        </tr>
+        </volist>
+	</tbody>
+</table>
+<div class="global-page">{$page}</div>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:my_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

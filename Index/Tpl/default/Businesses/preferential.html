@@ -1,0 +1,132 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/preferential.css"/>
+<style type="text/css">
+.crumbs-nav{position: relative;}
+#wrapper{text-align: left;width:960px;margin:10px auto;background:#fff;}
+.coupon .aside-mod-top {margin-top: 18px;}
+.act-share-it a{padding: 1px;}
+
+/* globel-page */
+.global-page { margin:15px 0; text-align:center; }
+.global-page a,.global-page span {*zoom:1;border:1px solid #d9dadb;color:#06c;padding: 0 8px;}
+.global-page a:hover {border:1px solid #eb4b4b;background:#fff5f5;color:#f22424;}
+.global-page span {color:#bfbfbf;}
+.global-page span.global-page-break {border:0;color:#04d;background:none;}
+.global-page span.select {background:#e61717;border:1px solid #d91616;font-weight:bold;color:#fff;}
+.global-page .global-page-next,
+.global-page .global-page-previous{font-family:tahoma;}
+.global-page .global-page-next {*height:22px;_height:auto;_padding-top:0;overflow:hidden;}
+.global-page span.global-page-next {background:none;color:#bfbfbf;}
+.global-page input {width:24px;text-align:center;vertical-align: middle;}
+.global-page button {font-size:12px;vertical-align: middle;}
+</style>
+<script type="text/javascript">
+<!--
+$(function(){
+	$.onload(function(){
+		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+	});
+	
+	$('.item-content').hover(function(){
+		$(this).addClass('hover');
+	},function(){
+		$(this).removeClass('hover');
+	});
+});
+//-->
+</script>
+
+<include file="Businesses:top" />
+<div id="wrapper" class="bb-t1 coupon">
+            
+<div id="main">
+	<div class="inner">
+		<div class="crumbs-nav"> <a href="{:U('Businesses/preferential')}">所有分类</a>&nbsp;&gt;&nbsp; <span class="coupon_no" id="spanCouponNum">共有<em>{$count}</em>条优惠活动</span> </div>
+		<div class="top-line"></div>
+		<div class="nav-wrapper cls">
+			<div class="nav-item choosed cls">
+			</div>
+			<div class="nav-item shop-type cls" style="padding-top: 20px;padding-bottom: 20px;">
+				<h4>类型：</h4>
+				<ul>
+					<li><a href="{:U('Businesses/preferential')}" <empty name="_REQUEST['child']">class="active"</empty>>全部</a></li>
+					<volist name="crr_categorydata" id="vo">
+					<eq name="vo.level" value="0">
+					<li><a href="{:U('Businesses/preferential/cid/'.$vo['id'])}">{$vo['name']}</a><span>({$vo['count_num']})</span></li>
+					<else />
+					<li <eq name="_REQUEST['child']" value="$vo['id']">class="active"</eq>><a href="{:U('Businesses/preferential/cid/'.$vo['pid'])}?child={$vo.id}">{$vo['name']}</a><span>({$vo['count_num']})</span></li>
+					</eq>
+					</volist>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="coupon-act">
+				<div class="act-info">
+					<div class="act-discount" style="float: left;">
+						<span <empty name="_REQUEST['sort']">class="hover"</empty>><em class="act-hot">HOT</em><a href="{:U('Businesses/preferential')}?cid={$_REQUEST['cid']}&child={$_REQUEST['child']}&sort=0">热门优惠</a></span>
+						<span <eq name="_REQUEST['sort']" value="1">class="hover"</eq>><em class="act-new">NEW</em><a href="{:U('Businesses/preferential')}?cid={$_REQUEST['cid']}&child={$_REQUEST['child']}&sort=1">最新优惠</a></span>
+					</div>
+					<div style="float: right;margin-top: 10px;">
+						<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+					        <a class="bds_qzone"></a>
+					        <a class="bds_tsina"></a>
+					        <a class="bds_tqq"></a>
+					        <a class="bds_renren"></a>
+					        <span class="bds_more">更多</span>
+							<a class="shareCount"></a>
+					    </div>
+						<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+						<script type="text/javascript" id="bdshell_js"></script>
+					</div>
+				</div>
+				<div class="act-left"></div>
+				<div class="act-right"></div>
+			</div>
+            			<div class="coupon-list cls">
+				<ul id="ulCouponList">
+					<volist name="preferentialdata" id="vo">
+					<li>
+						<div class="item-wrapper">
+							<div class="item-content">
+								<h4><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">{$vo.name}</a></h4>
+								<p class="discription"><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">{$vo.short_title}</a></p>
+								<div class="pic"><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank"><span class="vam"></span><img src="{$vo.logo.origin}" alt="{$vo.short_title}" width="150" height="150"></a></div>
+								<p class="deadline">
+									<span class="t_title">截止时间：</span><em>{$vo.endtime|toDateYmd}</em><br>
+									还有<em>{:intval(($vo['endtime'] - time()) / 86400)}</em>天
+								</p>
+								<div class="btn-box">
+									<span type="button" class="cou-btn btn-normal btn_print"><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">直接打印</a></span>
+									<span type="button" class="cou-btn btn-normal btn_send_to_cellphone"><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}">免费短信下载</a></span>								</div>
+								<span class="scissors"></span>							</div>
+						</div>
+					</li>
+					</volist>
+				</ul>
+			</div>
+            		</div>
+		<div class="pager">
+             <div class="global-page">
+             {$page}
+             </div>                                        		
+        </div>	
+	</div>
+</div>
+<div id="aside">
+	<div class="aside-mod aside-mod-top latset-coupon">
+		<div class="hd">
+			<h4>最新精品优惠券</h4>
+		</div>
+		<div class="bd">
+			<ul>
+			<volist name="newdata" id="vo">
+                	<li><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}">{$vo.short_title}</a></li>
+            </volist>
+			</ul>
+		</div>
+	</div>
+</div>
+
+        </div>
+<include file="Public:footer" />

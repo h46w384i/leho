@@ -1,0 +1,15 @@
+<volist name="darendata" id="vo">
+<li class="daren">
+	<div class="user-photo">
+		<a href="{:U('User/space/id/'.$vo['id'])}"><img src="{$vo.header.thumbnail}" alt="{$vo.name}" width="30" height="30"></a>
+	</div>
+	<div class="user-content">
+		<strong>
+			<a href="{:U('User/space/id/'.$vo['id'])}" title="{$vo.name}">{$vo.name|msubstr=###,0,5}</a>
+<a class="ico-approve approve-person-s" href="{:U('Index/daren')}" target="_blank" title="达人认证"></a>		</strong>
+		<span title="{$vo['self_introduction']}">{$vo['self_introduction']|msubstr=###,0,5}</span>
+	</div>
+	<a class="btn-follow-22-add add-attention" href="#" onclick="return false" uid={$vo.id}><span>加关注</span></a>
+	<a href="#" onclick="return false" class="close" style="display: none; "></a>
+</li>
+</volist>

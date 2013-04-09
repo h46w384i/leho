@@ -1,0 +1,62 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script>
+$(function(){
+	memberModifyPwd();
+});
+</script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="mylife-top">
+		<h2>帐号设置</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>修改密码</h3>
+			<p>请填写以下信息，修改您的登录密码。</p>	
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form" action="{:U('Member/savePwd')}" method="post" id="setPwdForm">
+				<ul>
+					<li>
+						<label class="k" for="mail">旧密码：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="password" name="oldpwd" maxlength="60" placeholder="请输入您的旧密码">
+							<em></em>
+						</span>
+					</li>
+					<li>
+						<label class="k" for="mail">新密码：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="password" name="newpwd" maxlength="60" placeholder="请输入您的新密码">
+							<em></em>
+						</span>
+					</li>
+					<li>
+						<label class="k" for="mail">重复新密码：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="password" name="newpwd2" maxlength="60" placeholder="请重复您的新密码">
+							<em></em>
+						</span>
+					</li>
+					
+				</ul>
+				<div class="btn">
+					<input type="submit" id="submitPwdForm" value="保存" class="btn-reg">
+				</div>
+			</form>
+			
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:edit_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

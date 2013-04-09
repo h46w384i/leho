@@ -1,0 +1,153 @@
+<include file="Public:top" xmlns="http://www.w3.org/1999/html"/>
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="shxinxi-top">
+		<h2>优惠管理</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>编辑优惠</h3>
+			<p>编辑您的优惠信息。</p>
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form updateform" action="{:U('Company/updatePreferential')}" method="post">
+                <input name="id" value="{$data.id}" type="hidden">
+				<ul>
+					<li>
+						<label class="k" for="title">商品名称：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="text" name="title" id="title" placeholder="请输入您的商品名称" value="{$data.title}">
+							<em></em>
+						</span>
+					</li>
+                    <li>
+                        <label class="k" for="short_title">商品简略名称：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="short_title" id="short_title" placeholder="请输入您的商品名称" value="{$data.short_title}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="pre">消费券有效期：</label>
+						<span class="v">
+                            <input autocomplete="off" class="sns-text editdate" type="text" name="starttime" value="{:toDateYmd($data['starttime'])}" style="width: 115px;">
+                            ～
+   							<input autocomplete="off" class="sns-text editdate" type="text" name="endtime" value="{:toDateYmd($data['endtime'])}" style="width: 115px;">
+							<em></em>
+						</span>
+                        <script type="text/javascript">
+                            $(function() {
+                                $( ".editdate" ).datepicker({changeMonth: true,changeYear: true,shortYearCutoff: 50});
+                            });
+                        </script>
+                    </li>
+                    <li>
+                        <label class="k" for="note">注意事项：</label>
+						<span class="v">
+							<textarea class="sns-text" style="width: 450px;height: 200px;" type="text" name="note" id="note" placeholder="输入注意事项">{$data.note}</textarea>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="sms">短信内容：</label>
+						<span class="v">
+							<textarea class="sns-text" style="width: 450px;height: 200px;" type="text" name="sms" id="sms" placeholder="输入短信内容">{$data.sms}</textarea>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="logo">logo：</label>
+						<span class="v jvf_btn">
+                            <input name="logo" type="hidden">
+							<a href="javascript:;" class="btn-reg btn_a" id="upload_button">上传</a>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="d">&nbsp;</label>
+						<span class="v jvf_btn" id="imgbox">
+                            <notempty name="data.logopath">
+                                <img src="{$data.logopath}" WIDTH="450" />
+                            </notempty>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="d">状态：</label>
+						<span class="v jvf_btn">
+                            <select name="status">
+                                <option value="1" <eq name="data.status" value="1">selected="selected"</eq>>启用</option>
+                                <option value="0" <eq name="data.status" value="0">selected="selected"</eq>>停止</option>
+                            </select>
+						</span>
+                    </li>
+				</ul>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('.updateform').submit(function(){
+		var form = $(this);
+        var title = form.find('input[name="title"]');
+        if(!title.val()){
+            title.tip('商品名称不能为空',3000);
+			title.focus();
+            return false;
+        }
+        var pre = form.find('input[name="short_title"]');
+        if(!pre.val()){
+            pre.tip('请填写缩略标题',3000);
+			pre.focus();
+            return false;
+        }
+
+		$.post(form.attr('action'),form.serialize(),function(data){
+			if(data.status == 1){
+				jalert(data.info,{callback:function(){
+                    goUrl(APP+'/Company/preferential');
+                }});
+			}else{
+				form.find('input[type="submit"]').tip(data.info,3000);
+			}
+		},'json');
+        return false;
+	});
+    new AjaxUpload('#upload_button', {
+        action: APP+'/Xheditor/upLoadImg',
+        name: 'images',
+        onSubmit : function(file , ext){
+            if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+                this.setData({
+                    'ext': ext
+                });
+                this.disable();
+            } else {
+                return false;
+            }
+
+        },
+        onComplete : function(file,response){
+            var data=eval("("+response+")");
+            $('#imgbox').html('<img src="'+data.msg.url+'" width="450">');
+            $('input[name="logo"]').val(data.msg.id);
+            this.enable();
+        }
+    });
+    xheditorBox();
+});
+</script>
+<include file="Public:footer" />

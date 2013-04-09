@@ -1,0 +1,48 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="myxinxi-top">
+		<h2>账户信息</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>账户日志</h3>
+			<p>以下信息将显示您账户变动详情。</p>			
+		</div>
+		<div class="mylife-bd">
+<table cellspacing="0" cellpadding="0" border="0" class="jvf_table">
+	<thead>
+	  <tr>
+	    <th width="150px">{%amount_text}</th>
+	    <th width="100px">{%member_cashlog_type}</th>
+	    <th width="300px">{%member_cashlog_event}</th>
+	    <th width="150px">{%member_cashlog_time}</th>
+	  </tr>
+	</thead>
+    <tbody>
+		<volist name="cash_logsdata" id="vo">
+        <tr>
+          <td class="txc">&yen;{$vo.val|abs}</td>
+          <td class="txc"><if condition="abs($vo['val']) eq $vo['val']">{%member_cashlog_inc}<else />{%member_cashlog_dec}</if></td>
+          <td class="txc">{$vo.content|getCashContent}</td>
+          <td class="txc">{$vo.addtime}</td>
+        </tr>
+        </volist>
+	</tbody>
+</table>
+<div class="global-page">{$page}</div>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Member:my_nav" />
+	</div>
+
+	</div>
+
+<include file="Public:footer" />

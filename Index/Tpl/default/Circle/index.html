@@ -1,0 +1,40 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/discover.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/feed.css"/>
+<script>
+$(function(){
+	circleIndex({:json_encode($_REQUEST)});
+});
+</script>
+<div id="wrapper">		
+	
+<div id="bd"> 
+	<div id="main">
+		<div class="column-wraper cls">
+				<div class="tag-block jvf_pubu">
+					<div class="tag-bd">
+						<ul>
+						<volist name="labels" id="vo">
+							<li><a href="{:U('Circle/index/lid/'.$vo['id'])}" <eq name="_REQUEST.lid" value="$vo['id']">class="current"</eq>>{$vo.name}</a></li>
+						</volist>
+						</ul>
+					</div>
+				</div>
+		</div>
+		<div id="split_page" class="splitpage cls" style="display:none"> 
+		</div>
+	</div> 
+</div>
+<div class="block-bottom block-show">
+	<div class="block-bottom-main cls">
+		<div class="block-btn-show">
+			<a href="javascript:;" onclick="jvfDialog('sharebox', APP+'/Member/sharebox');" class="publish-btn"></a>
+		</div>
+		<div class="block-show-other tag-share-container share-container">
+			<span>独乐乐不如众乐乐，让我们一起分享到：</span><a href="javascript:;" onclick="return false;" class="ico-sina shareto-button-tsina"></a><a href="javascript:;" onclick="return false;" class="ico-qq shareto-button-qzone"></a><a href="javascript:;" onclick="return false;" class="ico-renren shareto-button-renren"></a><a href="javascript:;" onclick="return false;" class="ico-tqq shareto-button-tqq"></a>		</div>
+	</div>
+</div>
+</div>
+
+<include file="Public:footer" />

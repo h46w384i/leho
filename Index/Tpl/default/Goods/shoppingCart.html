@@ -1,0 +1,100 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/pay.css"/>
+<script type="text/javascript">
+$(function(){
+	shoppingCart();
+});
+</script>
+<div id="wrapper">
+            
+	<!--div id="hd"></div-->
+				<div id="bd" class="grid-m0a220 sh-platform">
+		<div id="wrap" class="cls m-context-bg">
+			<div id="main">
+				<div class="emptygoods" id="emptyGoods" <empty name="goodsdata">style="display:block;"<else />style="display:none;"</empty>>
+	                <p><a href="{:U('Mall/index')}">{%shoppingcart_return_index}</a></p>
+	            </div>
+				<div class="inner" id="haveGoods" <empty name="goodsdata">style="display:none;"<else />style="display:block;"</empty>>
+					<div class="context">
+						<!-- 标题 -->
+						<div class="cont-title">
+							<span class="orders">订购服务<i>仅需三步</i></span>
+							<div class="steps">
+								<ol>
+									<li class="selected"><span class="first"><em>1.提交订单</em></span></li>
+									<li><span class=""><em>2.选择支付方式</em></span></li>
+									<li><span class="last"><em>3.支付成功</em></span></li>
+								</ol>
+							</div>
+						</div>
+						<form method="post" id="form-order">
+						<div class="order-list" id="shoppingCartList">
+							<table summary="" cellpadding="0" cellspacing="0">
+								<colgroup>
+									<col class="table-list-11">
+									<col class="table-list-2">
+									<col class="table-list-3">
+									<col class="table-list-4">
+									<col class="table-list-7">
+									<col class="table-list-8">
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="table-list-11">服务内容</th>
+										<th>数量</th>
+										<th>&nbsp;</th>
+										<th>乐活价</th>
+																				<th>&nbsp;</th>
+										<th>小计</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								<volist name="goodsdata" id="vo">
+									<tr>
+										<td class="table-list-11"><p class=""><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p><p class="from"><em>来自：{$vo.promulgator.name}</em></p></td>
+										<td class="price">
+										<span class="num-sel">
+											<a href="javascript:;" class="minus low" style="visibility: visible; ">——</a>
+											<input maxlength="2" autocomplete="off" type="text" name="reserve_num" value="{$nums[$vo['id']]}" id="goods_{$vo.id}" class="num sc_pt_count">
+											<a href="javascript:;" class="plus high" style="visibility: visible; ">＋</a>
+										</span>
+										</td>
+										<td class="symbol">×</td>
+										<td class="price">&yen;<span id="unitprice_{$vo.id}">{$vo.price}</span></td>
+										<td class="symbol">=</td>
+										<td class="price single" >&yen;<span id="subtotal_{$vo.id}">{$vo['price'] * $nums[$vo['id']]}</span></td>
+										<td><a id="deleteGoods_{$vo.id}" href="javascript:;" class="a_blue">{%delete}</a></td>
+									</tr>
+								</volist>																																			<tr>
+										<td colspan="6" class="total">应付金额：<i>&yen;<span id="totalPriceBot"></span></i></td>
+									</tr>
+																	</tbody>
+							</table>
+						</div>
+						<div class="btns">
+							<a href="{:U('Mall/index')}" class="btn btn-t1" id="btn-confirm"><span>返回继续购物</span></a>
+							<a href="{:U('Member/payment')}" class="btn btn-t1" id="btn-confirm"><span>确认无误，购买</span></a>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id="aside" class="no-bdr">
+				<div class="mod serv-tel">
+					<div class="hd">客服电话：</div>
+					<div class="bd">
+						<p><i>{&sysconfig.site_services_tel}</i></p>
+						<p>工作时间：{&sysconfig.site_work_times}</p>
+					</div>
+					<div class="ft" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="ft"></div>	
+        </div>
+
+<include file="Public:footer" />

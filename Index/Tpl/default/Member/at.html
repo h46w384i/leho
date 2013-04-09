@@ -1,0 +1,126 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/myhome.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/message.css"/>
+<script type="text/javascript">
+$(function(){
+	$.getScript(PUBLIC+'/dwz/js/jquery.masonry.min.js',function(){
+		var href = "{:U('Circle/ajaxCircle/at/1')}";
+		reset(href);
+	});
+	
+	var scrollboot = true;
+	
+	$(window).scroll(function(){
+			var $container = $('#main .column-wraper');
+			var $page = $('#split_page');
+			var bottom = $container.offset().top + $container.outerHeight() - $(this).height();
+			var scrollTop=$(document).scrollTop();//滚动条距离
+			if(scrollTop>=bottom && scrollboot){
+				scrollboot = false;
+				var href = $page.find('.current').next('a').attr('href');
+				if(href){
+					loading.loadingStart('.jvf_member_box');
+					$.getJSON(href,function(data){
+						loading.loadingEnd();
+						$page.html(data.info.page);
+						$newElems = $(data.info.html);
+						$newElems.hide();
+						$newElems.imagesLoaded(function(){
+							$container.append($newElems).masonry( 'appended', $newElems, false );
+							scrollboot = true;
+							$newElems.show();
+						});
+					});
+				}else{
+					loading.loadingNot('.jvf_member_box');
+				}	
+			}
+	});
+	
+	function reset(href){
+		var $container = $('#main .column-wraper');
+		var $page = $('#split_page');
+		loading.loadingStart('#main');
+		$.post(href,function(data){
+			loading.loadingEnd();
+			$page.html(data.info.page);
+			var html = $(data.info.html);
+			html.hide();
+			$container.append(html);
+			if($container.is('.masonry')){
+				$container.imagesLoaded( function(){
+					$container.masonry('reload');
+					html.show();
+				});
+			}else{
+				//$container.imagesLoaded( function(){
+			      $container.masonry({
+			        itemSelector : '.jvf_pubu'
+			      });
+			      html.show();
+			    //});
+			}
+			scrollboot = true;
+		},'json');
+	}
+	ajaxCircle();
+});
+</script>
+<div id="wrapper">
+<div id="bd" class="bb-t4 message">
+	<div id="main">
+           <div class="inner">
+               <h1 class="title"><img src="../Public/images/message-title.jpg" alt="消息"></h1>
+               <div class="mes-nav">
+                   <ul class="cls">
+                       <li><a href="{:U('Member/comment')}">评论</a></li>
+                       <li class="selected"><a href="{:U('Member/at')}" onclick="return false;">提到我的</a></li>
+                       <li><a href="{:U('Member/liked')}">喜欢</a></li>
+                   </ul>
+                   <div class="message-date cls">
+                   		<a href="" class="selected" onclick="return false;">@我的分享</a><span>({$count})</span><a href="{:U('Member/comment_at')}">@我的评论</a><span>({$comment_count})</span>
+				   </div>
+               </div>
+               <div class="column-wraper">
+               		
+               </div>
+               <div id="split_page" style="display: none;">
+               </div>
+			</div>
+		</div>
+		<div id="aside">
+			<div class="col-l">
+    <div class="moudle-block">
+         <div class="hd"></div>
+         <div class="bd">
+         	           	<div class="title"><h2>@使用小帮助</h2></div>
+             <div class="main cls">
+                <div class="moudle-content">
+                    <p>问：什么是@提醒？</p>
+					<p>答：在分享中@他人时，比如@小助手，小助手就会收到提醒。</p>
+                </div>
+             </div>
+		            </div>
+         <div class="ft"></div>
+    </div>
+    <div class="moudle-block">
+         <div class="hd"></div>
+         <div class="bd">
+             <div class="title"><h2>意见反馈</h2></div>
+             <div class="main cls">
+                <div class="moudle-content">
+                    <p>欢迎使用并提出宝贵建议</p>
+                    <p>你可以通过以下方式提交意见反馈：</p>
+                    <p>发邮件至{&sysconfig.site_services_email}</p>
+                </div>
+             </div>
+         </div>
+         <div class="ft"></div>
+    </div>
+</div>		</div>
+</div>
+
+	</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,81 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/myhome.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/district.css"/>
+<script>
+$(function(){
+	memberPeriphery();
+});
+</script>
+<div id="wrapper">
+<include file="Member:topPublic" />
+<div class="myhome-nav">
+	<a href="{:U('Member/interest')}" class="tab" data-feed_type="0">
+		<i class="favorite"></i><span>兴趣爱好</span>
+	</a>
+	<a href="{:U('Member/index')}" class="tab" data-feed_type="1">
+		<i class="dynamic"></i><span>好友动态</span>
+	</a>
+	<a href="{:U('Circle/ajaxCircle/periphery/'.$memberdata['id'])}" onclick="return false" class="tab selected" data-feed_type="2">
+		<i class="address"></i><span>周边资讯</span>
+	</a>
+</div>
+<div id="bd" class="bb-t1">
+	<div id="main">
+		<div class="column-wraper cls">
+		<empty name="peripherydata">
+			<div class="block-empty interest" data-feed_type="0" style="">
+				<div class="explain-empty">
+					<p>啊哦，这里还是空的…</p>
+					<p>添加你爱逛的商圈，<span class="font-color1">周边打折优惠</span>包打听！</p>
+				</div>
+				<a href="#" onclick="return false" class="empty-btn-add add-group"><span>添加周边</span> </a>
+			</div>
+		<else />
+			<div class="moudle-block moudle tag-list interest jvf_pubu" data-feed_type="0" id="interest" style="">
+				<div class="hd"></div>
+				<div class="bd">
+					<div class="title"><span>我的周边</span></div>
+					<div class="main cls">
+						<div class="tag-block">
+							<div class="tag-bd" style="max-height: 228px; overflow: hidden;">
+								<ul class="interest-list cls">
+									<php>$count = count($peripherydata);</php>
+									<gt name="count" value="1">
+									<li class="interest-tag selected" lid="0" uid="{$memberdata.id}">
+									<a href="#" onclick="return false;">全部</a>
+									</li>
+									</gt>
+									<volist name="peripherydata" id="vo">
+									<li class="interest-tag <lt name="count" value="2"><eq name="i" value="1">selected</eq></lt>" lid="{$vo.id}" title="{$vo.name}">
+									<a href="#" onclick="return false;">{$vo.name}</a>
+									</li>
+									</volist>
+								</ul>
+								<div class="block-loading loading" style="display: none; "></div>
+							</div>
+							<a href="#" onclick="return false" class="display-tag less" style="display: none; " title="显示全部"><span></span></a>
+						</div>
+						<div class="other-block">
+							<a href="#" onclick="return false" class="add-group">+ 添加周边</a>
+							<a href="#" class="manage-group" target="_blank" style="display: none;">管理兴趣</a>
+						</div>
+					</div>
+				</div>
+				<div class="ft"></div>
+			</div>
+		</empty>
+		</div>
+		<div id="split_page" class="splitpage cls" style="display:none;"></div>
+	</div>
+</div>
+
+	</div>
+<div id="medal_tips" class="panel panel-t4 panel-t4-tl medal-explain" style="position: absolute; width: 170px; zoom: 1; z-index: 147; display: none; ">
+	<div class="panel-content">
+		<div class="bd"></div>
+	</div>
+	<span class="sd"></span>
+	<span class="cue"></span>
+</div>
+<include file="Public:footer" />

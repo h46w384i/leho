@@ -1,0 +1,350 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/home.css"/>
+<div id="wrapper">
+<include file="Businesses:pub" />
+<div id="bd" class="gl-w">
+		<div id="wrap" class="doc-ex-1 cls">
+			<div id="main">
+				<div class="inner" id="inner">
+	<div id="wideAdvert_module">
+				<div class="sh-mod slider switch-fade cls">
+			<div id="picslide">
+				<ul class="slide-img switch-content">
+                    <volist name="businesses_slidedata" id="vo">
+					<li <eq name="i" value="1">style="opacity: 1;"<else />style="opacity: 0;"</eq>>
+                        <a href="{$vo.link}" target="_blank"><img src="__ROOT__{$vo.img}" width="100%" height="270"></a>
+                    </li>
+                    </volist>
+				</ul>
+				<ul class="slide-num switch-nav">
+                    <volist name="businesses_slidedata" id="vo">
+                    <eq name="i" value="1">
+					<li class="selected first">{$i}</li>
+                    <else />
+                    <li class="unselected">{$i}</li>
+                    </eq>
+                    </volist>
+				</ul>
+			</div>
+            <script type="text/javascript">
+                $(function(){
+                    function start(){
+                        window.businesses_slide = setInterval(function(){
+                            var crr = $('.slide-num li.selected').next();
+                            if(!crr.html()){
+                                crr = $('.slide-num li:first');
+                            }
+                            xunhuan(crr);
+                        },3000);
+                    }
+                    function xunhuan(t){
+                        var li = $('.slide-num li');
+                        var index = li.index(t);
+                        li.removeClass('selected').addClass('unselected');
+                        t.removeClass('unselected').addClass('selected');
+                        $('.slide-img li').css('opacity','0').eq(index).css('opacity','1');
+                    }
+                    $('.slide-num li').hover(function(){
+                        xunhuan($(this));
+                        clearInterval(window.businesses_slide);
+                    },function(){
+                        start();
+                    });
+                    start();
+
+					$('.introduce .switch-nav li').click(function(){
+						var lis = $('.introduce .switch-nav li');
+						lis.removeClass('selected').addClass('unselected');
+						var index = lis.index($(this));
+						$(this).removeClass('unselected').addClass('selected');
+						var divs = $('.introduce .switch-content .pre');
+						divs.removeClass('selected').addClass('unselected');
+						divs.eq(index).removeClass('unselected').addClass('selected');
+					});
+                });
+            </script>
+		</div>
+	</div>
+													
+	<div id="multi_info_module">
+		<a name="multi_info"></a>
+		<!-- 公司介绍 视频相册 商户动态 -->
+		<div class="sh-mod introduce">
+			<div class="hd tab-hd">
+				<ul class="switch-nav">
+                    <volist name="businesses_articledata" id="vo">
+                        <eq name="i" value="1">
+                        <li class="selected">
+                        <else />
+                        <li class="unselected">
+                        </eq>
+                            <a href="javascript:;">{$vo.title}</a>
+                        </li>
+                    </volist>
+                </ul>
+			</div>
+			<div class="bd tab-bd switch-content" id="multi-info-content">
+                <volist name="businesses_articledata" id="vo">
+                    <eq name="i" value="1">
+				 	<div class="pre hide selected" style="height: 385px; ">
+                    <else />
+                    <div class="pre hide unselected" style="height: 385px; ">
+                    </eq>
+                         {$vo.content}
+					</div>
+                </volist>
+			    <div class="sh-more sh-more-toggle" style="display:none;">
+					<a href="#" class="" id="muti_tab_fold">更多精彩<em class="unfold"></em></a>
+				</div>
+			</div>
+					</div>
+	</div>
+
+                <div id="recService_module">
+                    <a name="recService"></a>
+                    <!-- 套系服务 -->
+                    <div class="sh-mod service">
+                        <div class="hd">
+                            <span class="n"><h2>推荐服务</h2></span>
+                        </div>
+                        <div class="bd">
+                            <ul class="mod-it-1 cls">
+                                <volist name="goodsdata" id="vo">
+                                <li>
+                                    <div class="img pic-center-210-150">
+                                        <a class="pc-inner" href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">
+                                            <img height="160" src="{$vo.accessory.thumbnail}" width="220" alt="{$vo.title}">
+                                        </a>
+                                    </div>
+                                    <div class="txt">
+                                        <p class="attr"><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p>
+                                        <p class="price"><span class="discount">&yen;<i>{$vo.price}</i></span><span class="original">&yen;<i>{$vo.original}</i></span></p>
+                                    </div>
+                                </li>
+                                </volist>
+                            </ul>
+                            <div class="sh-more"><a href="{:U('Businesses/service/id/'.$_REQUEST['id'])}" target="_blank">查看全部服务»</a></div>
+                        </div>
+                        <div class="ft" style="display:none;"></div>
+                    </div>
+                </div>
+
+                <div id="discount_module">
+                    <a name="discount"></a>
+                    <!-- 优惠 -->
+                    <div class="sh-mod discount">
+                        <div class="hd">
+                            <span class="n"><h2>优惠</h2></span>
+                        </div>
+                        <div class="bd">
+                            <ul class="mod-t-1 cls">
+                                <volist name="preferentialdata" id="vo">
+                                <li class="dst-2">
+                                    <dl class="">
+                                        <dt><a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></dt>
+                                        <dd>
+										<span>截止时间：{$vo.endtime|toDateYmd}  还有：{:intval(($vo['endtime'] - time()) / 86400)}天</span>
+                                            <a href="{:U('Businesses/preferentialDetail/id/'.$vo['id'])}" target="_blank">立即领取»</a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                </volist>
+                            </ul>
+                            <div class="sh-more">
+                                <a href="{:U('Businesses/doing/id/'.$_REQUEST['id'])}" target="_blank">更多精彩»	</a>
+                            </div>
+                        </div>
+                        <div class="ft" style="display:none;"></div>
+                    </div>
+                </div>
+
+                <div id="pic_module">
+                    <!-- 推荐主题 -->
+                    <div class="sh-mod album">
+                        <div class="hd">
+                            <span class="n"><h2>相册</h2></span>
+                        </div>
+                        <div class="bd">
+                            <ul class="mod-it-2 cls">
+                                <volist name="picturedata" id="vo">
+                                <li>
+                                    <div class="img">
+                                        <a class="pc-inner" href="{:U('Businesses/pic/id/'.$vo['id'])}" target="_blank">
+                                            <img src="{$vo.accessory.thumbnail}" alt="{$vo.title}" width="150">
+
+                                        </a>
+                                    </div>
+                                    <div class="txt">
+                                        <p><a target="_blank" class="" data_number="18" href="{:U('Businesses/pic/id/'.$vo['id'])}">{$vo.title}</a></p>
+                                        <p>({$vo.num}张)</p>
+                                    </div>
+                                    <eq name="vo.isreal" value="1">
+                                    <span class="i-certificate">实景认证</span>
+                                    </eq>
+                                    <span class="x1"></span>
+                                    <span class="x2"></span>
+                                </li>
+                                </volist>
+                            </ul>
+                            <div class="sh-more"><a href="{:U('Businesses/poto/id/'.$_REQUEST['id'])}" target="_blank">更多精彩»</a></div>
+                        </div>
+                        <div class="ft" style="display:none;"></div>
+                    </div>
+                </div>
+
+                <div id="sns_module">
+                <a name="sns"></a>
+                <div class="sh-mod expshare">
+                <div class="hd tab-hd">
+                    <ul class="switch-nav">
+                        <li class="selected"><a href="javascript:;">消费分享</a></li>
+                    </ul>
+                    <notempty name="memberdata" value="">
+                        <a href="javascript:;" class="more-link" onclick="jvfDialog('sharebox', APP+'/Member/sharebox');">我也要说»</a>
+                    </notempty>
+                </div>
+                <div class="bd switch-content">
+
+                <div class="selected">
+                <div class="mod-loading" style="display: none; "></div>
+                <div id="feed_place_list">
+                <!-- { start 消费分享 -->
+                <ul class="feed-share sh">
+                <volist name="fenxiangdata" id="vo">
+                <li class="feed-c">
+                    <div class="avatar"><a href=""><img width="50" height="50" src="{$vo.header}" alt=""></a></div>
+                    <div class="fname">
+                        <p><strong><a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank">{$vo.name}</a></strong></p>
+                        <p><a href="{:U('User/space/id/'.$vo['uid'])}" target="_blank">{$vo.addtime|dgmdate}</a></p>
+                    </div>
+                    <div class="post-detail _cmtTarget">
+                        <div class="txt">
+                            {$vo.content}
+                        </div>
+
+                        <div class="img">
+                            <ul class="cls">
+                                <volist name="vo.accessory" id="v">
+                                <li><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><img src="{$v.thumbnail}" width="120" height="120" alt=""></a></li>
+                                </volist>
+                            </ul>
+                        </div>
+
+                        <div class="tools cls" postid="72e01b38b06a89ebc5db017a">
+                            <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="digg like-btn"><em>{$vo.likes}</em></a></span>
+                            <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="comment-view-btn _cmtBtn" data-postid="72e01b38b06a89ebc5db017a" data--ban="2000">评论</a><b class="c-count">({$vo.comment})</b></span>
+                            <span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="trans-btn">转发</a><b>({$vo.forwarding})</b></span>
+                        </div>
+                    </div>
+                </li>
+                </volist>
+                </ul>
+                <!-- end 消费分享 }  -->
+                </div>
+
+                </div>
+                </div>
+                </div>
+                    <div style="height:1px;"></div>
+				</div>
+			</div>
+        </div>
+			<div id="aside">
+				<!-- 商家特色 -->
+				<div class="sh-mod shop-serv">
+																																																																																																																																																																																																																																																																																																																																																																												<div class="hd">
+							<span class="n">商家特色</span>
+						</div>
+						<php>
+							$characteristic = explode(',',str_replace('，',',',$businessesdata['characteristic']));
+						</php>
+						<div class="bd">
+							<ul class="cls">
+							    <volist name="characteristic" id="item">
+							    <li><span>{$item}</span></li>
+								</volist>
+							</ul>
+							<span class="x1"></span>
+							<div class="btn">
+								<a href="javascript:;" class="btns-ex btn-ex-t1 follow jvf_callme" uid="{$businessesdata.uid}" ><span>在线咨询</span></a>
+							</div>
+						</div>
+									</div>
+										
+	
+	<div id="map_module">
+		<!-- 地图 -->
+        <div class="sh-mod shop-map">
+            <div class="bd">
+                <div class="img">
+                    <div id="map" style="height: 177px; width: 210px;">
+
+                    </div>
+                    <div>
+                        <a class="businessesMap" href="javascript:;">查看大图</a>
+                    </div>
+                    <script type="text/javascript">
+                        $(function(){
+                            load_map_wrapper();
+                        });
+                        function load_map_wrapper(){
+                        <if condition="($businessesdata.latitude neq '') AND ($businessesdata.longitude neq '')">
+                                var map = new jvfMap("map","{$businessesdata.latitude}","{$businessesdata.longitude}",{$businessesdata.zoom},false);
+                        map.addTags("{$businessesdata.latitude}","{$businessesdata.longitude}","{$businessesdata.address}",{$businessesdata.zoom},"");
+                        
+                        </if>
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+	</div>
+
+									
+
+
+	<!-- 社区feeds -->
+<div class="sh-mod shop-feeds" id="sns_mini_module">
+	<div class="bd">
+		<div class="info cls">
+			<div class="avatar">
+				<a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank"><img width="50" height="50" src="{$mdata.header.thumbnail}" width="50" height="50" alt="{$mdata.name}"></a>
+			</div>
+			<div class="fn">
+				<p><a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">{$mdata.name}</a><a href="javascript:;" class="i-v" title="商家认证"></a></p>
+				<p><a href="{:U('Member/attention/id/'.$mdata['id'])}" class="btn-ex-follow guanzhu"><span>加关注</span></a><em>{$mdata['wasAttentionNum']}观众</em></p>
+							</div>
+		</div>
+				<div class="feeds">
+				<ul>
+				<volist name="talk_aboutdata" id="vo">
+					<li class="feeds-li _cmtTarget">
+							<p class="p">
+								{$vo.content}													
+							</p>
+							<notempty name="vo.accessory">
+							<p class="p">
+								<a href="{:U('Talk_about/detail/id/'.$vo['id'])}" target="_blank"><img src="{$vo.accessory.0.thumbnail}" alt="" width="58"></a>
+							</p>
+							</notempty>
+							<div class="tools cls">
+								<p class="f-l"><em>{$vo.addtime|date='m-d H:i',###}</em></p>
+								<p class="f-r">
+									<span><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="digg like-btn" data--ban="0" style="outline:none"><em>{$vo.likes}</em></a></span>
+									<span class="comment-number"><a href="{:U('Talk_about/detail/id/'.$vo['id'])}" class="comment-view-btn _cmtBtn">评论</a><b class="c-count">({$vo.comment})</b></span>
+								</p>
+							</div>
+						</li>
+				</volist>
+				</ul>
+				<div class="sh-more">
+					<a href="{:U('User/space/id/'.$mdata['id'])}" target="_blank">更多精彩»</a>
+				</div>
+			</div>
+			</div>
+</div>
+							</div>
+		</div>
+	</div>
+<include file="Public:footer" />

@@ -1,0 +1,44 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script>
+$(function(){
+	memberVerification();
+})
+</script>
+<div id="wrapper">
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+				
+	<div class="mylife-top">
+		<h2>帐号设置</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>帐号绑定</h3>
+			<p>你可以使用绑定帐号访问{&sysconfig.site_name}<span>绑定账号方便登陆。</span></p>			
+		</div>
+		<div class="mylife-bd">
+			<div class="middle_edit">
+                     <ul class="edit_verification_list">
+                     <notempty name="login_portdata">
+ 					<volist name='login_portdata' id='vo'>
+                     <li class="edit_verification_list_item clearfix">
+                         <h3><span class="icon <eq name="vo.verified" value="1">yes<else />no</eq>"></span>{%member_verification_vo_before}{$vo.name}{%member_verification_vo_after}</h3>
+                         <p class="description">{$vo.description}</p>
+                         <a href="{:U('Login_port/index/id/'.$vo['id'])}"><img class="jvf_fr" alt="{$vo.name}" src="__ROOT__{$vo.logo}"></a>
+                     </li>
+                     </volist>
+                     </notempty>
+                     </ul>
+                   </div>
+		</div>
+	</div>	
+
+			</div>
+		</div>
+		<include file="Member:edit_nav" />
+	</div>
+	</div>
+<include file="Public:footer" />

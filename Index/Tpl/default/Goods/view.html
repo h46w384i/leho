@@ -1,0 +1,242 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/detail.css"/>
+<script type="text/javascript" src="../Public/js/jquery.countdown.min.js"></script>
+<script>
+$.onload(function(){
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+	$.getScript('../Public/js/baidumap_one.js');
+});
+
+function load_map_wrapper(){
+	<if condition="($goodsdata.latitude neq '') AND ($goodsdata.longitude neq '')">
+	var map = new jvfMap("map","{$goodsdata.latitude}","{$goodsdata.longitude}",{$goodsdata.zoom},false);
+	map.addTags("{$goodsdata.latitude}","{$goodsdata.longitude}","{$goodsdata.address}",{$goodsdata.zoom},"{$goodsdata.short_title}<br />{%address_text}：{$goodsdata.address}<br />{%phone_text}：{$goodsdata.tel}");
+	<else />
+	initialize();
+	</if>
+}
+$(function(){
+	jQuery("#ddTimeout").countdown({
+		until: {$goodsdata['finishtime'] - time()}, 
+		compact: true,
+		layout: '<span>{d10}{d1}天</span><span>{h10}{h1}小时</span><span>{m10}{m1}分</span><span>{s10}{s1}秒</span>'
+	});
+	goodsIndex();
+	load_map_wrapper();
+});
+</script>
+<div id="bd" >
+            
+	<div id="sec-header">
+		
+<div class="sec-header-inner">
+	<h4><a class="logo" href="{:U('Mall/index')}" title="乐活商城">乐活商城</a><div class="city"><a href="{:U('Index/city')}">{$switch_region.crr.name}</a></div></h4>
+	<ul id="sec-nav" class="cate-nav">
+        <li class="navactiv"><a href="{:U('Mall/index')}">首页</a></li>
+        <volist name="categorydata" id="vo">
+            <li>
+                <a href="{:U('Mall/classify/cid/'.$vo['id'])}">{$vo.name}</a>
+            </li>
+        </volist>
+	</ul>
+</div>
+</div>
+<div class="bd-wrap">
+        <div id="main" class="detail">
+            <div class="inner">
+            
+	            	<ul class="path">
+				<li class="first"><a href="{:U('Mall/index')}">商城首页</a></li>
+				<li><a href="{:U('Mall/classify/cid/'.$cidarr[1])}">{$cidarr[1]|getParent='Goods_category',###}</a></li>
+				<li><a href="{:U('Mall/classify/cid/'.$cidarr[1])}?child={$cidarr[2]}">{$cidarr[2]|getParent='Goods_category',###}</a></li>
+				<li>{$goodsdata.short_title}</li>
+	</ul>
+	<div class="product-info cls">
+		<div class="intro">
+			<h1>{$goodsdata.short_title}</h1>
+			<p>{$goodsdata.title}</p>
+		</div>
+		<div class="illustration"><div class="pic-center"><img src="{$goodsdata.accessory.0.path}" title="{$goodsdata.short_title}" width="410" height="300"></div></div>
+		<div class="purchase-module purchase-module-type1">
+			<div class="price">
+				<p>&yen<span>{$goodsdata.price}</span></p>
+				<div class="purchase-btn"><a class="tobuy" href="javascript:;">抢购</a></div>
+			</div>
+						<div class="result cls">
+				<dl>
+					<dt>原价</dt>
+					<dd>&yen{$goodsdata.original}</dd>
+				</dl>
+				<dl>
+					<dt>折扣</dt>
+					<dd>{:toPrice($goodsdata['price']/$goodsdata['original']*10)}折</dd>
+				</dl>
+				<dl>
+					<dt>节省</dt>
+					<dd>&yen{$goodsdata['original'] - $goodsdata['price']}</dd>
+				</dl>
+			</div>
+			<div class="statistic"><span class="ico ico-people"></span><strong>{$goodsdata.crrnum}</strong>人已购买</div>
+			<div class="timeleft">
+				<span class="ico ico-time"></span>
+				<dl>
+					<dt>剩余时间</dt>
+					<dd id="ddTimeout"></dd>
+				</dl>
+			</div>
+			<div class="promise cls">
+				<dl>
+					<dd class="ico ico-rsms"></dd>
+					<dt>如实描述</dt>
+                    <dd><a title="服务信息真实消费才靠谱" href="{:U('Article/detail/id/55')}"></a></dd>
+				</dl>
+                				<dl>
+					<dd class="ico ico-sst"></dd>
+					<dt>随时退款</dt>
+                    <dd><a title="未消费想退就退" href="{:U('Article/detail/id/56')}"></a></dd>
+				</dl>
+                				<dl>
+					<dd class="ico ico-xxpf"></dd>
+					<dt>先行赔付</dt>
+                    <dd><a title="消费纠纷商城为您做主" href="{:U('Article/detail/id/57')}"></a></dd>
+				</dl>
+			</div>
+		</div>
+		<div class="share-container bdshare_t bds_tools get-codes-bdshare" id="bdshare" style="z-index: 1; ">
+			<h4>分享到：</h4>
+            <a class="bds_qzone" title="分享到QQ空间">QQ空间</a>
+            <a class="bds_tsina" title="分享到新浪微博">新浪微博</a>
+            <a class="bds_tqq" title="分享到腾讯微博">腾讯微博</a>
+            <a class="bds_renren" title="分享到人人网">人人网</a>
+            <span class="bds_more">更多</span>
+		</div>
+		<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=668549" ></script>
+		<script type="text/javascript" id="bdshell_js"></script>
+	</div>
+	<div class="article">
+        {$goodsdata.detail}
+	</div>
+	<div class="purchase-module purchase-module-type2">
+		<div class="price">
+				<p>&yen<span>{$goodsdata.price}</span></p>
+				<div class="purchase-btn"><a class="tobuy" href="{:U('Goods/buy/id/'.$goodsdata['id'])}">抢购</a></div>
+			</div>
+						<div class="result cls">
+				<dl>
+					<dt>原价</dt>
+					<dd>&yen{$goodsdata.original}</dd>
+				</dl>
+				<dl>
+					<dt>折扣</dt>
+					<dd>{:toPrice($goodsdata['price']/$goodsdata['original']*10)}折</dd>
+				</dl>
+				<dl>
+					<dt>节省</dt>
+					<dd>&yen{$goodsdata['original'] - $goodsdata['price']}</dd>
+				</dl>
+			</div>
+	</div>
+
+            </div>
+        </div>
+        
+        
+        
+        <div id="aside">
+            
+	<div class="shop-info mod">
+		<div class="bd">
+        	<h2><a href="{:U('Businesses/detail/id/'.$goodsdata['promulgator']['id'])}" target="_blank">{$goodsdata['promulgator']['name']}</a></h2>
+			<ul>
+	          <li>
+				  <em>商家认证：</em>
+				  <eq name="goodsdata.promulgator.qualifications" value="1"><a target="_blank" href="{:U('Article/detail/id/58')}" class="ico zizi" title="资质认证"></a></eq>
+	              <eq name="goodsdata.promulgator.security" value="1"><a target="_blank" href="{:U('Article/detail/id/59')}" class="ico baozhengjin" title="保证金计划"></a></eq>
+	          </li>
+              <li><em>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</em>{$goodsdata.promulgator.type|default="暂无信息"}</li>
+              
+              <li><em>商家特色：</em>{$goodsdata.promulgator.characteristic|default="暂无信息"}</li>
+
+				<li><em>营业时间：</em>{$goodsdata.promulgator.opening|default="暂无信息"}</li>
+                                                                
+				<li><em>预约电话：</em>{$goodsdata.promulgator.tel|default="暂无信息"}</li>
+				<li><em>商家地址：</em>{$goodsdata.promulgator.address|default="暂无信息"}<a class="addr_map_button tomap" href="javascript:;" id="businessesMap" rel="{$goodsdata.promulgator.id}">[地图]</a></li>
+			</ul>
+		</div>
+	</div>
+    
+    <!-- 店铺介绍 end -->
+
+    <!-- 地图 sta -->
+	<div class="mod shop-map">
+		<div class="hd"><h4>地图</h4></div>
+		<div id="map_module" class="bd">
+                   <div class="data" style="">
+           <div id="map" class="map"></div>
+           <div class="options cls text"><span class="opt-2"><a class="addr_map_button" href="javascript:;" id="bigMap" rel="{$goodsdata.id}">查看大图</a></span></div>
+       </div>
+            		</div>
+	</div>
+    <div id="hugeViewMapPanel" style="width: 813px;display:none;" class="panel panel-t1">
+        <div class="panel-content">
+            <div class="hd">
+                <h3>查看地图</h3>
+            </div>
+            <div class="bd">
+                <!-- content -->
+                <div class="panel-map">
+                    <div class="map" style="width:782px;height:541px;"></div>
+                </div>
+                <div class="panel-map-info">
+                    <h4><a href="javascript:;" rel="nofollow" class="map-shop-name"></a></h4>
+                    <ul class="map-shop-container cls">
+                        <li><span class="map-shop-address-icon map-shop-common">地址：</span><span class="map-shop-address"></span></li>
+                        <li><span class="map-shop-phone-icon map-shop-common">电话：</span><span class="map-shop-phone"></span></li>
+                    </ul>
+                    <div class="tips">
+                        提醒: 地图标注位置仅供参考，具体情况以实际道路标识信息为准
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span class="co1"><span></span></span>
+        <span class="co2"><span></span></span>
+        <span class="cue"></span>
+        <span class="sd"></span>
+        <span class="close"></span>
+        <span class="resize"></span>
+    </div>
+
+    				
+
+
+    
+    <!-- 地图 end -->
+
+    	<div class="recommend-list mod">
+		<div class="hd"><h4>相关服务推荐</h4></div>
+		<div class="bd showindow">
+		<volist name="similar" id="vo">
+						<div class="cell">
+				<div class="pic"><a href="{:U('Goods/index/id/'.$vo['id'])}">
+					<img height="138" src="{$vo.accessory.thumbnail}" title="{$vo.short_title}"></a>
+				</div>
+				<div class="intro"><a href="{:U('Goods/index/id/'.$vo['id'])}">{$vo.title}</a></div>
+				<div class="info2">
+					<div class="record"><span>{$vo.crrnum}</span>人已经购买</div>
+					<a class="go" href="{:U('Goods/index/id/'.$vo['id'])}">去看看</a>
+				</div>
+			</div>
+		</volist>
+					</div>
+	</div>
+        </div>
+        
+        
+</div>
+        </div>
+
+<include file="Public:footer" />

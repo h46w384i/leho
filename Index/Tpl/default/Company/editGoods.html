@@ -1,0 +1,307 @@
+<include file="Public:top" xmlns="http://www.w3.org/1999/html"/>
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script src="../Public/js/baidumap_location.js" type="text/javascript"></script>
+<script src="__PUBLIC__/dwz/js/jquery.dragsort-0.4.3.min.js" type="text/javascript"></script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="shxinxi-top">
+		<h2>商户管理</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>编辑商品</h3>
+			<p>编辑您的商品信息。</p>
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form updateform" action="{:U('Company/updateGoods')}" method="post">
+                <input name="id" value="{$data.id}" type="hidden">
+				<ul>
+					<li>
+						<label class="k" for="title">商品名称：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="text" name="title" id="title" placeholder="请输入您的商品名称" value="{$data.title}">
+							<em></em>
+						</span>
+					</li>
+                    <li>
+                        <label class="k" for="short_title">商品简略名称：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="short_title" id="short_title" placeholder="请输入您的商品名称" value="{$data.short_title}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="cid">商品分类：</label>
+						<span class="v">
+							<select name="cid">
+                                <volist name="goods_categorydata" id="vo">
+                                        <php>$n = (substr_count($vo['path'],',') - 1) * 24 + 3</php>
+                                        <option value="{$vo.id}" <eq name="vo.id" value="$data['cid']">selected="selected"</eq><neq name="vo.level" value="1">disabled="disabled"</neq>>{:str_pad('∟',$n,'&nbsp;',STR_PAD_LEFT)}{$vo.name}</option>
+                                </volist>
+							</select>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="short_title">地区分类：</label>
+						<span class="v">
+							<select name="rid">
+                                <volist name="regiondata" id="vo">
+                                    <php>$n = (substr_count($vo['path'],',') - 1) * 24 + 3</php>
+                                    <option value="{$vo.id}" <eq name="vo.id" value="$data['rid']">selected="selected"</eq><neq name="vo.level" value="2">disabled="disabled"</neq>>{:str_pad('∟',$n,'&nbsp;',STR_PAD_LEFT)}{$vo.name}</option>
+                                </volist>
+                            </select>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="num">数量：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="num" id="num" placeholder="请输入您的商品总数量" value="{$data.num}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="onenum">限购：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="onenum" id="onenum" placeholder="输入0或不输入不限购" value="{$data.onenum}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="original">原价：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="original" id="original" placeholder="输入原价"  value="{$data.original}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="payment">支付方式：</label>
+						<span class="v">
+                            <label style="line-height: 30px;margin-right: 20px;">
+                            <input type="radio" name="payment" value="0" <eq name="data.payment" value="0">checked="checked"</eq>>
+                            现金
+                            </label>
+                            <label>
+                            <input type="radio" name="payment" value="1" <eq name="data.payment" value="1">checked="checked"</eq>>
+                            定金
+                            </label>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="price">现价：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="price" id="price" placeholder="输入金额" value="{$data.price}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="finishtime">结束时间：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text editdate" type="text" name="finishtime" id="finishtime" value="{$data.finishtime|toDateYmd}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="pre">消费券前缀：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="pre" id="pre" placeholder="消费券的前缀" value="{$data['pre']}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="pre">消费券有效期：</label>
+						<span class="v">
+                            <input autocomplete="off" class="sns-text editdate" type="text" name="starttime" value="{$data.starttime|toDateYmd}" style="width: 115px;">
+                            ～
+   							<input autocomplete="off" class="sns-text editdate" type="text" name="endtime" value="{$data.endtime|toDateYmd}" style="width: 115px;">
+							<em></em>
+						</span>
+                        <script type="text/javascript">
+                            $(function() {
+                                $( ".editdate" ).datepicker({changeMonth: true,changeYear: true,shortYearCutoff: 50});
+                            });
+                        </script>
+                    </li>
+                    <li>
+                        <label class="k" for="keywords">关键字：</label>
+						<span class="v">
+							<textarea class="sns-text" style="width: 266px;height: 50px;" type="text" name="keywords" id="keywords" placeholder="输入关键字">{$data.keywords}</textarea>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="description">描述：</label>
+						<span class="v">
+							<textarea class="sns-text" style="width: 266px;height: 50px;" type="text" name="description" id="description" placeholder="输入描述">{$data.description}</textarea>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="detail">内容：</label>
+						<span class="v" style="display: inline-block;">
+							<textarea name="detail" class="sns-text editor" style="height: 200px;width: 450px;" type="text" name="detail" id="detail" upImgUrl="{:U('Xheditor/upLoadImg')}" upImgExt="jpg,jpeg,gif,png">{$data.detail}</textarea>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="tel">电话：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="tel" id="tel" placeholder="联系电话" value="{$data.tel}">
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="address">地址：</label>
+						<span class="v">
+							<input autocomplete="off" class="sns-text" type="text" name="address" id="address" placeholder="地址" value="{$data.address}">
+                            <a href="javascript:;" onclick="codeAddress($('#address').val());">标记</a>
+                            <a href="javascript:;" onclick="showMarker();">显示标记</a>
+							<em></em>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k" for="map">地图：</label>
+                        <input id="longitude" name="longitude" type="hidden" value="{$data.longitude}">
+                        <input id="latitude" name="latitude" type="hidden" value="{$data.latitude}">
+                        <input id="zoom" name="zoom" type="hidden" value="{$data.zoom}">
+                        <div id="map_canvas" style="width:450px; height: 300px;margin-left: -4px;display: inline-block;"></div>
+                    </li>
+                    <li>
+                        <label class="k" for="tel">图片：</label>
+						<span class="v jvf_btn">
+							<a href="javascript:;" class="btn-reg btn_a" id="upload_button">上传</a>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k">已上传图片：</label>
+                        <div style="width:450px; display: inline-block;">
+                            <ul id="imgBox">
+                                <volist name="data.accessory" id="vm">
+                                    <li class="sortableitem">
+                                        <div class="jvf_clos"><span onclick="deleteImg(this);">×</span></div>
+                                        <input type="hidden" name="imgs[]" value="{$vm.accessoryid}">
+                                        <img src="__ROOT__{$vm.thumbnail}"/>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </li>
+				</ul>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('.updateform').submit(function(){
+		var form = $(this);
+        var title = form.find('input[name="title"]');
+        if(!title.val()){
+            title.tip('商品名称不能为空',3000);
+            return false;
+        }
+        var num = form.find('input[name="num"]',3000);
+        if(!num.val()){
+            num.tip('请填写商品数量');
+            return false;
+        }
+        var pre = form.find('input[name="pre"]',3000);
+        if(!pre.val()){
+            pre.tip('请填写消费券前缀',3000);
+            return false;
+        }
+        var detail = form.find('textarea[name="detail"]');
+        if(!detail.val()){
+            detail.tip('请填写内容',3000);
+            return false;
+        }
+        var tel = form.find('input[name="tel"]');
+        if(!tel.val()){
+            tel.tip('请填写电话',3000);
+            return false;
+        }
+        var address = form.find('input[name="address"]');
+        if(!address.val()){
+            address.tip('请填写地址',3000);
+            return false;
+        }
+		$.post(form.attr('action'),form.serialize(),function(data){
+			if(data.status == 1){
+				jalert(data.info,{callback:function(){
+                    goUrl(APP+'/Company/goods');
+                }});
+			}else{
+				form.find('input[type="submit"]').tip(data.info,3000);
+			}
+		},'json');
+        return false;
+	});
+    xheditorBox();
+    function insertGoodsImg(data){
+        if(!data.err){
+            var html= '<li class="sortableitem"><div class="jvf_clos"><span onclick="deleteImg(this);">×</span></div><input type="hidden" name="imgs[]" value="'+data.msg.id+'" /><img src="'+data.msg.thumbnail+'" /></li>';
+            $('#imgBox').append(html);
+        }else{
+            $('#upload_button').tip(data.err);
+        }
+    }
+    function imgBoxdrag(){
+        $( "#imgBox" ).dragsort({dragSelectorExclude:"span"});
+    }
+    try{
+        setTimeout(function() {
+            initialize("map_canvas");
+            <notempty name="data.latitude">
+                addTags('{$data.latitude}','{$data.longitude}','{$data.address}',"map_canvas",'');
+            </notempty>
+            new AjaxUpload('#upload_button', {
+                action: APP+'/Xheditor/goodsImgLoad',
+                name: 'images',
+                onSubmit : function(file , ext){
+                    if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+                        this.setData({
+                            'ext': ext
+                        });
+                        this.disable();
+                    } else {
+                        return false;
+                    }
+
+                },
+                onComplete : function(file,response){
+                    var data=eval("("+response+")");
+                    insertGoodsImg(data);
+                    this.enable();
+                }
+            });
+        },0);
+    }catch(e){
+    }
+    imgBoxdrag();
+    $('input[name="payment"]').click(function(){
+        if($('input[name="payment"]:checked').val() == 1){
+            $('label[for="price"]').text('定金：');
+        }else{
+            $('label[for="price"]').text('现价：');
+        }
+    });
+});
+function deleteImg(t){
+	var li = $(t).parents(".sortableitem");
+	li.remove();
+}
+</script>
+<include file="Public:footer" />

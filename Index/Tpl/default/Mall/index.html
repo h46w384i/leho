@@ -1,0 +1,169 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/mall.css"/>
+<script>
+$(function(){
+	mallIndex();
+});
+</script>
+<div id="bd" >
+            
+	<div id="sec-header">
+		
+<div class="sec-header-inner">
+	<h4><a class="logo" href="{:U('Mall/index')}" title="乐活商城">乐活商城</a><div class="city"><a href="{:U('Index/city')}">{$switch_region.crr.name}</a></div></h4>
+	<ul id="sec-nav" class="cate-nav">
+		<li class="navactiv"><a href="{:U('Mall/index')}">首页</a></li>
+		<volist name="categorydata" id="vo">
+		    <li>
+                <a href="{:U('Mall/classify/cid/'.$vo['id'])}">{$vo.name}</a>
+            </li>
+		</volist>
+	</ul>
+</div>
+
+</div>
+    <div class="bd-wrap">
+        <div id="main">
+            <div class="inner">
+                <div class="section-top">
+					<div class="sort">
+						<h2>全部分类</h2>
+						<volist name="goods_categorydata" id="vo">
+							<div class="sort-list">
+							<dl>
+								<dt><a href="{:U('Mall/classify/cid/'.$vo['id'])}">{$vo.name}</a></dt>
+								<volist name="vo.child" id="v">
+								<dd><a href="{:U('Mall/classify/cid/'.$vo['id'].'/child/'.$v['id'])}">{$v.name}</a></dd>
+								</volist>
+							</dl>
+						</div>
+						</volist>
+					</div>
+					<div id="slide" class="switch-fade">
+						{:showAdvPosition('mail_top')}
+					</div>
+					<div class="st-aside" id="n_s_guest">
+					 <empty name="memberdata">
+						<div id="g_login_reg_btn" class="login">
+                            <a class="lg login_btn" href="javascript:jvfDialog('signinDialog',APP+'/User/signin');">登录</a>
+                            <a class="reg reg_btn" href="{:U('User/register')}">注册</a>
+                        </div>
+                     <else />
+						<div id="n_s_user" class="login" style="">
+							<dl>
+								<dt>Hi，<span id="user_info_uname">{$memberdata.name}</span></dt>
+								<dd>查看 <a href="{:U('Member/buyOrderList')}">我的订单</a></dd>
+							</dl>
+						</div>
+					 </empty>
+						<div class="promise">
+							<dl>
+								<dd class="ico ico-rsms"></dd>
+								<dt>如实描述</dt>
+								<dd>信息真实消费才靠谱</dd>
+								<dd><a rel="nofollow" target="_blank" href="{:U('Article/detail/id/55')}"></a></dd>
+							</dl>
+							<dl>
+								<dd class="ico ico-sst"></dd>
+								<dt>随时退</dt>
+								<dd>未消费想退就退</dd>
+								<dd><a rel="nofollow" target="_blank" href="{:U('Article/detail/id/56')}"></a></dd>
+							</dl>
+							<dl class="last">
+								<dd class="ico ico-xxpf"></dd>
+								<dt>先行赔付</dt>
+								<dd>消费纠纷商城为您做主</dd>
+								<dd><a rel="nofollow" target="_blank" href="{:U('Article/detail/id/57')}"></a></dd>
+							</dl>
+
+						</div>
+						<div class="placard">
+							<h4>公告</h4>
+							<ul>
+							<volist name="announcement" id="vo">
+								<li><a href="{:U('Article/detail/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></li>
+							</volist>
+							</ul>
+						</div>
+					</div>
+					<div class="showindow">
+					<volist name="hot" id="vo">
+						<div class="cell">
+							<div class="pic">
+								<a href="{:U('Goods/index/id/'.$vo['id'])}" title="{$vo.businesses.name}" target="_blank"><img src="{$vo.accessory.thumbnail}" alt="{$vo.businesses.name}"></a>
+								<div class="popbar">
+									<div class="con">
+										<div class="avatar"><a href="{:U('Goods/index/id/'.$vo['id'])}" title="{$vo.businesses.name}" target="_blank"><img src="{$vo.businesses.accessory.thumbnail}" alt="{$vo.businesses.name}"></a></div>
+										<dl>
+											<dt>&yen;<span>{$vo.price}</span></dt>
+											<dd>原价：{$vo.original}</dd>
+										</dl>
+										<a class="go" href="{:U('Goods/index/id/'.$vo['id'])}">去看看<span class="ico ico-arrow">箭头</span></a>
+									</div>
+									<div class="bg"></div>
+								</div>
+							</div>
+						</div>
+					</volist>
+					</div>
+				</div>
+                
+                
+                
+                                
+                <volist name="goods_categorydata" id="vo">
+                                <div class="section">
+					<div class="common-tt cls">
+						<h2>
+                            <span>F{$i}</span>
+                            {$vo.name}
+                            <a class="cate_anchor" name="meishi"></a>
+                        </h2>
+                        
+						<a class="more" href="{:U('Mall/classify/cid/'.$vo['id'])}" target="_blank">更多{$switch_region.crr.name}{$vo.name}<span class="ico ico-more">更多箭头</span></a>
+
+                        
+                        <div class="sort-nav">
+						<dl>
+							<dt><span class="ico ico-label">标签</span>分类：</dt>
+							<volist name="vo.child" id="v">
+							<dd><a href="{:U('Mall/classify/cid/'.$vo['id'].'/child/'.$v['id'])}">{$v.name}</a></dd>
+							</volist>
+						</dl>
+	<dl class="last">
+		<dt><span class="ico ico-zone">商圈</span>区域：</dt>
+		<volist name="regiondata" id="r">
+		<dd><a href="{:U('Mall/classify/cid/'.$vo['id'].'/rid/'.$r['id'])}">{$r.name}</a></dd>
+		</volist>
+	</dl>
+</div>
+                        
+                        
+					</div>
+                    
+					<div class="s-aside" style="height: 624px; ">
+                    <volist name="vo.goods" id="v" offset="0" length="4">	
+						<div class="cell">
+							<a href="{:U('Goods/index/id/'.$v['id'])}" target="_blank" class="avatar">
+								<img src="{$v['businesses']['accessory']['thumbnail']}" style="width:124px;height:124px;" alt="{$v['businesses']['name']}">
+							</a>
+							<h3><a href="{:U('Goods/index/id/'.$v['id'])}">{$v['businesses']['name']}</a></h3>
+						</div>
+					</volist>
+					</div>
+                    
+					<div class="showindow showindow-type1">
+					<volist name="vo.goods" id="v" offset="0" length="6">
+						<include file="Mall:item" />
+					</volist>
+											</div>
+				</div>
+                </volist>
+            </div>
+        </div>
+    </div>
+        </div>
+
+<include file="Public:footer" />

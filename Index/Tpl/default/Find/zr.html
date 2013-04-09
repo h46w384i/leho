@@ -1,0 +1,98 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link type="text/css" href="../Public/css/search.css" rel="stylesheet">
+<link type="text/css" href="../Public/css/side-con.css" rel="stylesheet">
+<div id="wrapper">
+<div class="search-header">
+    <div class="search-header-inner">
+        <div class="search-logo"><h1>乐活搜索</h1></div>
+        <div class="search-box">
+            <form action="">
+                <input name="keyword" type="text" autocomplete="off" value="{$_REQUEST['keyword']}" ""="" data-placeholder="" class="input-box search-placeholder">
+                <input type="submit" value="搜索" class="btn-search">
+            </form>
+            <div class="search-result container-item" style="display:none;">
+
+            </div>
+        </div>
+
+        <div class="search-tips">
+            <!--<a href="/search/?keyword=创意家居" class="keyword">疯狂创意家居</a>
+            <a href="/search/?keyword=香水" class="keyword">香水迷情</a>
+            <a href="/search/?keyword=胎教" class="keyword">音乐胎教</a>
+            <a href="/search/?keyword=婚纱照" class="keyword">婚纱照</a>
+            <a href="/search/?keyword=体验团" class="keyword">体验团</a>-->
+        </div>
+
+    </div>
+</div>
+
+<div id="bd" class="bb-t3">
+<div id="main">
+<div class="inner">
+<div class="col-c">
+<div class="inner">
+<div class="search-result-list">
+    <volist name="mdata" id="vo">
+        <div class="search-result-block cls">
+            <div class="result-photo">
+                <a href="{:U('User/space/id/'.$vo['id'])}" target="_blank"><img src="{$vo.header.thumbnail}" title="{$vo.name}"></a>
+            </div>
+            <div class="result-info">
+                <div class="result-info-user">
+                    <p class="name"><strong><a href="{:U('User/space/id/'.$vo['id'])}" target="_blank">{$vo.name}</a>
+                    <p><span class="auth"></span></p>
+                    <div class="result-info-user-desc">
+                        <p class="desc">{$vo.self_introduction}</p>
+                    </div>
+                </div>
+                <div class="btns-follow">
+                    <a href="javascript:;" <in name="vo.id" value="$memberdata['attention_ids']">class="btn-follow-22-end ico-add"<else />class="btn-follow-22-add ico-add"</in> data-uid="{$vo.id}"><span>加关注</span></a>								</div>
+            </div>
+        </div>
+    </volist>
+</div>
+<div class="pager">
+    <div class="global-page">
+        {$page}
+    </div>
+    <div id="ptest"></div>
+</div>
+</div>
+</div>
+    <include file="Find:right" />
+</div>
+</div>
+    <include file="Find:left" />
+</div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.btn-follow-22-add').live('click',function(){
+            var t = $(this);
+            var id = t.attr('data-uid');
+            loginAfter(function(){
+                $.getJSON(APP+'/Member/attention/id/'+id,function(data){
+                    if(data.status == 1){
+                        t.removeClass('btn-follow-22-add').addClass('btn-follow-22-end');
+                    }
+                });
+            });
+            return false;
+        });
+
+        $('.btn-follow-22-end').live('click',function(){
+            var t = $(this);
+            var id = t.attr('data-uid');
+            loginAfter(function(){
+                $.getJSON(APP+'/Member/removeattention/id/'+id,function(data){
+                    if(data.status == 1){
+                        t.removeClass('btn-follow-22-end').addClass('btn-follow-22-add');
+                    }
+                });
+            });
+            return false;
+        });
+    });
+</script>
+<include file="Public:footer" />

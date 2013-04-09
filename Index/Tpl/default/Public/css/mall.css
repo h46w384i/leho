@@ -1,0 +1,74 @@
+/* index.css ������ҳ������ȫ��CMS���� �ѽ���css���õ�CMS�У�http://www.leho.com/picture/mall/css/index.css */
+.section-top{height:436px; padding-bottom:16px; margin-bottom:28px; border:1px solid #e3e3e3; border-top:1px solid #cc5a07; border-bottom:0 none; background:#fff url(../images/bg_section-top.gif) 0 bottom repeat-x;}
+
+.section-top .sort{float:left; width:178px; height:100%; *margin-right:-1px; border-right:1px solid #e3e3e3;}
+.section-top .sort h2{position:relative; left:-1px; top:-1px; width:180px; *margin-right:-2px; font:16px/30px "\5FAE\8F6F\96C5\9ED1","\5b8b\4f53"; color:#ffe7b4; text-shadow:0 1px 1px rgba(0,0,0,0.3); text-indent:12px; background-color:#f66600;}
+.section-top .sort-list{padding:9px 0 6px 10px; margin:1px; border-bottom:1px solid #f4eee7; line-height:20px;}
+.section-top .last{border-bottom:0 none;}
+.section-top .sort dl{overflow:hidden; height:84px;}
+.section-top .sort .less dl{height:64px;}
+.section-top .sort dt{margin-bottom:4px; font-weight:bold; font-size:14px;}
+.section-top .sort dt a{color:#6c4f3b;}
+.section-top .sort dd{float:left; margin-right:11px; white-space:nowrap;}
+.section-top .sort dd a{color:#333;}
+.section-top .sort dd a:hover{color:#930; text-decoration:none;}
+.section-top .sort .invalid, .section-top .sort .invalid:hover{color:#999; cursor:default;}
+/* ��ҳ�ֲ�ͼ */
+#slide{position:relative; float:left; width:602px; height:238px; margin:8px auto auto 9px;}
+#slide ol{position:absolute; left:0; bottom:0; z-index:2; width:100%; height:32px; font-size:14px; line-height:32px; color:#333;}
+#slide ol li{position:relative; float:left; display:block; width:200px; height:100%; margin-right:1px; text-align:center; cursor:pointer;}
+#slide ol li span{position:absolute; left:0; top:0; z-index:2; display:block; width:100%; height:100%;}
+#slide ol li em{position:absolute; left:0; top:0; z-index:1; display:block; width:100%; height:100%; text-indent:-9999px; background-color:#fff; opacity:0.6; *filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);}
+#slide ol .selected em{opacity:0.8; *filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);}
+#slide ol .last{margin-right:0;}
+#slide ul{position:absolute; left:0; top:0; z-index:1; width:100%; height:100%;}
+#slide ul li{position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; *filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);}
+#slide ul li img{display:block;}
+
+.section-top .showindow{float:left; width:620px; height:190px;}
+.section-top .showindow .cell{width:50%; height:100%; margin-right:-1px; border-right:1px solid #e3e3e3;}
+.section-top .showindow .pic{width:292px; height:172px; margin-top:9px;}
+.section-top .showindow .active .popbar{height:58px;}
+.section-top .showindow .pic .popbar .avatar{position:absolute; left:4px; top:4px; width:48px; height:48px; border:1px solid #999;}
+.section-top .showindow .pic .popbar .avatar img{width:100%; height:100%;}
+.section-top .showindow .pic .popbar dl{position:absolute; left:68px; top:8px; color:#666;}
+.section-top .showindow .pic .popbar dt{height:26px; font-size:20px; line-height:26px; color:#f46d00;}
+.section-top .showindow .pic .popbar dt span{font-size:30px;}
+.section-top .showindow .pic .popbar dd{font-family:"\5b8b\4f53"; text-decoration:line-through;}
+.section-top .showindow .pic .popbar .go{top:19px; right:10px; width:auto; padding-right:16px; font-family:"\5FAE\8F6F\96C5\9ED1","\5b8b\4f53"; font-size:18px; color:#f46d00; background:none;}
+.section-top .showindow .pic .popbar .go .ico{position:absolute; right:0; top:2px;}
+
+.section-top .st-aside{float:right; width:176px; height:100%; padding:1px; border-left:1px solid #e3e3e3;}
+
+.section-top .login{height:75px; border-bottom:1px solid #e3e3e3; text-align:center;}
+.section-top .login .lg, .section-top .login .reg{overflow:hidden; display:inline-block; width:80px; height:33px; margin-top:21px; font-size:0; line-height:0; vertical-align:top; background-image:url(../images/btn.png); background-repeat:no-repeat;}
+.section-top .login .lg{background-position:0 0;}
+.section-top .login .lg:hover{background-position:0 -33px;}
+.section-top .login .reg{background-position:right 0;}
+.section-top .login .reg:hover{background-position:right -33px;}
+.section-top .login dl{padding:14px 0 0 14px; line-height:22px; text-align:left;}
+.section-top .login dl a{color:#06f;}
+
+.section-top .promise dl{*width:126px; background:url(../images/line.gif) center bottom no-repeat;}
+.section-top .promise dl a{*width:176px; *height:60px; *background-color:#c00; *filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)}
+.section-top .promise .last{border-bottom:1px solid #e3e3e3; background:none;}
+
+.section-top .placard{padding:10px 0 0 14px;}
+.section-top .placard h2{font:14px/26px "\5FAE\8F6F\96C5\9ED1","\5b8b\4f53"; color:#cb5500;}
+.section-top .placard ul{width:150px; line-height:26px;}
+.section-top .placard ul a{overflow:hidden; display:block; width:100%; color:#666; white-space:nowrap; text-overflow:ellipsis;}
+.section-top .placard ul a:hover{color:#930; text-decoration:none;}
+/* anchor */
+.anchor .meishi a{background-position:0 -50px;}
+.anchor .meishi a:hover,.anchor .meishi a.hover{background-position:-50px -50px;}
+.anchor .xiuxian a{background-position:0 -102px;}
+.anchor .xiuxian a:hover,.anchor .xiuxian a.hover{background-position:-50px -102px;}
+.anchor .hunjia a{background-position:0 -154px;}
+.anchor .hunjia a:hover,.anchor .hunjia a.hover{background-position:-50px -154px;}
+.anchor .muying a{background-position:0 -206px;}
+.anchor .muying a:hover,.anchor .muying a.hover{background-position:-50px -206px;}
+.anchor .shenghuo a{background-position:0 -258px;}
+.anchor .shenghuo a:hover,.anchor .shenghuo a.hover{background-position:-50px -258px;}
+
+/*������ҳ¥���л���λ*/
+.cate_anchor{position:absolute;margin-top:-80px; overflow:hidden; height:1px; width:1px;}

@@ -1,0 +1,22 @@
+<div id="partner" class="block-item">
+	<!--{start: 合作伙伴 -->
+		<div class="item-bd">
+		<div class="item-bd-top"></div>
+		<div class="item-bd-btm"></div>
+		<h3 title="友情链接"><span>友情链接</span></h3>
+		<volist name="linkdata" id="vo" mod="9">
+		<eq name="mod" value="1">
+			<div class="block-item-cont cls"><dl>
+			<else />
+			<eq name="mod" value="0"><dl class="last"><dl>
+			<else />
+			<dl>
+			</eq>
+		</eq>
+				<dd><a href="{$vo.url}" target="_blank"><eq name="vo.type" value="1"> <img src="__ROOT__{$vo.logo}"><else />{$vo.name} </eq></a></dd>
+			</dl>
+		<eq name="mod" value="0">
+		</div>
+		</eq>
+		</volist>
+	</div>

@@ -1,0 +1,44 @@
+<div id="sec-header">
+			<div class="sec-header-inner">
+				<h2>
+					<a class="logo" href="{:U('Businesses/index')}">逛商街</a>
+					<div class="city">
+						<a class="currcity" href="{:U('Index/city')}"><span>{$switch_region.crr.name}</span></a>
+					</div>
+				</h2>
+				<ul class="cate-nav">
+					<li <eq name="ACTION_NAME" value="index">class="curr"</eq>><a href="{:U('Businesses/index')}"><span>首页</span></a></li>
+					<li <eq name="ACTION_NAME" value="lists">class="curr"</eq>><a href="{:U('Businesses/lists')}"><span>找商家</span></a></li>
+					<li <eq name="ACTION_NAME" value="preferential">class="curr"</eq>><a href="{:U('Businesses/preferential')}"><span>淘优惠</span></a></li>
+				</ul>
+			</div>
+			<style type="text/css">
+				#sec-header{position:relative; z-index:3; width:100%; border-bottom:1px solid #ddd; background-color:#eee;}
+				#index #sec-header{border-bottom:0 none; background-color:transparent;}
+				.sec-header-inner{width:980px; height:60px; margin:0 auto;}
+				#sec-header h2{position:relative; float:left;}
+				#sec-header h2 .logo{font:24px/60px "\5FAE\8F6F\96C5\9ED1","\5b8b\4F53"; color:#333; text-shadow:0 1px 1px rgba(0,0,0,0.2)}
+				#sec-header h2 .logo:hover{text-decoration:none;}
+				#sec-header .city{position:absolute; left:82px; top:18px; font-weight:normal; line-height:26px; white-space:nowrap;}
+				#sec-header .city a{color:#666;}
+				#sec-header .city a:hover{text-decoration:none;}
+				#sec-header .city .currcity{display:block; padding-left:8px; background:url(../Public/images/sec-header_sj.png) 0 0 no-repeat;}
+				#sec-header .city .currcity:hover{background-position:0 -26px;}
+				#sec-header .city .currcity span{position:relative; right:-1px; display:inline-block; padding-right:18px; background:url(../Public/images/sec-header_sj.png) right top no-repeat; cursor:pointer;}
+				#sec-header .city .currcity:hover span{background-position:right -26px;}
+				#sec-header .active .currcity, #sec-header .active .currcity:hover{background-position:0 -52px;}
+				#sec-header .active .currcity span, #sec-header .active .currcity:hover span{background-position:right -52px;}
+				#sec-header .city i{position:absolute; top:9px; right:5px; border-width:4px 4px 0; border-style:solid solid none; border-color:#999 #f5f4f4 #f5f4f4; line-height:0;}
+				#sec-header .active i{border-width:0 4px 4px; border-style:none solid solid; border-color:#f5f4f4 #f5f4f4 #999;}
+				#sec-header .city ul{position:absolute; left:0; top:26px; display:none; padding:1px; border:1px solid #ccc; border-radius:2px; box-shadow:1px 1px 1px rgba(0,0,0,0.2); background-color:#fff; opacity:0.9; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);}
+				#sec-header .active ul{display:block;}
+				#sec-header .city ul a{display:block; padding:0 16px 0 8px;}
+				#sec-header .city ul a:hover{color:#333; background-color:#eee;}
+				#sec-header .cate-nav{float:left; _display:inline; margin:17px auto auto 120px; font:16px/28px "\5FAE\8F6F\96C5\9ED1","\5b8b\4F53";}
+				#sec-header .cate-nav li{float:left; margin-right:7px;}
+				#sec-header .cate-nav li a{float:left; display:block; padding-left:12px; color:#333; text-shadow:1px 1px 0 #fff;}
+				#sec-header .cate-nav li a:hover, #sec-header .cate-nav .curr a{color:#fff; text-decoration:none; background:url(../Public/images/sec-header_sj.png) 0 -78px no-repeat; text-shadow:0 1px 1px rgba(0,0,0,0.3);}
+				#sec-header .cate-nav li span{position:relative; right:-2px; display:inline-block; padding-right:12px; cursor:pointer;}
+				#sec-header .cate-nav li a:hover span, #sec-header .cate-nav .curr span{background:url(../Public/images/sec-header_sj.png) right -78px no-repeat;}
+			</style>
+		</div>

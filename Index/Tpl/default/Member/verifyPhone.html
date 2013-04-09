@@ -1,0 +1,74 @@
+<script type="text/javascript">
+<!--
+$(function(){
+	$('#send_phone').click(function(){
+		sendcode();
+	});
+	
+	$('#phone_form').submit(function(){
+		var t = $(this);
+		var phone = $('#phone_confirm').val();
+		var authcode = $('#phone_code').val();
+		var url = APP+'/Member/phoneverify/phone/'+phone+'/authcode/'+authcode;
+		$.getJSON(url,function(data){
+			if(data.status == 1){
+				t.parents('.ui-dialog').remove();
+				jalert(data.info);
+				$('#phone').val(phone);
+			}else{
+				t.find('input[type="submit"]').tip(data.info,2000);
+			}
+		});
+		return false;
+	});
+});
+function sendcode(){
+	var t = $('#send_phone');
+	var phone = $('#phone_confirm').val();
+	if(!phone){
+		t.tip('手机号码有误，请重新输入',2000);
+		return false;
+	}
+	$.getJSON(APP+'/Member/smsphone/phone/'+phone,function(data){
+		if(data.status == 1){
+			t.find('span').text('60秒后重新发送');
+			window.time = 59;
+			t.unbind('click');
+			window.dj = setInterval(function(){
+				if(window.time <= 0){
+					t.click(function(){
+						sendcode();
+					});
+					clearInterval(window.dj);
+					t.find('span').text('免费发送验证码');
+				}else{
+					window.time = window.time-1;
+					t.find('span').text(window.time+'秒后重新发送');
+				}
+			},1000);
+		}else{
+			t.tip(data.info,2000);
+		}
+	});
+}
+//-->
+</script>
+<div class="panel-bind" title="帐号设置-绑定手机">
+	<div class="panel-content">
+		<div class="bd">
+			<div class="phone-bind">
+			<form id="phone_form" method="post" class="sns-form">
+				<ul>
+					<li><label class="k" for="phone_confirm">手机号：</label><span class="v"><input type="text" id="phone_confirm" name="phone_confirm" class="sns-text" placeholder="请输入你的手机号" reqmsg="手机号码" maxlength="11" errmsg="手机号码有误，请重新输入" datatype="mobilecode"> </span><a href="javascript:;" class="btns btn-t3" id="send_phone"><span id="btn-get-mobile-code" data-refid="span-get-mobile-code" data-disabledtext="{0}秒后重新发送" data-gettokeninterval="60" data-enabledtext="免费发送验证码">免费发送验证码</span></a>
+					<em style=""></em>
+					</li>
+					<li><label class="k" for="phone_code">验证码：</label><span class="v"><input type="text" id="phone_code" name="phone_code" class="sns-text" reqmsg="验证码"> </span><em style=""></em></li>
+				</ul>
+				<div class="btn">
+					<input type="submit" value="提交" class="btn-reg">
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>

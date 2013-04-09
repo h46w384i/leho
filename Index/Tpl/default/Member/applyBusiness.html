@@ -1,0 +1,491 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/zhaoshang.css" />
+<div id="doc">
+	<div id="bd">
+		<div class="bb-t3">
+			<div id="main">
+			<form action="{:U('Member/doApplyBusiness')}" method="post" id="basic" onsubmit="return false">
+				<div class="zhaoshang">
+					<div class="hd">只需3分钟，就能免费拥有自己的店铺</div>
+					<div class="stepnav">
+						<ul class="stepnav">
+							<li class="stepnav_f f_r">&nbsp;</li><li class="stepnav_n n_r">1.创建店铺</li><li class="stepnav_t t_r-p">&nbsp;</li><li class="stepnav_n n_p">2.签协议</li><li class="stepnav_t t_p-p">&nbsp;</li><li class="stepnav_n n_p">3.填信息</li><li class="stepnav_t t_p-p">&nbsp;</li><li class="stepnav_n n_p">4.完成</li><li class="stepnav_b b_p">&nbsp;</li>
+						</ul>
+					</div>
+					<div class="form step">
+						<div class="content">
+								<ul class="list">
+									<li>
+										<label class="k" for=""><span class="em">*</span>商户名称：</label> <span class="v"><input id="name" name="name" reqmsg=" 商户名称不允许为空" class="input-block" type="text" datatype="text" maxlength="30" errmsg="商户名称长度不能超过30个字" emel="biz_name" autocomplete="off"></span>&nbsp;
+										<a href="javascript:;" id="addAliasBtn">添加别名</a> <em id="biz_name"></em>
+									</li>
+									<li id="alias" style="display: none;"><label class="k" for="">别名：</label> <span class="v"><input class="sp-name" id="alias_name" name="b_name" type="text" datatype="bytetext" maxlength="60" errmsg=" 商户名称长度不能超过30个字"></span> <em></em></li>
+									<li>
+										<input id="cid" name="cid" type="hidden"> 
+										<label class="k" for=""><span class="em">*</span>所属行业：</label> 
+										<span class="v">
+											<select id="industry1" reqmsg=" 请选择商户分类" emel="catEm">
+												<option value="">请选择</option>
+												<volist name="first" id="vo">
+												<option value="{$vo.id}">{$vo.name}</option>
+												</volist>
+											</select>
+											<select id="industry2">
+												<option value="">请选择</option>
+											</select>
+										</span> 
+										<em id="catEm"></em>
+									</li>
+									<li>
+										<input name="rid" id="rid" type="hidden">
+										<input name="bcid" id="bcid" type="hidden">
+										<label class="k" for="">
+											<span class="em">*</span>所在地区：
+										</label> 
+										<span class="v">
+												<select id="cityT">
+												<option	value="">请选择</option>
+												<volist name="region_first" id="vo">
+												<option	value="{$vo.id}">{$vo.name}</option>
+												</volist>
+												</select>
+												<select id="districtT">
+													<option	value="">请选择</option>
+												</select>
+												商区：<select id="businessT">
+													<option value="">请选择</option>
+												</select>
+											</span> 
+											<em id="areaEm"></em>
+									</li>
+									<li>
+										<input type="hidden" id="longitude" name="longitude">
+										<input type="hidden" id="latitude" name="latitude">
+										<input type="hidden" id="zoom" name="zoom">
+										<label class="k" for=""><span class="em">*</span>商户地址：</label>
+										<span class="v">
+											<input id="addr_input" value="" placeholder="例如：西单北大街，不需要重复填写市、区" name="address" class="input-block" type="text" datatype="bytetext" maxlength="120" errmsg=" 地址长度不能超过60个字">
+										</span>&nbsp;
+										<a href="javascript:;" id="markBtn">在地图上标记</a>
+										<em id="markEm"></em>
+									</li>
+									<li style="margin-bottom: 5px;" class="phone">
+										<input type="hidden" name="tal" id="tal">
+										<label class="k" for="">商户电话：</label>
+										<span class="v">
+											<input id="area_phone" datatype="magic-phonezone||reg" reg-pattern="/^[48]00$/" maxlength="4" class="input-area" type="text"
+											value="" size="4" reqmsg=" 请输入电话区号。" reqlogic="(!$tel_phone &amp;&amp; !$ext_phone) || $area_phone"
+										>-<input id="tel_phone" class="input-tel" datatype="phonecode" reg-pattern="/^\d{7,8}$/" maxlength="8" type="text" reqmsg=" 请输入电话号码。" reqlogic="(!$area_phone &amp;&amp; !$ext_phone) || $tel_phone">-<input id="ext_phone" errmsg=" 分机号输入不正确" datatype="phoneext"
+											maxlength="6" class="input-ext" type="text" reqmsg=""
+										></span>&nbsp;<em></em><br> <span class="des">例：010-12345678-1234，或400-1234567</span></li>
+								</ul>
+								<ul id="phone_con" class="list"></ul>
+								<ul class="list">
+									<li><label class="k" for="">商户手机：</label><span class="v"><input name="phone" id="mobN" type="text" datatype="mobilecode" errmsg="请检查手机号码。" size="20" class="input-block"></span><em></em></li>
+									<li><label class="k" for="">营业时间：</label><span class="v">
+									<input name="opening" datatype="bytetext" maxlength="80" errmsg=" 营业时间长度不能超过40个字" class="input-block" type="text" value=""
+											placeholder="例如：周一至周五早上10:20-晚21:00 或24小时营业" emptyhintel="emptyhint-10002"
+										></span><em></em></li>
+								</ul>
+								<ul id="catData"></ul>
+								<div class="ft_step2">
+									<button type="button" class="bt_blue110 spr_bt" id="btnOK">下一步</button>
+								</div>
+						</div>
+						<div class="map" id="mapContainer" style="display: none; overflow: hidden; color: rgb(0, 0, 0); text-align: left;">
+							
+						</div>
+					</div>
+					<div class="step" style="display: none;">
+						<div class="agree_title">{$fuwu.title}</div>
+							<div class="bd">					
+							<div class="agree_content">
+								{$fuwu.content}
+							</div>					
+						</div>
+						<div class="ft_step2"><button type="button" class="bt_blue110 spr_bt" id="step2ok">同意</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="bt_gray104 spr_bt"><button id="pre_step">上一步</button></a></div>
+					</div>
+					<div class="bd step" style="display: none;">				
+							<ul class="apply">
+									<li class="list_title">申请公司信息</li>
+									<li>
+										<label class="k">
+										<span class="em">*</span>
+										企业名称：</label><span class="v"><input name="companyname" type="text" size="40" reqmsg="企业名称" errmsg="您填写的名称过短，请与营业执照保持完全一致。 " datatype="bytetext" minlength="8" maxlength="128"><em class="tip"></em></span><br><span id="repeatSpan" class="des error" style="color:red;display:none;">您填写的信息重复！系统中已存在该商家！<br></span><span class="des">事业单位需与事业单位法人证书名称一致，民办非企业单位需与登记证书名称一致</span>
+									</li>
+									<li>
+										<label class="k">
+										<span class="em">*</span>
+										法人姓名：</label><span class="v"><input name="legal" type="text" size="40" reqmsg="法人姓名" datatype="bytetext" maxlength="32"><em class="tip"></em></span><br><span class="des">法人名称需与执照上名称一致 </span>
+									</li>							
+									<li id="li-0004">
+										<label class="k">
+										<span class="em">*</span>
+										有效期截止日：</label><span class="v"><input name="validity" type="text" datatype="d" minvalue="2012-07-25" maxvalue="2099-01-01" reqmsg="营业执照有效期" id="validity" readonly="readonly"><em class="tip" style=""></em></span><br><span class="des">营业执照有效期截止日期</span>
+									</li>
+									<li>
+										<label class="k">	
+											<span class="em">*</span>
+											营业执照扫描件：
+										</label>
+										<span class="v img_up" data-capt="营业执照扫描件">
+											<input class="up_btn" type="hidden" name="license" >
+											<input type="button" value="上传" id="imgs">
+										</span><br><span class="des">请上传企业营业执照或个体工商户执照副本彩色原件电子版（数码相机拍摄件或彩色扫描件）</span>
+										<div style="margin-top: 10px;margin-left: 126px;" id="imgurl"></div>
+									</li>
+									<li class="list_title">店铺管理员信息</li>
+								<li>
+									<label class="k">商户ID：</label><span class="v">{$memberdata.name}</span><br>
+								</li>
+								
+								
+																	<li>
+										<label class="k">
+										<span class="em">*</span>
+										姓名：</label><span class="v"><input datatype="bytetext" maxlength="32" name="fz_name" type="text" size="40" reqmsg="姓名"><em class="tip"></em></span><br>
+									</li>
+									
+                                    <li style="display:none;">
+										<label class="k">
+										<span class="em">*</span>
+										身份证号：</label><span class="v"><input name="fz_tel" datatype="idnumber" type="text" size="40" reqmsg="身份证号"><em class="tip"></em></span><br>
+									</li> 
+									<li>
+										<label class="k">
+										<span class="em">*</span>
+										手机号码：</label><span class="v"><input name="fz_phone" type="text" size="40" datatype="mobilecode" errmsg="手机号码格式不正确" reqmsg="手机号码"><em class="tip"></em></span><br>
+									</li>
+									<li>
+										<label class="k">
+										<span class="em">*</span>
+										电子邮箱：</label><span class="v"><input name="fz_mail" type="text" size="40" reqmsg="电子邮箱" datatype="email" errmsg="邮箱地址格式不正确"><em class="tip"></em></span><br>
+									</li>
+									<li>
+										<label class="k">
+										<!--<span class="em">*reqmsg="联系地址"</span>-->
+										联系地址：</label><span class="v"><input name="fz_address" type="text" size="40"><em class="tip"></em></span><br>
+									</li>
+									<li>
+										<label class="k">									
+										<!--<span class="em">*  reqmsg="电话号码"errmsg=" 分机号输入不正确"</span>-->
+										联系电话：</label><span class="v">
+							
+										<input id="fz_area_phone" datatype="magic-phonezone||reg" reg-pattern="/^[48]00$/" maxlength="4" type="text" value="" reqmsg=" 请输入电话区号。" reqlogic="(!$tel_phone &amp;&amp; !$ext_phone) || $area_phone">-
+										<input id="fz_tel_phone" datatype="phonecode" reg-pattern="/^\d{7,8}$/" maxlength="8" type="text" reqmsg=" 请输入电话号码。" reqlogic="(!$area_phone &amp;&amp; !$ext_phone) || $tel_phone">-
+										<input id="fz_ext_phone" datatype="phoneext" maxlength="6" type="text" style="width:82px;" reqmsg="">
+										<input name="fz_tel" id="fz_tel" type="hidden"></span><em class="tip"></em><br>
+										<span class="des">例：010-12345678-1234，或400-1234567</span>
+									</li>
+									<li>
+										<label class="k">					
+										传真：</label><span class="v"><input datatype="bytetext" maxlength="16" name="fax" type="text" size="40"></span><br>
+									</li>							
+
+								<li class="btnav">
+									<label class="k"></label>
+									<span class="v"><button type="button" class="bt_submit spr_bt" id="step3ok">确   认</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="bt_save spr_bt" id="pre_step2">上一步</button></span>
+								</li>
+							</ul>
+				</div>
+				<div class="step" style="display: none;">
+					<div class="success"><div class="content">
+												<h1>提交成功</h1>
+							<span>
+								 您的信息将在三个工作日内进行审核，请耐心等待。如有问题，请拨打{&sysconfig.site_services_tel}						</span>
+										</div>
+					</div>
+				</div>
+				</div>
+			</form>
+				<div class="foot"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	var child = {:json_encode($child)};
+	var region_child = {:json_encode($region_child)};
+	var circle = {:json_encode($circle)};
+	$(function() {
+		$('#addAliasBtn').click(function() {
+			$('#alias').show();
+			$(this).hide();
+		});
+		
+		$('#btnOK').click(function(){
+			var name = $('input[name="name"]');
+			if(!name.val()){
+				name.tip('商户名称不能为空',3000);
+                name.focus();
+				return false;
+			}
+			var cid = $('input[name="cid"]');
+			if(!cid.val()){
+				$('#industry2').tip('请选择所属行业',3000);
+                $('#industry2').focus();
+				return false;
+			}
+			
+			var rid = $('input[name="rid"]');
+			if(!rid.val()){
+				$('#districtT').tip('请选择所在地区',3000);
+                $('#districtT').focus();
+				return false;
+			}
+			
+			var address = $('input[name="address"]');
+			if(!address.val()){
+				address.tip('商户地址不能为空',3000);
+                address.focus();
+				return false;
+			}
+			
+			$('#tel').val($('#area_phone').val()+'-'+$('#tel_phone').val()+'-'+$('#ext_phone').val());
+			$('.step').hide().eq(1).show();
+			$('.stepnav_n').removeClass('n_r').addClass('n_p').eq(1).removeClass('n_p').addClass('n_r');
+			$('.stepnav_f').removeClass('f_r').addClass('f_p');
+			$('.stepnav_t').removeClass('t_r-p').addClass('t_p-p').eq(1).removeClass('t_p-p').addClass('t_r-p');
+		});
+		
+		$( "#validity" ).datepicker({changeMonth: true,changeYear: true,shortYearCutoff: 50});
+		
+		$('#pre_step').click(function(){
+			$('.step').hide().eq(0).show();
+			$('.stepnav_n').removeClass('n_r').addClass('n_p').eq(0).removeClass('n_p').addClass('n_r');
+			$('.stepnav_f').removeClass('f_p').addClass('f_r');
+			$('.stepnav_t').removeClass('t_r-p').addClass('t_p-p').eq(0).removeClass('t_p-p').addClass('t_r-p');
+		});
+		
+		$('#step2ok').click(function(){
+			$('.step').hide().eq(2).show();
+			$('.stepnav_n').removeClass('n_r').addClass('n_p').eq(2).removeClass('n_p').addClass('n_r');
+			$('.stepnav_t').removeClass('t_r-p').addClass('t_p-p').eq(2).removeClass('t_p-p').addClass('t_r-p');
+		});
+		$('#pre_step2').click(function(){
+			$('.step').hide().eq(1).show();
+			$('.stepnav_n').removeClass('n_r').addClass('n_p').eq(1).removeClass('n_p').addClass('n_r');
+			$('.stepnav_t').removeClass('t_r-p').addClass('t_p-p').eq(1).removeClass('t_p-p').addClass('t_r-p');
+		});
+		
+		$('#step3ok').click(function(){
+			var t = $(this);
+			var companyname = $('input[name="companyname"]');
+			if(!companyname.val()){
+				companyname.tip('企业名称不能为空',3000);
+                companyname.focus();
+				return false;
+			}
+			var legal = $('input[name="legal"]');
+			if(!legal.val()){
+				legal.tip('法人名称不能为空',3000);
+                legal.focus();
+				return false;
+			}
+			var validity = $('input[name="validity"]');
+			if(!validity.val()){
+				validity.tip('营业执照有效期不能为空',3000);
+                validity.focus();
+				return false;
+			}
+			var license = $('input[name="license"]');
+			if(!license.val()){
+				$('#imgs').tip('请上传您的营业执照扫描件',3000);
+                $('#imgs').focus();
+				return false;
+			}
+			var fz_name = $('input[name="fz_name"]');
+			if(!fz_name.val()){
+				fz_name.tip('负责人姓名不能为空',3000);
+                fz_name.focus();
+				return false;
+			}
+			var fz_phone = $('input[name="fz_phone"]');
+			if(!fz_phone.val()){
+				fz_phone.tip('负责人手机号码不能为空',3000);
+                fz_phone.focus();
+				return false;
+			}
+			var fz_mail = $('input[name="fz_mail"]');
+			if(!fz_mail.val()){
+				fz_mail.tip('负责人邮箱不能为空',3000);
+                fz_phone.focus();
+				return false;
+			}
+			
+			$('input[name="fz_tel"]').val($('#fz_area_phone').val()+'-'+$('#fz_tel_phone').val()+'-'+$('#fz_ext_phone').val());
+			var form = $('#basic');
+			var para = form.serialize();
+			$.post(form.attr('action'),para,function(data){
+				if(data.status == 1){
+					$('.step').hide().eq(3).show();
+					$('.stepnav_n').removeClass('n_r').addClass('n_p').eq(3).removeClass('n_p').addClass('n_r');
+					$('.stepnav_b').removeClass('b_p').addClass('b_r');
+				}else{
+					t.tip(data.info,3000);
+				}
+			},'json');
+		});
+	});
+	
+	$('#industry1').change(function(){
+		var pid = $(this).val();
+		var html = '<option value="">请选择</option>';
+		if(pid && child){
+			for(vo in child){
+				if(child[vo].pid == pid){
+					html += '<option value="'+child[vo].id+'">'+child[vo].name+'</option>';
+				}
+			}
+		}
+		$('#industry2').html(html);
+	});
+	
+	$('#industry2').change(function(){
+		$('#cid').val($(this).val());
+	});
+
+	$('#cityT').change(function(){
+		var pid = $(this).val();
+		var html = '<option value="">请选择</option>';
+		if(pid && region_child){
+			for(vo in region_child){
+				if(region_child[vo].pid == pid){
+					html += '<option value="'+region_child[vo].id+'">'+region_child[vo].name+'</option>';
+				}
+			}
+		}
+		$('#districtT').html(html);
+	});
+
+	$('#districtT').change(function(){
+		var rid = $(this).val();
+		$('#rid').val(rid);
+		var html = '<option value="">请选择</option>';
+		if(rid && circle){
+			for(vo in circle){
+				if(circle[vo].rid == rid){
+					html += '<option value="'+circle[vo].id+'">'+circle[vo].name+'</option>';
+				}
+			}
+		}
+		$('#businessT').html(html);
+	});
+
+	$('#businessT').change(function(){
+		$('#bcid').val($(this).val());
+	});
+	
+	
+	new AjaxUpload('#imgs', {
+		action: APP+'/Xheditor/upLoadImg',
+		name: 'images',
+		onSubmit : function(file , ext){
+			if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+				this.setData({
+				'ext': ext
+				});
+				this.disable();
+			} else {
+				return false;
+			}
+		},
+		onComplete : function(file,response){
+			var data=eval("("+response+")");
+			if(data.err == ''){
+				$('input[name="license"]').val(data.msg.relpath);
+				$('#imgurl').html('<img src="'+data.msg.url+'"></img>');
+			}else{
+				$('#imgs').tip(data.err,3000);
+			}
+			this.enable();
+		}
+	});
+	
+	$('#markBtn').click(function(){
+		var val = $('#addr_input').val();
+		if(!val){
+			$('#addr_input').tip('请输入地址',2000);
+			return false;
+		}
+		jvfDialogHtml('bigBox','<div title="标记地图" style="width:500px;height:400px;"></div>');
+		
+		var map = new BMap.Map("bigBox");
+        var myGeo = new BMap.Geocoder();
+        myGeo.getPoint(val, function(point){
+            if(point){
+                map.centerAndZoom(point, 15);
+                map.enableScrollWheelZoom();
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+                marker.enableDragging(true); // 设置标注可拖拽
+                var sContent = '<div style="margin-top: 10px;"><div>是否将新位置设置为商户的默认位置？</div><div style="text-align: center;margin-top: 5px;"><button id="modifyMapOkButton" type="button">是</button>&nbsp;&nbsp;<button id="modifyMapCancelButton" type="button">否</button></div></div>';
+                var infoWindow = new BMap.InfoWindow(sContent);
+                marker.addEventListener('dragend',function(){
+                    var m = this;
+                    this.openInfoWindow(infoWindow);
+                    $('#modifyMapCancelButton').click(function(){
+                        m.closeInfoWindow();
+                    });
+                    $('#modifyMapOkButton').click(function(){
+                        $(this).parents('.ui-dialog').find('.ui-dialog-titlebar-close').trigger('click');
+                        callSmall(m.getPosition());
+
+                    });
+                });
+            }else{
+                var local = new BMap.LocalSearch(map);
+                local.search(val);
+                local.setSearchCompleteCallback(function(rs){
+                    console.log(rs.getNumPois());
+                    if (local.getStatus() == BMAP_STATUS_SUCCESS){
+                        var poi = rs.getPoi(0);
+                        if(poi){
+                            map.centerAndZoom(poi.point, 15);
+                            map.enableScrollWheelZoom();
+                            var marker = new BMap.Marker(poi.point);
+                            map.addOverlay(marker);
+                            marker.enableDragging(true); // 设置标注可拖拽
+                            var sContent = '<div style="margin-top: 10px;"><div>是否将新位置设置为商户的默认位置？</div><div style="text-align: center;margin-top: 5px;"><button id="modifyMapOkButton" type="button">是</button>&nbsp;&nbsp;<button id="modifyMapCancelButton" type="button">否</button></div></div>';
+                            var infoWindow = new BMap.InfoWindow(sContent);
+                            marker.addEventListener('dragend',function(){
+                                var m = this;
+                                this.openInfoWindow(infoWindow);
+                                $('#modifyMapCancelButton').click(function(){
+                                    m.closeInfoWindow();
+                                });
+                                $('#modifyMapOkButton').click(function(){
+                                    $(this).parents('.ui-dialog').find('.ui-dialog-titlebar-close').trigger('click');
+                                    callSmall(m.getPosition());
+
+                                });
+                            });
+                        }
+                    }else{
+                        $('#bigBox').html('标记失败，找不到地址,请输入正确地址');
+                    }
+                });
+            }
+        }, "全国");
+
+		var callSmall = function(p){
+			$('#mapContainer').show();
+			var smallmap =  new BMap.Map("mapContainer");
+			smallmap.centerAndZoom(p,13);
+			smallmap.enableScrollWheelZoom();
+			var marker = new BMap.Marker(p);
+			smallmap.addOverlay(marker);
+			$('#latitude').val(p.lat);
+			$('#longitude').val(p.lng);
+			$('#zoom').val(13);
+			smallmap.addEventListener("zoomend", function(){
+			   $('#zoom').val(this.getZoom());
+			});
+		}
+	});
+	
+//-->
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,57 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/myhome.css"/>
+<script>
+$(function(){
+	memberIndex();
+});
+</script>
+<div id="wrapper">
+<include file="Member:topPublic" />
+<div class="myhome-nav">
+	<a href="{:U('Member/interest')}" class="tab " data-feed_type="0">
+		<i class="favorite"></i><span>兴趣爱好</span>
+	</a>
+	<a href="{:U('Circle/ajaxCircle/uid/'.$memberdata['id'])}" onclick="return false" class="tab selected" data-feed_type="1">
+		<i class="dynamic"></i><span>好友动态</span>
+	</a>
+	<a href="{:U('Member/periphery')}" class="tab " data-feed_type="2">
+		<i class="address"></i><span>周边资讯</span>
+	</a>
+</div>
+<div id="bd" class="bb-t1">
+	<div id="main">
+		<div class="column-wraper cls">
+			<div class="moudle-block moudle daren-tuijian jvf_pubu" data-feed_type="1" style="">
+			<!--{start: 达人推荐 -->
+				<div class="hd"></div>
+				<div class="bd">
+					<div class="title"><span>达人推荐</span></div>
+					<div class="main cls">
+						<ul class="mo-user-list">
+							<include file="Circle:randomDaren" />
+						</ul>
+						<div class="block-loading loading" style="display:none; height:122px;"></div>
+						<div class="other-block">
+							<a href="#" onclick="return false" class="switch">换一组</a>
+							<a href="#" class="more" target="_blank">更多...</a>
+						</div>
+					</div>
+				</div>
+				<div class="ft"></div>
+			<!--}end: 达人推荐 -->          
+			</div>
+		</div>
+		<div id="split_page" class="splitpage cls" style="display:none;"></div>
+	</div>
+</div>
+
+	</div>
+<div id="medal_tips" class="panel panel-t4 panel-t4-tl medal-explain" style="position: absolute; width: 170px; zoom: 1; z-index: 147; display: none; ">
+	<div class="panel-content">
+		<div class="bd"></div>
+	</div>
+	<span class="sd"></span>
+	<span class="cue"></span>
+</div>
+<include file="Public:footer" />

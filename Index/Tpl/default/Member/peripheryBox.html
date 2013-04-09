@@ -1,0 +1,68 @@
+<script xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+$(function(){
+    peripheryBox();
+});
+</script>
+<div class="interest-panel" title="添加商圈">
+	<div class="panel-content">
+    <div class="bd cls">
+    <div class="cont cls">
+    <div class="msg">关注你感兴趣的商圈，最热最新的消费分享和优惠信息时时掌握。</div>
+    <div class="container cls">
+        <div class="checkbox-wrapper" style="margin-top: 16px;margin-left: 26px;">
+            <!--{start: 全选 -->
+						<span class="checkbox-cont">
+							<a href="javascript:;" class="checked"></a>全选
+						</span>
+            <a href="javascript:;" id="add_district_select" class="btns btn-t1"><span><strong>关注本页所选</strong></span></a>
+            <!--}end: 全选 -->
+        </div>
+        <div class="page-wrapper">
+            <div class="splitpage cls">
+                <!-- {start: 翻页 -->
+                <div class="global-page" data-tpn="3">
+                    <div class="global-page">
+                    <volist name="businesses_circledata" id="vo" mod="12">
+                    <if condition="$mod eq 1">
+                        {$n++}
+                        <a href="javascript:;" <if condition="$n eq 1">class="select"</if> >{$n}</a>
+                    </if>
+                    </volist>
+                </div>
+                </div>
+                <!-- }end:feed 翻页 -->
+            </div>
+        </div>
+    </div>
+    <div class="district-list-wrapper">
+    <div style="width: 2262px; margin-left: 0px;text-align: left; " class="district-list-size">
+        <volist name="businesses_circledata" id="vo" mod="12">
+        <if condition="$mod eq 1">
+            <if condition="$i eq 1">
+                <div class="district-list cls current">
+                <else />
+                <div class="district-list cls">
+            </if>
+        </if>
+        <dl class="checkbox-btn follow">
+            <dt class="">
+                <a href="javascript:;" class="checked" data-district_id="{$vo.id}"></a>{$vo.name}<span></span></dt>
+            <dd class="content">覆盖区域：{$vo.label}</dd>
+            <dd class="tool">
+                <a href="javascript:;" <in name="vo.id" value="$iids">class="btn-follow-20-end add_district"<else />class="btn-follow-20-add add_district"</in> data-district_id="{$vo.id}"><span>加关注</span></a>
+            </dd>
+        </dl>
+        <if condition="($mod eq 0) or ($vo['id'] eq $m['id'])">
+            {:dump($vo);}
+        </div>
+        </if>
+        </volist>
+    </div>
+    </div>
+    </div>
+    </div>
+		<div class="ft">
+			<a href="#" onclick="return false" class="interest-close"></a>
+		</div>
+	</div>
+</div>

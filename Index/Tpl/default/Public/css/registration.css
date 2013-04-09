@@ -1,0 +1,294 @@
+#wrapper{
+	padding:0
+}
+#wrapper #bd{
+	width:980px
+}
+#wrapper .bd{
+	text-align:left
+}
+#wrapper .psp-title h2{
+	font:normal 20px/18px "Microsoft YaHei";
+	padding:17px 10px;
+	color:#666
+}
+#wrapper .psp-wrap{
+	background:#fff;
+	min-height:460px;
+	_height:460px;
+	padding:1px;
+	border-radius:5px;
+	box-shadow:1px 1px 2px rgba(0,0,0,.1)
+}
+#wrapper .psp-container{
+	float:left;
+	border-right:1px solid #eef0ec
+}
+#wrapper .psp-sidebar{
+	float:left
+}
+.psp-wrap span.emptyhint{
+	line-height:28px
+}
+.sns-form .dark-hint{
+	display:none
+}
+.psp-main{
+	margin:48px 0 35px 35px
+}
+.psp-main .sns-form .em-block{
+	display:block;
+	padding-left:95px;
+	font-size:12px;
+	color:#999;
+	line-height:30px
+}
+.psp-main .sns-form .k{
+	width:90px;
+	line-height:36px
+}
+.psp-main .sns-form .v{
+	display:inline-block;
+	vertical-align:middle;
+	height:36px;
+	line-height:36px
+}
+.psp-main .sns-form .v input,.psp-main .sns-form .v lable{
+	vertical-align:middle;
+	line-height:36px;
+	height:36px
+}
+.psp-main .sns-form .v .sns-text{
+	display:inline-block;
+	width:215px;
+	height:22px;
+	line-height:22px;
+	border-top:1px solid #c4c4c4;
+	border-left:1px solid #c4c4c4;
+	border-right:1px solid #ebebeb;
+	border-bottom:1px solid #ebebeb;
+	vertical-align:top
+}
+.psp-main .sns-form .v .sns-text:focus{
+	background:#fffee0
+}
+.psp-main .sns-form select{
+	display:inline-block;
+	width:90px;
+	padding:10px 10px 10px 5px;
+	vertical-align:middle
+}
+.psp-main .sns-form .v .captcha{
+	width:78px
+}
+.psp-main .sns-form .captcha-pic{
+	display:inline-block;
+	vertical-align:middle;
+	margin:0 10px
+}
+.psp-main .btn-reg{
+	border:none;
+	width:88px;
+	height:32px;
+	border:1px solid #5f9e20;
+	background:#6db227;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	border-radius:3px;
+	margin-left:95px
+}
+.psp-main .psp-sidebar{
+	width:340px;
+	padding-left:20px
+}
+.psp-main .other-list{
+	overflow:hidden;
+	margin:8px 0 0
+}
+.psp-main .other-list a{
+	display:inline-block;
+	background:url(../images/spr-other-signin.gif) no-repeat 0 0;
+	padding:1px 5px 0 20px
+}
+.psp-main .other-list .sina{
+	background:url(../images/spr-other-signin.gif) no-repeat 0 0
+}
+.psp-main .other-list .qq{
+	background:url(../images/spr-other-signin.gif) no-repeat 0 -44px
+}
+.psp-main .other-list .ren{
+	background:url(../images/spr-other-signin.gif) no-repeat 0 -100px
+}
+.psp-main .other-list .baidu{
+	background:url(../images/spr-other-signin.gif) no-repeat 0 -144px
+}
+.psp-main .signin{
+	border:none;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	border-radius:3px;
+	font-size:12px;
+	text-align:center
+}
+.psp-main .show-box{
+	margin:25px 0 0
+}
+.psp-main .show-main{
+	width:330px;
+	height:275px;
+	background:#edf0eb;
+	margin-top:5px
+}
+.psp-main .wi{
+	width:565px
+}
+.psp-main .sns-form .c0{
+	color:#000
+}
+.psp-main .sns-form .pl{
+	padding-left:0
+}
+.psp-main .sns-form .lh{
+	line-height:14px
+}
+.psp-main .sns-form .fz{
+	font-size:12px
+}
+.psp-main .sns-form .v .error{
+	border-color:#f25749
+}
+.sns-form ul em.error{
+	margin-left:5px
+}
+.sns-form .em-break em.error{
+	margin-left:95px
+}
+#_vcode_txt{
+	vertical-align:middle
+}
+.approve-container{
+	padding:48px 35px
+}
+.approve-container .approve-main{
+	float:left;
+	width:710px;
+	border-right:1px solid #e2e2e2
+}
+.approve-container .approve-aside{
+	float:left;
+	width:176px;
+	padding-left:20px
+}
+.approve-container .approve-tips{
+	color:#666;
+	margin:0 0 30px 20px
+}
+.approve-container .sns-form ul em,.approve-container .sns-form ul a{
+	line-height:36px
+}
+.approve-container .sns-form ul em.error{
+	background-position:0 8px
+}
+.approve-container .sns-form .k,.approve-container .sns-form .v{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	line-height:36px
+}
+.approve-container .sns-form .k{
+	width:120px;
+	text-align:right
+}
+.approve-container .sns-form .v{
+	margin-right:10px
+}
+.approve-container .sns-form .v .sns-text{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	width:215px;
+	height:22px;
+	line-height:22px;
+	border-top:1px solid #c4c4c4;
+	border-left:1px solid #c4c4c4;
+	border-right:1px solid #ebebeb;
+	border-bottom:1px solid #ebebeb;
+	vertical-align:top
+}
+.approve-container .sns-form .v .error{
+	border:1px solid #DD3C10
+}
+.approve-container .sns-form .v .sns-select{
+	color:#666
+}
+.approve-container .sns-form .v .sns-select select{
+	display:inline-block;
+	;
+	*display:inline;
+	*zoom:1;
+	width:90px;
+	_margin-top:6px;
+	line-height:36px;
+	padding:8px 10px 8px 5px;
+	vertical-align:middle
+}
+.approve-container .sns-form .v .sns-textarea{
+	width:428px;
+	height:74px;
+	padding:5px;
+	line-height:20px;
+	vertical-align:bottom;
+	margin-right:10px
+}
+.approve-container .sns-form .submit{
+	padding-left:125px
+}
+.approve-container .sns-form .submit .btn-apply{
+	width:108px;
+	height:32px;
+	border-radius:3px;
+	border:1px solid #5f9e20;
+	background:#6eb327;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	float:left
+}
+.approve-container .sns-form .submit p{
+	font-size:12px;
+	color:#999;
+	padding-left:120px;
+	line-height:32px
+}
+.approve-container .approve-shop-num{
+	margin-bottom:5px
+}
+.approve-container .approve-shop-num strong{
+	color:#e66e00;
+	margin:0 5px
+}
+.approve-container .approve-shop-list li{
+	position:relative;
+	padding:10px 0 10px 60px;
+	height:50px
+}
+.approve-container .approve-shop-list .head{
+	position:absolute;
+	left:0;
+	top:10px
+}
+.approve-container .approve-shop-list .head img{
+	display:block
+}
+.approve-container .approve-shop-list .shop-desc .name,.approve-container .approve-shop-list .shop-desc .num-pl,.approve-container .approve-shop-list .shop-desc .num-p2{
+	display:block
+}
+.approve-container .approve-shop-list .shop-desc .num-pl{
+	background:url(../images/ico_love.png) 0 center no-repeat;
+	padding-left:12px
+}
+.approve-container .approve-shop-list .shop-desc .num-p2 a{
+	margin-right:5px
+}

@@ -1,0 +1,138 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/pay.css"/>
+<script type="text/javascript">
+$(function(){
+	memberPayment();
+});
+</script>
+
+<div id="wrapper">
+            
+	<!--div id="hd"></div-->
+				<div id="bd" class="grid-m0a220 sh-platform">
+		<div id="wrap" class="cls m-context-bg">
+			<div id="main">
+				<div class="inner">
+					<div class="context">
+						<!-- 标题 -->
+						<div class="cont-title">
+							<span class="orders">订购服务<i>仅需三步</i></span>
+							<div class="steps">
+								<ol>
+									<li class="selected-pre"><span class="first"><em>1.提交订单</em></span></li>
+									<li class="selected"><span class=""><em>2.选择支付方式</em></span></li>
+									<li><span class="last"><em>3.支付成功</em></span></li>
+								</ol>
+							</div>
+						</div>
+						<form method="post" id="payForm">
+						<div class="order-list">
+							<table summary="" cellpadding="0" cellspacing="0">
+								<colgroup>
+									<col class="table-list-11">
+									<col class="table-list-2">
+									<col class="table-list-3">
+									<col class="table-list-4">
+									<col class="table-list-7">
+									<col class="table-list-8">
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="table-list-11">服务内容</th>
+										<th>数量</th>
+										<th>&nbsp;</th>
+										<th>乐活价</th>
+										<th>&nbsp;</th>
+										<th>小计</th>
+									</tr>
+								</thead>
+								<tbody>
+								<volist name="goodsdata" id="vo">
+									<tr>
+										<td class="table-list-11"><p class=""><a href="{:U('Goods/index/id/'.$vo['id'])}" target="_blank">{$vo.title}</a></p><p class="from"><em>来自：{$vo.promulgator.name}</em></p></td>
+										<td class="price">
+										{$nums[$vo['id']]}
+										</td>
+										<td class="symbol">×</td>
+										<td class="price">&yen;{$vo.price}</td>
+										<td class="symbol">=</td>
+										<td class="price single">&yen;
+										<php>
+					          			$tmp = $nums[$vo['id']] * $vo['price'];
+					          			$total += $tmp;
+					          			echo toPrice($tmp);
+					          			</php>
+					          			</td>
+									</tr>
+								</volist>
+									<tr>
+										<td colspan="6" class="total mobile">订购成功后，消费券密码将发送至您的手机号：<b>13512345678</b>，凭此密码到店消费。</td>
+									</tr>
+									<tr>
+										<td colspan="6" class="total"><a href="javascript:;" onclick="window.history.back();return false;" class="fix" id="btn-back">&lt;&lt;返回修改订单</a>应付金额：<i>&yen;<span id="totalPrices">{$total|toPrice}</span></i></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						  <notempty name="orderdata">
+					      	<input id="oid" name="oid" type="hidden" value="{$orderdata.id}">
+					      </notempty>
+						<div id="mobile" class="order-next">
+							<div class="title">
+								<span class="">您的手机：</span>
+							</div>
+							<div class="content mobile">
+								<p><em>订购成功后，乐活券密码将发送至您的手机号：</em><span class="emptyhint dark-emptyhint">在此填写您的手机号码</span><input type="text" name="phone" id="phone" data-placeholder="在此填写您的手机号码" value="<empty name="orderdata">{$memberdata.phone}<else />{$orderdata.phone}</empty>" maxlength="11" datatype="mobilecode" forcevld="true" reqmsg=" 请输入手机号" emel="hint-mobile" emptyhintel="emptyhint-10001"><em>，凭此密码到店消费。</em></p>
+								<p class="mobile-err"><span id="hint-mobile"></span></p>
+							</div>
+						</div>
+						<div id="mobile" class="order-next">
+							<div class="title">
+								<span class="">账户信息：</span>
+							</div>
+							<div class="content mobile">
+							<ul class="account_info">
+								<li class="balance"><strong class="font14px bold">{%account_balance}：</strong><span class="arial">&yen;<b id="balanceTf">{$memberdata.cash|toPrice}</b></span></li>
+								<li id="needPriceWrap" class="balance hidden" style="display: list-item;">
+									<gt name="orderdata.incharge" value='0'>
+										<strong class="font14px bold">{%status_pay}：</strong>
+										<span class="f18 fontff5500">&yen;<b id="incharge">{$orderdata.incharge}</b></span>，
+									</gt>
+										<strong class="font14px bold">{%member_payment_needpricewrap}：</strong>
+										<span class="f18 fontff5500">&yen;<b id="needPrice">0</b></span>
+								</li>
+                                <li class="balance"><input type="checkbox" checked="checked" id="iscash" value="1" name="iscash"><label for="iscash">{%member_payment_iscash}</label></li>
+					            <li class="mobile bdt">{%member_payment_verification}</li>
+					            
+					            <li class="mobile bold" style="height: auto;line-height: auto;"><label class="jvf_fl" for="remark">{%remark_text}：</label><textarea cols="30" rows="4" placeholder="{%remark_text}" class="jvf_inputt mx600" name="remark" id="remark">{$orderdata.remark}</textarea></li>
+            				</ul>
+							</div>
+						</div>
+						<include file="Member:paylist" />
+												<!-- 提交订购 -->
+						<div class="btns">
+													<a href="javascript:;" class="btn btn-t1" target="_blank" id="goodsBuyBtn" onclick="$('#payForm').submit();"><span>确认订单，付款</span></a>
+												</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id="aside" class="no-bdr">
+				<div class="mod serv-tel">
+					<div class="hd">客服电话：</div>
+					<div class="bd">
+						<p><i>{&sysconfig.site_services_tel}</i></p>
+						<p>工作时间：{&sysconfig.site_work_times}</p>
+					</div>
+					<div class="ft" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="ft"></div>	
+        </div>
+
+
+<include file="Public:footer" />

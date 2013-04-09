@@ -1,0 +1,29 @@
+<script>
+$(function(){
+	interestBox();
+});
+</script>
+<div class="interest-panel" title="添加兴趣">
+	<div class="panel-content">
+		<div class="bd">
+			<p class="explain">选择你喜欢的兴趣，成功关注后就可以看到相关精彩内容！</p>
+						<ul class="interest-nav">
+						<volist name="share" id="v">
+							<li><a href="#" onclick="return false" data-num="1" class="nav1 interest-tab">{$v.name}</a></li>
+						</volist>
+						</ul>
+			<div class="interest-tags">
+						<volist name="share" id="v">
+								<ul class="interest-tag-list cls" <neq name="i" value="1">style="display:none;"</neq>>
+								<volist name="v.share" id="vo">
+											<li class="interest-tag <in name="vo.id" value="$iids">selected</in>" data-interest_id="8c1464019818e619fa7a33fb" data--ban="500" lid="{$vo.id}"><a href="#" onclick="return false"><span>{$vo.name}</span></a></li>
+								</volist>
+								</ul>
+						</volist>
+			</div>
+		</div>
+		<div class="ft">
+			<a href="#" onclick="return false" class="interest-close"></a>
+		</div>
+	</div>
+</div>

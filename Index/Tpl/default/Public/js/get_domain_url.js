@@ -1,0 +1,1 @@
+pmc_in_script_time_4030=new Date()*1;function get_domain_url(A,B,C){if(!!A){return"{0}/{1}/{2}".format(__CONF__.site_url,A,C||"timeline");}else{return"{0}/profile/{1}{2}".format(__CONF__.site_url,!!C?C+"/":"",B=="0"?"":B);}}pmc_exec_time_4030=new Date()*1-pmc_in_script_time_4030;

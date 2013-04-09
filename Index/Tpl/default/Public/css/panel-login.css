@@ -1,0 +1,139 @@
+.panel-login-new{
+	width:540px
+}
+.panel-login-new .panel-login-cont-hd{
+	width:100%;
+	height:84px;
+	background:url(../images/bg-panel-login.png) 0 0 no-repeat
+}
+.panel-login-new .panel-login-cont-bd{
+	padding:0 30px 40px 30px
+}
+.panel-login-new .panel-login-cont-l{
+	float:left;
+	width:146px;
+	color:#666
+}
+.panel-login-new .panel-login-cont-l .reg-btn,.panel-login-new .panel-login-cont-l .third-party-btn{
+	display:block;
+	background:url(../images/bg-panel-login.png) 0 -85px no-repeat;
+	width:106px;
+	height:28px;
+	overflow:hidden;
+	text-indent:-999em
+}
+.panel-login-new .panel-login-cont-l .third-party-btn{
+	background-position:0 -114px;
+	height:24px;
+	margin-bottom:5px
+}
+.panel-login-new .panel-login-cont-l .reg-btn{
+	margin:6px 0 10px 0
+}
+.panel-login-new .panel-login-cont-l .sina{
+	margin-top:6px
+}
+.panel-login-new .panel-login-cont-l .qq{
+	background-position:0 -139px
+}
+.panel-login-new .panel-login-cont-l .renren{
+	background-position:0 -165px
+}
+.panel-login-new .panel-login-cont-l .baidu{
+	background-position:0 -191px
+}
+.panel-login-new .panel-login-cont-r{
+	float:left;
+	border-left:1px solid #eef0ec;
+	padding-left:30px;
+	margin-top:36px
+}
+.panel-login-new .panel-login-cont-r .panel-login-form li{
+	margin-bottom:18px;
+	font-size:14px
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .k{
+	font-size:14px;
+	display:inline-block;
+	*display:inline;
+	*zoom:1
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .v{
+	position:relative;
+	display:inline-block;
+	*display:inline;
+	*zoom:1
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .v .emptyhint{
+	left:0;
+	top:0;
+	height:32px;
+	line-height:32px;
+	padding:3px 8px
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .v input{
+	width:202px;
+	height:36px;
+	line-height:36px9;
+	*line-height:35px;
+	vertical-align:middle;
+	outline:none;
+	border:1px solid #b3b3b3;
+	border-right-color:#ebebeb;
+	border-bottom-color:#ebebeb;
+	padding:0 8px
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .v input.error{
+	border:1px solid #f25749;
+	background:#fff6f5
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .btn-login{
+	width:80px;
+	height:38px;
+	_height:39px;
+	border:none;
+	background:url(../images/bg-panel-login.png) -106px -85px no-repeat;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	font-size:14px;
+	margin:0 30px 0 44px;
+	margin-left:48px9;
+	vertical-align:middle
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .btn-active{
+	background-position:-106px -202px;
+	color:#666
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .error-txt{
+	margin-left:46px;
+	margin-left:50px9;
+	padding-bottom:8px
+}
+.panel-login-new .panel-login-cont-r .panel-login-form .error-txt .error{
+	background:url(../images/ico_form.png) 0 0 no-repeat;
+	display:block;
+	line-height:16px;
+	padding-left:22px;
+	margin:-8px 0 10px 0
+}
+.panel-login-new .login-remember{
+	padding-left:46px;
+	margin-top:-8px;
+	margin-bottom:16px
+}
+.panel-login-new .login-remember .remember-checkbox{
+	float:left;
+	color:#666
+}
+.panel-login-new .login-remember .remember-checkbox label{
+	cursor:pointer
+}
+.panel-login-new .login-remember .remember-checkbox input{
+	vertical-align:-3px;
+	_vertical-align:-1px
+}
+.panel-login-new .login-remember .fogot-num{
+	float:right;
+	margin-top:1px9
+}

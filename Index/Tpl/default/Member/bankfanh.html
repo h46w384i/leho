@@ -1,0 +1,53 @@
+<script>
+$(function(){
+	memberBankfanh("{$url}");
+});
+</script>
+<div style="display: block; width:340px;" title="支付">
+<empty name="form">
+	<div id="paySuccess" title="{%pay_success}">
+       <div class="segment jvf_box_con">
+			  <div class="pay_icon">{%member_bankfanh_paySuccess_pay_icon}<br>
+	          	{%member_bankfanh_paySuccess_div}</div>
+			  </div>
+			  <div class="jvf_box_buttom clearfix">
+			  <div class="pay_butt_1">
+		     <a class="btn p2153 f14 linebl pay_success" href="javascript:;">{%member_bankfanh_paySuccess_close_info}</a>
+			  </div>
+		</div>
+	</div>
+<else />	
+	<div title="{%member_bankfanh_payPlatform_title}" id="payPlatform">
+     
+      <div class="segment jvf_box_con">
+			  <div class="pay_icon">{%member_bankfanh_payPlatform_pay_icon_before}{$paytype}{%member_bankfanh_payPlatform_pay_icon_after}<br></div>
+              <div class="psm">
+	          	{%member_bankfanh_payPlatform_br}<br />
+                {%member_bankfanh_payPlatform_div_before}{$paytype}{%member_bankfanh_payPlatform_div_after}
+                </div>
+			  </div>
+              
+			  <div class="jvf_box_buttom clearfix">
+
+             	<a class="paycit"  href="javascript:;" oid="{$oid}">{%member_bankfanh_payPlatform_close_info}</a>
+	          	<a class="paycit" href="javascript:;" onclick="$('#paysubmit').submit();$('#payPlatform').hide();$('#payLoading').show();">{$paytype}{%member_bankfanh_payPlatform_title}</a>
+				{$form}
+			 </div>
+	</div>
+</empty>
+<div class="hidden" title="{%member_bankfanh_payLoading_title}" id="payLoading">
+  
+			  <div class="segment jvf_box_con">
+			  <div class="pay_icon">
+              	{%member_bankfanh_payLoading_pay_icon}<br>{%member_bankfanh_payLoading_br}
+              </div>
+              <div class="psm">{%member_bankfanh_payLoading_div}<br>
+              {%member_bankfanh_payLoading_div_br}</div>
+			  </div>
+			  <div class="jvf_box_buttom clearfix">
+		      <a class="paycit" style="color:#FFF;" href="javascript:;" onclick="goUrl(APP+'/Member/index');">{%member_bankfanh_payLoading_pay_butt_1}</a>
+		      <a class="paycit" style="color:#FFF;" href="javascript:;">{%member_bankfanh_payLoading_pay_butt_2}</a>
+			  </div>
+</div>
+ 
+</div>

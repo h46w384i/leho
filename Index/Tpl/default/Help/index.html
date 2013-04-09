@@ -1,0 +1,35 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/other.css"/>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+				
+<div class="help-cont">
+	<div class="help-hd">
+		<h3>{$data.title}</h3>
+	</div>
+	<div class="help-bd">
+        {$data.content}
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="aside">
+			<div class="help-nav">
+			<volist name="articles_categorydata" id="vo">
+			<eq name="data.cid" value="$vo['id']">
+				<volist name="vo.articles" id="v">
+					<dl>
+						<dt <eq name="data.id" value="$v['id']">class="current"</eq>><a href="{:U('Help/index/id/'.$v['id'])}" target="_self">{$v.title}</a></dt>
+					</dl>
+				</volist>
+			</eq>
+			</volist>
+			</div>
+		</div>
+	</div>
+	</div>
+
+<include file="Public:footer" />

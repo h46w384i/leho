@@ -1,0 +1,127 @@
+<include file="Public:top" xmlns="http://www.w3.org/1999/html"/>
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script src="__PUBLIC__/dwz/js/jquery.dragsort-0.4.3.min.js" type="text/javascript"></script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="shxinxi-top">
+		<h2>商户相册</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>编辑相册</h3>
+			<p>编辑您的相册信息。</p>
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form updateform" action="{:U('Company/updatePicture')}" method="post">
+                <input name="id" value="{$data.id}" type="hidden">
+				<ul>
+					<li>
+						<label class="k" for="title">相册名称：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="text" name="title" id="title" placeholder="请输入您的相册名称" value="{$data.title}">
+							<em></em>
+						</span>
+					</li>
+                    <li>
+                        <label class="k" for="tel">图片：</label>
+						<span class="v jvf_btn">
+							<a href="javascript:;" class="btn-reg btn_a" id="upload_button">上传</a>
+						</span>
+                    </li>
+                    <li>
+                        <label class="k">已上传图片：</label>
+                        <div style="width:450px; display: inline-block;">
+                            <ul id="imgBox">
+                                <volist name="data.accessory" id="vm">
+                                    <li class="sortableitem">
+                                        <div class="jvf_clos"><span onclick="deleteImg(this);">×</span></div>
+                                        <input type="hidden" name="imgs[]" value="{$vm.accessoryid}">
+                                        <img src="{$vm.thumbnail}"/>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </li>
+				</ul>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('.updateform').submit(function(){
+		var form = $(this);
+        var title = form.find('input[name="title"]');
+        if(!title.val()){
+            title.tip('相册名称不能为空',3000);
+            return false;
+        }
+		$.post(form.attr('action'),form.serialize(),function(data){
+			if(data.status == 1){
+				jalert(data.info,{callback:function(){
+                    goUrl(APP+'/Company/picture');
+                }});
+			}else{
+				form.find('input[type="submit"]').tip(data.info,3000);
+			}
+		},'json');
+        return false;
+	});
+    xheditorBox();
+    function insertGoodsImg(data){
+        if(!data.err){
+            var html= '<li class="sortableitem"><div class="jvf_clos"><span onclick="deleteImg(this);">×</span></div><input type="hidden" name="imgs[]" value="'+data.msg.id+'" /><img src="'+data.msg.thumbnail+'" /></li>';
+            $('#imgBox').append(html);
+        }else{
+            $('#upload_button').tip(data.err);
+        }
+    }
+    function imgBoxdrag(){
+        $( "#imgBox" ).dragsort({dragSelectorExclude:"span"});
+    }
+    try{
+        setTimeout(function() {
+            new AjaxUpload('#upload_button', {
+                action: APP+'/Xheditor/upLoadImg',
+                name: 'images',
+                onSubmit : function(file , ext){
+                    if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+                        this.setData({
+                            'ext': ext
+                        });
+                        this.disable();
+                    } else {
+                        return false;
+                    }
+
+                },
+                onComplete : function(file,response){
+                    var data=eval("("+response+")");
+                    insertGoodsImg(data);
+                    this.enable();
+                }
+            });
+        },0);
+    }catch(e){
+    }
+    imgBoxdrag();
+});
+function deleteImg(t){
+	var li = $(t).parents(".sortableitem");
+	li.remove();
+}
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,211 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/myhome.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/message.css"/>
+<script type="text/javascript">
+<!--
+$(function(){
+	ajaxComment();
+});
+
+function ajaxComment(){
+	$('.cmt-reply').live('click',function(){
+		var t = $(this);
+		var div = t.parents('li.cls').find('.comment-post');
+		if(div.is(':hidden')){
+			var content = div.find('textarea[name="content"]');
+			if(!content.val()){
+				content.val('回复@'+t.attr('data-info')+':');
+				commentNum(content);
+			}
+			div.show();
+		}else{
+			div.hide();
+		}
+	});
+	
+	$('.cmt-tools .del').live('click',function(){
+		var t = $(this);
+		var li = t.parents('li.cls');
+		var cid = t.attr('cid');
+		$.getJSON(APP+'/Member/comment_del/id/'+cid,function(data){
+			if(data.status == 1){
+				li.fadeOut(function(){
+					li.remove();
+				});
+			}else{
+				t.tip(data.info);
+			}
+		});
+	});
+	
+	$('.comment_form .comment-btn').live('click',function(){
+		var t = $(this);
+		var form = t.parents('.comment_form');
+		var para = form.serialize();
+		if(t.is('.btn-t6')){
+			$.post(APP+'/Member/doTalk_about_comment',para,function(data){
+				if(data.status == 1){
+					jalert('回复成功');
+					t.parents('.comment-post').hide();
+					var content = form.find('textarea[name="content"]');
+					content.val('');
+					commentNum(content);
+				}else{
+					t.tip(data.info,2000);
+				}
+			},'json');
+		}
+	});
+	
+	$('.comment_form .btn-faces').qqFace('.comment_form',function(t){
+		commentNum(t);
+	},'textarea[name="content"]');
+	
+	$('.comment_form textarea[name="content"]').live('keyup',function(e){
+		var t = $(this);
+		commentNum(t);
+	});
+	
+	$('.comment_form .panel-checkbox').live('click',function(){
+		var t = $(this);
+		var input = t.siblings('input[name="panel-checkbox"]');
+		if(t.is('.checkbox')){
+			t.removeClass('checkbox').addClass('checked');
+			input.val(1);
+		}else{
+			t.removeClass('checked').addClass('checkbox');
+			input.val(0);
+		}
+	});
+	
+	function commentNum(t){
+		var form = t.parents('.comment_form');
+		var submitbtn = form.find('.comment-btn');
+		var num = getLength(t.val());
+		var textNum = 140 - num;
+		if(textNum < 0){
+			submitbtn.removeClass('btn-t6').addClass('btn-default-20');
+		}else{
+			submitbtn.removeClass('btn-default-20').addClass('btn-t6');
+		}
+		if(num <=0){
+			submitbtn.removeClass('btn-t6').addClass('btn-default-20');
+		}
+	}
+}
+//-->
+</script>
+<div id="wrapper">	
+<div id="bd" class="bb-t4 message">
+	<div id="main">
+           <div class="inner">
+               <h1 class="title"><img src="../Public/images/message-title.jpg" alt="消息"></h1>
+               <div class="mes-nav">
+                   <ul class="cls">
+                       <li><a href="{:U('Member/comment')}">评论</a></li>
+                       <li class="selected" onclick="return false;"><a href="{:U('Member/at')}">提到我的</a></li>
+                       <li><a href="{:U('Member/liked')}">喜欢</a></li>
+                   </ul>
+                   <div class="message-date cls">
+                   <a href="{:U('Member/at')}">@我的分享</a><span>({$count})</span><a href="{:U('Member/comment_at')}" class="selected" onclick="return false;">@我的评论</a><span>({$comment_count})</span>
+						                   </div>
+               </div>
+               <div class="comment-lst">
+                   						<ul>
+                   						<volist name="talk_about_commentdata" id="vo">
+													<li class="cls">
+								<div class="cmt-lst-l">
+									<a href="{:U('User/space/id/'.$vo['uid'])}" class="head">
+										<img src="{$vo.header}">
+									</a>
+								</div>
+								<div class="cmt-lst-c">
+									<p>
+										<span class="cmt-ori">
+										<a href="{:U('User/space/id/'.$vo['uid'])}">{$vo.name}</a>:
+										</span>
+										{$vo.content|contentFilter}
+										<span class="send-time">
+											({$vo.addtime|dgmdate})
+										</span>
+									</p>
+									<p>
+										<span>
+											评论
+										</span>
+										<span class="cmt-target">我</span>
+										<span>的分享:</span>
+										{$vo.talk_content|contentFilter}
+									</p>
+									<p></p>
+									<p class="cmt-tools"><span class="cmt-del"><a href="javascript:;" class="del" cid="{$vo.id}">删除</a><i class="split">|</i></span><a class="cmt-reply" href="javascript:;" data-info="{$vo.name}">回复</a></p>
+									<div class="comment">
+										<div class="comment-post list-com" style="display:none">
+											<div class="comment-textarea">
+											<form class="comment_form">
+												<input type="hidden" name="tid" value="{$vo.tid}" />
+												<div class="txt">
+													<textarea class="cmt-post-cnt" name="content"></textarea>
+												</div>
+												<div class="submit cls" style="z-index: 9999;">
+													<a href="javascript:;" class="comment-btn btns btn-default-20">
+														<span>评论</span>
+													</a>
+													<a class="btn-faces" href="javascript:;">表情</a>
+													<span class="penel-check-wrap">
+														<input name="panel-checkbox" type="hidden">
+														<i class="checkbox panel-checkbox"></i><span class="font">同时转发</span>
+													</span>
+	
+												</div>
+											</form>
+											</div>
+											<i class="arr-t"></i>
+										</div>
+									</div>
+								</div>
+							</li>
+							</volist>
+							</ul>
+							<div class="splitpage">
+							<div class="global-page">{$page}</div>					
+							</div>
+               </div>
+			</div>
+		</div>
+		<div id="aside">
+			<div class="col-l">
+    <div class="moudle-block">
+         <div class="hd"></div>
+        <div class="bd">
+         	           	<div class="title"><h2>@使用小帮助</h2></div>
+             <div class="main cls">
+                <div class="moudle-content">
+                    <p>问：什么是@提醒？</p>
+					<p>答：在分享中@他人时，比如@小助手，小助手就会收到提醒。</p>
+                </div>
+             </div>
+		            </div>
+         <div class="ft"></div>
+    </div>
+    <div class="moudle-block">
+         <div class="hd"></div>
+         <div class="bd">
+             <div class="title"><h2>意见反馈</h2></div>
+             <div class="main cls">
+                <div class="moudle-content">
+                    <p>欢迎使用并提出宝贵建议</p>
+                    <p>你可以通过以下方式提交意见反馈：</p>
+                    <p>发邮件至{&sysconfig.site_services_email}</p>
+                </div>
+             </div>
+         </div>
+         <div class="ft"></div>
+    </div>
+</div>		</div>
+</div>
+
+	</div>
+
+<include file="Public:footer" />

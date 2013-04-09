@@ -1,0 +1,65 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/discover.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/css/feed.css"/>
+<script>
+$(function(){
+	circleIndex({:json_encode($_REQUEST)});
+});
+</script>
+<div id="wrapper">		
+
+<div id="bd"> 
+	<div id="main">
+	<div id="scroll-switch" class="block-propaganda switch-tabs">
+	<div class="show-pic ">
+		<ul class="switch-content cls">
+			<volist name="albumdata" id="vo">
+            <li <eq name="i" value="1">class="selected"</eq>><a target="_blank" href="{:U('Circle/album/aid/'.$vo['id'])}"><img src="{$vo.enlarge_accessory.origin}" alt="{$vo.title}" width="980" height="250"></a></li> 
+			</volist>
+		</ul>
+	</div>
+	<div class="slide-list-wrapper cls">
+		<div class="btn-previous"><a href="javascript:;" onclick="return false;" class="switch-scroll-prev switch-scroll"></a></div>
+		<div class="btn-next"><a href="javascript:;" onclick="return false;" class="switch-scroll-next switch-scroll"></a></div>
+		<div class="list-wrapper switch-scroll-panel switch-scroll-active">
+			<ul class="switch-nav slide-list" style="width: 2136px; ">
+				<volist name="albumdata" id="vo">
+                <li <eq name="i" value="1">class="selected"</eq>>
+					<a target="_blank" href="{:U('Circle/album/aid/'.$vo['id'])}"><img src="{$vo.enlarge_accessory.thumbnail}" alt="{$vo.title}" width="168" height="63"><div class="explain">{$vo.title}</div></a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container cls">
+			<h2 class="title">每日精选</h2>
+			<div style="float: right;width: 324px;line-height: 27px;"><span class="fl">独乐乐不如众乐乐，让我们一起分享到：</span>
+				<!-- Baidu Button BEGIN -->
+				    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" class="fl">
+				        <a class="bds_qzone"></a>
+				        <a class="bds_tsina"></a>
+				        <a class="bds_tqq"></a>
+				        <a class="bds_renren"></a>
+				    </div>
+				<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=778237" ></script>
+				<script type="text/javascript" id="bdshell_js"></script>
+				<script type="text/javascript">
+				$.onload(function(){
+					document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+				});
+				</script>
+				<!-- Baidu Button END -->
+			</div>
+		</div>
+		<div class="column-wraper cls">
+
+		</div>
+		<div id="split_page" class="splitpage cls" style="display:none"> 
+		</div>
+	</div> 
+</div>
+</div>
+
+<include file="Public:footer" />

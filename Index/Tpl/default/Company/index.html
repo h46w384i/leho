@@ -1,0 +1,158 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/css/mylife.css"/>
+<script src="../Public/js/baidumap_location.js" type="text/javascript"></script>
+<div id="wrapper">		
+	<div id="bd" class="bb-t6">
+		<div id="main">
+			<div class="inner">
+	<div class="shxinxi-top">
+		<h2>商户管理</h2>
+	</div>
+	<div class="mylife-cont">
+		<div class="mylife-hd">
+			<h3>我的商户</h3>
+			<p>以下信息将显示您的商户信息。</p>			
+		</div>
+		<div class="mylife-bd">
+			<form class="sns-form" action="{:U('Company/update')}" method="post" id="updateform">
+				<ul>
+					<li>
+						<label class="k" for="mail">商户名称：</label>
+						<span class="v">	
+							<input autocomplete="off" class="sns-text" type="text" id="name" maxlength="60" datatype="email" value="{$businesses.name}" placeholder="请输入您的邮箱" disabled="disabled">
+							<em></em>
+						</span>
+					</li>
+					<li>
+						<label class="k" for="">负责人：</label>
+						<span class="v"><input disabled="disabled" autocomplete="off" class="sns-text" type="text" id="fz_name" name="fz_name" minlength="4" maxlength="30" reg-pattern="/^[\u4100-\u9fa5_a-zA-Z0-9]*$/" datatype="magic-bytetext &amp;&amp; reg" errmsg="4-30个字符，支持中英文、数字、下划线" value="{$businesses.fz_name}" placeholder="4-30个字符，支持中英文、数字、下划线">&nbsp;&nbsp;<em></em></span>
+					</li>
+					<li>
+						<label class="k" for="">企业名称：</label>
+						<span class="v"><strong><input type="text" id="companyname" class="sns-text" datatype="magic-bytetext &amp;&amp; reg" minlength="4" maxlength="30" reg-pattern="/^[\u4100-\u9fa5_a-zA-Z0-9]*$/" errmsg="请输入真实姓名" size="30" placeholder="请输入你的姓名" value="{$businesses.companyname}" disabled="disabled"></strong><em></em></span>
+					</li>
+					
+					<li>
+						<label class="k" for="">logo：</label>
+						<input name="header" type="hidden" value="{$businesses.header}">
+						<span class="v">
+						<strong class="btn" style="padding-left: 0px;">
+							<input type="button" value="上传" class="btn-reg" id="upload">
+						</strong>
+						<div style="margin-left: 114px;margin-top: 10px;" id="headerimg">
+						<notempty name="businesses.header">
+						<img src="{$businesses.accessory.origin}" width="200px" height="200px" />
+						</notempty>
+						</div>
+						<em></em></span>
+					</li>
+				
+					<li>
+						<label class="k" for="">预约电话：</label>
+						<span class="v"><strong><input type="text" id="tel" name="tel" class="sns-text" value="{$businesses.tel}"></strong><em></em></span>
+					</li>
+
+                    <li>
+                        <label class="k" for="">营业时间：</label>
+                        <span class="v"><strong><input type="text" id="opening" name="opening" class="sns-text" value="{$businesses.opening}"></strong><em></em></span>
+                    </li>
+					
+					<li>
+						<label class="k" for="">商家类型：</label>
+						<span class="v"><strong><input type="text" id="type" name="type" class="sns-text" value="{$businesses.type}"></strong><em></em></span>
+					</li>
+					
+					<li>
+						<label class="k" for="">商家特色：</label>
+						<span class="v"><strong><input type="text" id="characteristic" name="characteristic" class="sns-text" value="{$businesses.characteristic}"></strong><em>&nbsp;&nbsp;&nbsp;&nbsp;多个请用逗号（,）分隔</em></span>
+					</li>
+                    <li>
+                        <label class="k" for="">服务范围：</label>
+                        <span class="v"><strong><input type="text" id="services" name="services" class="sns-text" value="{$businesses.services}"></strong><em></em></span>
+                    </li>
+					
+					<li>
+						<label class="k" for="">自我签名：</label>
+						<span class="v"><strong><input type="text" id="signature" name="signature" class="sns-text" value="{$businesses.signature}"></strong><em></em></span>
+					</li>
+
+					<li>
+						<label class="k" for="">地址：</label>
+						<span class="v"><strong>
+                            <input type="text" id="address" name="address" class="sns-text" value="{$businesses.address}"></strong>
+                            <a href="javascript:;" onclick="codeAddress($('#address').val());">标记</a>
+                            <a href="javascript:;" onclick="showMarker();">显示标记</a>
+                            <em></em>
+                        </span>
+					</li>
+                    <li>
+                        <label class="k" for="map">地图：</label>
+                        <input id="longitude" name="longitude" type="hidden" value="{$businesses.longitude}">
+                        <input id="latitude" name="latitude" type="hidden" value="{$businesses.latitude}">
+                        <input id="zoom" name="zoom" type="hidden" value="{$businesses.zoom}">
+                        <div id="map_canvas" style="width:450px; height: 300px;margin-left: -4px;display: inline-block;"></div>
+                    </li>
+
+				</ul>
+				<div class="btn">
+					<input type="submit" value="保存" class="btn-reg">
+				</div>
+			</form>
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<include file="Company:left" />
+	</div>
+
+	</div>
+<script type="text/javascript">
+<!--
+$.onload(function(){
+		new AjaxUpload('#upload', {
+		    action: APP+'/Xheditor/upLoadImg',
+		    name: 'images',
+		    onSubmit : function(file , ext){
+		        if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+		            this.setData({
+		            'ext': ext
+		            });
+		            this.disable();
+		        } else {
+		            return false;
+		        }
+		    },
+		    onComplete : function(file,response){
+		    	var data=eval("("+response+")");
+		    	if(data.err == ''){
+		    		$('input[name="header"]').val(data.msg.id);
+		    		$('#headerimg').html('<img src="'+data.msg.url+'" width="200" height="200"></img>');
+		    	}else{
+		    		$('#upload').tip(data.err,3000);
+		    	}
+		        this.enable();
+		    }
+		});
+});
+
+$(function(){
+    initialize("map_canvas");
+    <notempty name="businesses.latitude">
+            addTags('{$businesses.latitude}','{$businesses.longitude}','{$businesses.address}',"map_canvas",'');
+    </notempty>
+	$('#updateform').submit(function(){
+		var form = $(this);
+		$.post(form.attr('action'),form.serialize(),function(data){
+			if(data.status == 1){
+				jalert(data.info);
+			}else{
+				form.find('input["type=submit"]').tip(data.info);
+			}
+		},'json');
+		return false;
+	});
+});
+</script>
+<include file="Public:footer" />
